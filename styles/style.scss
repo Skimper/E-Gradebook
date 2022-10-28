@@ -1,0 +1,30 @@
+body {
+    background-image: linear-gradient(to right, #000428, #004e92);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+header {
+    text-align: center;
+}
+h1 {
+    color: whitesmoke;
+}
+
+form.login_form {
+    height: 500px; width: 400px;
+    text-align: center;
+    border-style: solid;
+    border-color: red;
+}
+label.login_label {
+    font-size: 26;
+    color: white;
+}
+input.login_input {
+    height: 30px; width: 300px;
+}
+button.login_button {
+    height: 30px; width: 140px;
+}
