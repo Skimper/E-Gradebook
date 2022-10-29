@@ -1,9 +1,13 @@
+html {
+    margin-left: 75px;
+}
 body {
     background-image: linear-gradient(to right, #000428, #004e92);
     background-repeat: no-repeat;
     background-attachment: fixed;
 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
 }
 header {
     text-align: center;
@@ -12,19 +16,153 @@ h1 {
     color: whitesmoke;
 }
 
+.menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 90%;
+    width: 75px;
+    height: 100%;
+    background: #131313;
+    font-size: 16px;
+    font-family: sans-ferif;
+
+    -webkit-box-shadow: 5px 0px 10px 0px rgb(17, 17, 17);
+    -moz-box-shadow: 5px 0px 10px 0px rgb(17, 17, 17);
+    box-shadow: 5px 0px 10px 0px rgb(17, 17, 17);
+}
+  
+.menu_item {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 0;
+    text-decoration: none;
+    color: #dddddd;
+    transition: background 0.3s;
+}
+
+.menu_item_disabled:hover {
+    background-color: inherit !important;
+}
+
+.menu_profile_image {
+    height: 50px; width: 50px;
+    border-radius: 50%;
+}
+
+.menu_bottom {
+    bottom: 0;
+    position: absolute;
+    width: 75px;
+}
+  
+.menu_item > i {
+    font-size: 2.2em; /* 2.2*16px */
+}
+
+.menu_item:hover {
+    background: #313131;
+}
+  
+  /* create tooltip after each menu item  */
+.menu_item::after {
+    position: absolute;
+    display: inline-block; /* ::before, ::after are inline as default
+    
+    /*  makes tooltip vertically center within each one of menu items  */
+    top: 50%;
+    transform: translateY(-50%);
+    
+    /* starting tooltip 100% left of menu item (just the right of them)   */
+    left: 100%;
+    
+    /* linked to the HTML attribute value  */
+    /* 使用 ::before 和 ::after 一定要有 content 否則不會發生作用。 */
+    content: attr(data-tooltip);
+    
+    /* set margin between menu item and tooltip  */
+    margin-left: 15px;
+    
+    /* makes words in same line   */
+    white-space: nowrap;
+    
+    padding: 7px 12px;
+    
+    /* 90% of current font size   */
+    font-size: 0.9em;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
+    color: #fff;
+    
+    /*  invisible (can't see it but can click on it)  */
+    opacity: 0;
+    /* can't click  */
+    visibility: hidden;
+    transition: opacity 1s;
+}
+.menu_item_bottom {
+    clear: both;
+    position: relative;
+    margin-top: 20px !important;
+}
+.menu_item:hover::after {
+    opacity: 1;
+    visibility: visible;
+}  
+
+.menu_profile {
+    height: 100px; width: 200px;
+    margin: 10px;
+    background: #131313;
+    border-radius: 10px;
+}
+
+.menu_profile p {
+    margin: 0;
+}
+
+img.logo_img {
+    height: 100px; width: 100px;
+    margin-top: 15%;
+}
 form.login_form {
-    height: 500px; width: 400px;
-    text-align: center;
-    border-style: solid;
-    border-color: red;
+    height: 500px; width: 300px;
+    margin-left: auto; margin-right: auto;
 }
 label.login_label {
     font-size: 26;
-    color: white;
+    color: #ffffff;
+    font-weight: 600;
 }
 input.login_input {
     height: 30px; width: 300px;
+    background-color: transparent;
+    font-weight: 600;
+    color: white;
+    border-style: none;
+    border-collapse: unset;
+    outline: none;
+
+    border-bottom: 2px !important;
+    border-bottom-style: solid !important;
+    border-bottom-color: #4976FF !important;
+
+    &:hover {
+        border-bottom-color: #0078D7 !important;
+    }
 }
 button.login_button {
     height: 30px; width: 140px;
+    
+    background-color: #0078D7;
+    border-style: none;
+    border-collapse: unset;
+    outline: none;
+
+    &:hover {
+        background-color: #0088f7;
+    }
 }
