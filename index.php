@@ -49,7 +49,7 @@
                         die("Connection failed: " . mysqli_connect_error());
                     }
                 
-                    $result = mysqli_query($conn, "SELECT id, email, username, password, rights FROM users WHERE email='".$username."' OR username='".$username."' AND password='". $password ."';");
+                    $result = mysqli_query($conn, "SELECT id, email, username, password, rights FROM users WHERE (email='".$username."' OR username='".$username."') AND password='". $password ."';");
                     mysqli_close($conn);
                 
                     if (mysqli_num_rows($result) > 0) {
@@ -62,7 +62,7 @@
                             $_SESSION['id'] = $row['id'];
                             $_SESSION['rights'] = $row['rights'];
 
-                            header("Location: http://localhost/infprojectpage/panel.php");
+                            header("Location: panel.php");
                         } else {
                             die("Błędne hasło!");
                         };

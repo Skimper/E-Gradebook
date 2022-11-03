@@ -59,47 +59,35 @@ h1 {
 }
   
 .menu_item > i {
-    font-size: 2.2em; /* 2.2*16px */
+    font-size: 2.2em;
 }
 
-.menu_item:hover {
+.menu_item:hover, .menu_active {
     background: #313131;
 }
-  
-  /* create tooltip after each menu item  */
-.menu_item::after {
+
+.menu_info::after {
     position: absolute;
-    display: inline-block; /* ::before, ::after are inline as default
+    display: inline-block;
     
-    /*  makes tooltip vertically center within each one of menu items  */
     top: 50%;
     transform: translateY(-50%);
     
-    /* starting tooltip 100% left of menu item (just the right of them)   */
     left: 100%;
     
-    /* linked to the HTML attribute value  */
-    /* 使用 ::before 和 ::after 一定要有 content 否則不會發生作用。 */
     content: attr(data-tooltip);
     
-    /* set margin between menu item and tooltip  */
     margin-left: 15px;
-    
-    /* makes words in same line   */
     white-space: nowrap;
-    
     padding: 7px 12px;
     
-    /* 90% of current font size   */
     font-size: 0.9em;
     font-weight: bold;
     background: rgba(0, 0, 0, 0.8);
     border-radius: 15px;
     color: #fff;
     
-    /*  invisible (can't see it but can click on it)  */
     opacity: 0;
-    /* can't click  */
     visibility: hidden;
     transition: opacity 1s;
 }

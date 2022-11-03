@@ -27,22 +27,23 @@
         <a href="#" class="menu_item menu_item_disabled" onclick="ProfileControler();">
             <img class="menu_profile_image" src="">
         </a>
-        <a href="#" class="menu_item menu_active"" data-tooltip="xxx">
+        <a href="#" class="menu_item menu_info menu_active"" data-tooltip="xxx">
             <i class="material-icons">x</i>
         </a>
-        <a href="#" class="menu_item menu_item" data-tooltip="xxx">
+        <a href="#" class="menu_item menu_info" data-tooltip="xxx">
             <i class="material-icons">x</i>
         </a>
-        <a href="#" class="menu_item" data-tooltip="xxx">
+        <a href="#" class="menu_item menu_info" data-tooltip="xxx">
             <i class="material-icons">x</i>
         </a>
-        <a href="#" class="menu_item" data-tooltip="xxx">
+        <a href="#" class="menu_item menu_info" data-tooltip="xxx">
             <i class="material-icons">x</i>
         </a>
-        <a href="?menu=logout" class="menu_bottom menu_item" data-tooltip="Wyloguj">
+        <a href="?menu=logout" class="menu_bottom menu_info menu_item" data-tooltip="Wyloguj">
             <i class="material-icons">x</i>
         </a>
     </nav>
+    
     <div class="menu_profile" id="profile" style="display: none;">
         <p><?php echo $_SESSION['username']; ?></p>
         <p><?php echo $_SESSION['email']; ?></p>
@@ -53,20 +54,8 @@
         Logout();
 
     function Logout() {
-        // Unset all of the session variables.
         $_SESSION = array();
 
-        // If it's desired to kill the session, also delete the session cookie.
-        // Note: This will destroy the session, and not just the session data!
-        if (ini_get("session.use_cookies")) {
-            $params = session_get_cookie_params();
-            setcookie(session_name(), '', time() - 42000,
-                $params["path"], $params["domain"],
-                $params["secure"], $params["httponly"]
-            );
-        }
-
-        // Finally, destroy the session.
         session_destroy();
         header("Location: http://localhost/infprojectpage/index.php");
     }
