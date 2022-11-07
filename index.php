@@ -6,7 +6,7 @@
         exit;
     }
 
-    define('CONN', array('localhost', 'root', '', 'infproject', 'utf8mb4'));
+    require('./api/sql.php');
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -41,15 +41,20 @@
                     Login($username, $password);
                 }
             
-                function Login($username, $password) {
-                    $conn = mysqli_connect(CONN[0], CONN[1], CONN[2], CONN[3]);
-                    mysqli_set_charset($conn, CONN[4]);
+                function Login($email, $password) {
+                    $conn = mysqli_connect(CONN['host'], CONN['user'], CONN['password'], CONN['database']);
+                    mysqli_set_charset($conn, CONN['charset']);
 
                     if (!$conn) {
                         die("Connection failed: " . mysqli_connect_error());
                     }
                 
-                    $result = mysqli_query($conn, "SELECT id, email, username, password, rights FROM users WHERE (email='".$username."' OR username='".$username."') AND password='". $password ."';");
+                    $result = mysqli_query($conn, "
+                    SELECT `users_students`.`email`, `users_students`.`password`, `students`.`id`, `students`.`classes_id`, `students`.`first_name`, `students`.`last_name`
+                    FROM `users_students` 
+	                    LEFT JOIN `students` ON `users_students`.`students_id` = `students`.`id`
+                    WHERE `users_students`.`email` = '".$email."' AND `users_students`.`password` = '".$password."';
+                    ");
                     mysqli_close($conn);
                 
                     if (mysqli_num_rows($result) > 0) {
@@ -58,9 +63,11 @@
                             session_regenerate_id();
                             $_SESSION['loggedin'] = true;
                             $_SESSION['email'] = $row['email'];
-                            $_SESSION['username'] = $row['username'];
+
                             $_SESSION['id'] = $row['id'];
-                            $_SESSION['rights'] = $row['rights'];
+                            $_SESSION['class'] = $row['classes_id'];
+                            $_SESSION['first_name'] = $row['first_name'];
+                            $_SESSION['last_name'] = $row['last_name'];
 
                             header("Location: panel.php");
                         } else {

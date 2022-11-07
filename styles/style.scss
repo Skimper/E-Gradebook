@@ -1,5 +1,5 @@
 html {
-    margin-left: 75px;
+    margin-left: 200px;
 }
 body {
     background-image: linear-gradient(to right, #000428, #004e92);
@@ -16,100 +16,53 @@ h1 {
     color: whitesmoke;
 }
 
-.menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    opacity: 90%;
-    width: 75px;
-    height: 100%;
-    background: #131313;
-    font-size: 16px;
-    font-family: sans-ferif;
-
-    -webkit-box-shadow: 5px 0px 10px 0px rgb(17, 17, 17);
-    -moz-box-shadow: 5px 0px 10px 0px rgb(17, 17, 17);
-    box-shadow: 5px 0px 10px 0px rgb(17, 17, 17);
+body {
+  font-family: "Lato", sans-serif;
 }
-  
-.menu_item {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 15px 0;
+
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+}
+
+.sidenav a {
+    width: auto; height: 50px;
+    padding: 16px 1px 1px 16px;
     text-decoration: none;
-    color: #dddddd;
-    transition: background 0.3s;
+    font-size: 22px;
+    color: #818181;
+    display: block;
+
+    &:hover {
+        background-color: rgb(214, 214, 214);
+    }
 }
 
-.menu_item_disabled:hover {
-    background-color: inherit !important;
-}
+.profile {
+    padding-bottom: 32px;
+    padding-top: 20px;
+    background-color: rgb(26, 26, 26);
 
-.menu_profile_image {
-    height: 50px; width: 50px;
+    p {
+        text-align: center;
+        height: 0px;
+    }
+}
+.avatar {
+    width: 75px; height: 75px;
+    margin-left: 60px;
     border-radius: 50%;
 }
 
-.menu_bottom {
-    bottom: 0;
-    position: absolute;
-    width: 75px;
-}
-  
-.menu_item > i {
-    font-size: 2.2em;
-}
-
-.menu_item:hover, .menu_active {
-    background: #313131;
-}
-
-.menu_info::after {
-    position: absolute;
-    display: inline-block;
-    
-    top: 50%;
-    transform: translateY(-50%);
-    
-    left: 100%;
-    
-    content: attr(data-tooltip);
-    
-    margin-left: 15px;
-    white-space: nowrap;
-    padding: 7px 12px;
-    
-    font-size: 0.9em;
-    font-weight: bold;
-    background: rgba(0, 0, 0, 0.8);
-    border-radius: 15px;
-    color: #fff;
-    
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 1s;
-}
-.menu_item_bottom {
-    clear: both;
-    position: relative;
-    margin-top: 20px !important;
-}
-.menu_item:hover::after {
-    opacity: 1;
-    visibility: visible;
-}  
-
-.menu_profile {
-    height: 100px; width: 200px;
-    margin: 10px;
-    background: #131313;
-    border-radius: 10px;
-}
-
-.menu_profile p {
-    margin: 0;
+@media screen and (max-height: 450px) {
+  .profile {padding-top: 15px;}
+  .sidenav a {font-size: 16px;}
 }
 
 img.logo_img {
@@ -153,4 +106,15 @@ button.login_button {
     &:hover {
         background-color: #0088f7;
     }
+}
+
+// GRADES.PHP
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    text-align: left;
 }
