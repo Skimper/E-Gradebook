@@ -21,17 +21,33 @@
 <body>
 <nav class="sidenav">
     <div class="profile">
-        <img src="" class="avatar"></img>
+        <img src="./img/avatar.jpg" class="avatar"></img>
         <p><?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name'] ?></p>
+        <p><?php echo $_SESSION['class'] ?></p>
     </div>
-    <a href="panel.php">Panel</a>
+    <a class="active" href="panel.php">Panel</a>
     <a href="grades.php">Oceny</a>
-    <a href="#">Frekwencja</a>
+    <a href="attendance.php">Frekwencja</a>
     <a href="#">Plan lekcji</a>
     <a href="#">Sprawdziany</a>
     <a href="#">Wydarzenia</a>
     <a href="#">Tematy</a>
 </nav>
+<section>
+    <h1 class="grades">Panel</h1>
+    <div class="panel">
+        <div class="p1">
+            <h3>Kutas</h3>
+        </div>
+        <div class="p2">x</div>
+        <div class="p3">x</div>
+        <div class="p4">x</div>
+        <div class="p5">x</div>
+        <div class="p6">x</div>
+        <div class="p7">x</div>
+        <div class="p8">x</div>
+    </div>
+</section>
 <?php
     if (isset($_GET['menu']) && $_GET['menu'] == "logout")
         Logout();
@@ -42,12 +58,6 @@
         session_destroy();
         header("Location: http://localhost/infprojectpage/index.php");
     }
-    echo $_SESSION['loggedin'];
-    echo $_SESSION['email'];
-    echo $_SESSION['id'];
-    echo $_SESSION['class'];
-    echo $_SESSION['first_name']; 
-    echo $_SESSION['last_name'];
 ?>
 </body>
 </html>

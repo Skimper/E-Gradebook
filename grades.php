@@ -23,26 +23,27 @@
 <body>
 <nav class="sidenav">
     <div class="profile">
-        <img src="" class="avatar"></img>
+        <img src="./img/avatar.jpg" class="avatar"></img>
         <p><?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name'] ?></p>
+        <p><?php echo $_SESSION['class'] ?></p>
     </div>
     <a href="panel.php">Panel</a>
-    <a href="grades.php">Oceny</a>
-    <a href="#">Frekwencja</a>
+    <a class="active" href="grades.php">Oceny</a>
+    <a href="attendance.php">Frekwencja</a>
     <a href="#">Plan lekcji</a>
     <a href="#">Sprawdziany</a>
     <a href="#">Wydarzenia</a>
     <a href="#">Tematy</a>
 </nav>
 <section>
-    <h1>Oceny</h1>
+    <h1 class="grades">Oceny</h1>
     <div>
-        <table style="width:100%">
-            <tr>
+        <table class="grades_table">
+            <tr class="table_top">
                 <th>Przedmiot</th>
-                <td>Oceny</td>
+                <td><b>Oceny</b></td>
             </tr>
-            <?php 
+            <?php // Całe generowanie tablel z ocenami
                 $conn = mysqli_connect(CONN['host'], CONN['user'], CONN['password'], CONN['database']);
                 mysqli_set_charset($conn, CONN['charset']);
 
