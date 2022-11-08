@@ -27,14 +27,14 @@
     </div>
     <a href="panel.php">Panel</a>
     <a href="grades.php">Oceny</a>
-    <a class="active" href="#">Frekwencja</a>
-    <a href="#">Plan lekcji</a>
+    <a href="attendance.php">Frekwencja</a>
+    <a class="active" href="timetable.php">Plan lekcji</a>
     <a href="#">Sprawdziany</a>
     <a href="#">Wydarzenia</a>
     <a href="#">Tematy</a>
 </nav>
 <section>
-    <h1 class="grades">Frekwencja</h1>
+    <h1 class="grades">Plan lekcji</h1>
     <table class="attendance" border="5" cellspacing="0" align="center">
         <tr>
             <td class="day" align="center" height="50"

@@ -28,7 +28,7 @@
     <a class="active" href="panel.php">Panel</a>
     <a href="grades.php">Oceny</a>
     <a href="attendance.php">Frekwencja</a>
-    <a href="#">Plan lekcji</a>
+    <a href="timetable.php">Plan lekcji</a>
     <a href="#">Sprawdziany</a>
     <a href="#">Wydarzenia</a>
     <a href="#">Tematy</a>
