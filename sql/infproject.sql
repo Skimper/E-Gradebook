@@ -252,8 +252,9 @@ CREATE TABLE IF NOT EXISTS `infproject`.`users_teachers` (
 CREATE TABLE IF NOT EXISTS `infproject`.`timetable` (
   `id` INT NOT NULL,
   `classes_id` VARCHAR(2) NOT NULL,
-  `leason` TINYINT(1) NOT NULL,
   `subject_id` SMALLINT(2) UNSIGNED NOT NULL,
+  `day` ENUM('mon', 'tue', 'wed', 'thu', 'fri') NULL,
+  `lesson` TINYINT(1) NULL,
   PRIMARY KEY (`id`),
     FOREIGN KEY (`classes_id`)
     REFERENCES `infproject`.`classes` (`id`)

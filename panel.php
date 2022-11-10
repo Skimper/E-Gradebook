@@ -116,6 +116,7 @@
                     $nu = $row['nu'];
                 }
                 mysqli_free_result($result);
+                mysqli_close($conn);
             ?>
             <script>
             function RenderChart(ob, nu, nb){
@@ -150,7 +151,78 @@
             </script>
         </div>
         <div class="p4">
-            <h3>Najbliższe lekcje</h3>
+            <?php 
+                $conn = mysqli_connect(CONN['host'], CONN['user'], CONN['password'], CONN['database']);
+                mysqli_set_charset($conn, CONN['charset']);
+
+                if (!$conn) {
+                    die("Connection failed: " . mysqli_connect_error());
+                }
+                
+                switch (getdate("wday")){
+                    case 0:
+                        $day = "mon";
+                        echo "<h3>Najbliższe lekcje</h3>";
+                        break;
+                    case 1:
+                        if (getdate("hours") > 16){
+                            $day = 'mon';
+                            echo "<h3>Dzisiejsze lekcje</h3>";
+                        } else {
+                            echo "<h3>Jutrzejsze lekcje</h3>";
+                            $day = 'tue';
+                        }
+                        break; 
+                    case 2:
+                        if (getdate("hours") > 16){
+                            $day = 'wue';
+                            echo "<h3>Dzisiejsze lekcje</h3>";
+                        } else {
+                            echo "<h3>Jutrzejsze lekcje</h3>";
+                            $day = 'wed';
+                        }
+                        break; 
+                    case 3:
+                        if (getdate("hours") > 16){
+                            $day = 'wed';
+                            echo "<h3>Dzisiejsze lekcje</h3>";
+                        } else {
+                            echo "<h3>Jutrzejsze lekcje</h3>";
+                            $day = 'thu';
+                        }
+                        break;
+                    case 4:
+                        if (getdate("hours") > 16){
+                            $day = 'thu';
+                            echo "<h3>Dzisiejsze lekcje</h3>";
+                        } else {
+                            echo "<h3>Jutrzejsze lekcje</h3>";
+                            $day = 'fri';
+                        }
+                        break;
+                    case 5:
+                        if (getdate("hours") > 16){
+                            $day = 'fri';
+                            echo "<h3>Dzisiejsze lekcje</h3>";
+                        } else {
+                            echo "<h3>Najbliższe lekcje</h3>";
+                            $day = 'mon';
+                        }
+                        break;
+                    case 6:
+                        $day = 'mon';
+                        echo "<h3>Najbliższe lekcje</h3>";
+                        break;
+                }
+
+                $result = mysqli_query($conn, "
+                    // Tutaj trzeba zrobić zapytanie wypisujące lekcje z ostatniego dnia. Coś z relacjami nie działa?!
+                ");
+                while ($row = mysqli_fetch_array($result)) {
+                    echo "";
+                }
+                mysqli_free_result($result);
+            ?>
         </div>
         <div class="p5">
             <h3>Nadchodzące sprawdziany</h3>
