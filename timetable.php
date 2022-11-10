@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Attendance</title>
+    <title>Plan lekcji</title>
 
     <link rel="stylesheet" href="./styles/normalize.css" type="text/css">
     <link rel="stylesheet" href="./styles/webkit.css" type="text/css">
@@ -21,7 +21,7 @@
 <body>
 <nav class="sidenav">
     <div class="profile">
-        <img src="./img/avatar.jpg" class="avatar"></img>
+        <img src="./img/avatar.jpeg" class="avatar"></img>
         <p><?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name'] ?></p>
         <p><?php echo $_SESSION['class'] ?></p>
     </div>
@@ -29,12 +29,15 @@
     <a href="grades.php">Oceny</a>
     <a href="attendance.php">Frekwencja</a>
     <a class="active" href="timetable.php">Plan lekcji</a>
-    <a href="#">Sprawdziany</a>
+    <a href="exams.php">Sprawdziany</a>
     <a href="#">Wydarzenia</a>
     <a href="#">Tematy</a>
+    <a href="#">Uwagi</a>
 </nav>
 <section>
-    <h1 class="grades">Plan lekcji</h1>
+    <header>
+        <h1 class="grades">Plan lekcji</h1>
+    </header>
     <table class="attendance" border="5" cellspacing="0" align="center">
         <tr>
             <td class="day" align="center" height="50"
@@ -71,136 +74,136 @@
             </td>
         </tr>
         <tr>
-            <td align="center" height="50">
-                <b>1<br>9:30-10:20</b>
+                        <td align="center" height="50">
+                <b>1<br>7:45-8:30</b>
             </td>
-            <td align="center" height="50">Eng</td>
-            <td align="center" height="50">Mat</td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Che</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
         </tr>
         <tr>
             <td align="center" height="50">
-                <b>2<br>10:20-11:10</b>
+                <b>2<br>8:35-9:20</b>
             </td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Eng</td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Mat</td>
-            <td align="center" height="50">Che</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
         </tr>
         <tr>
             <td align="center" height="50">
-                <b>3<br>10:20-11:10</b>
+                <b>3<br>9:25-10:10</b>
             </td>
-            <td align="center" height="50">Mat</td>
-            <td align="center" height="50">phy</td>
-            <td align="center" height="50">Eng</td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Che</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
         </tr>
         <tr>
             <td align="center" height="50">
-                <b>4<br>10:20-11:10</b>
+                <b>4<br>10:15-11:00</b>
             </td>
-            <td align="center" height="50">Phy</td>
-            <td align="center" height="50">Eng</td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Che</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
         </tr>
         <tr>
             <td align="center" height="50">
-                <b>5<br>10:20-11:10</b>
+                <b>5<br>11:15-12:00</b>
             </td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Mat</td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Eng</td>
-            <td align="center" height="50">Che</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
         </tr>
         <tr>
             <td align="center" height="50">
-                <b>7<br>10:20-11:10</b>
+                <b>7<br>12:15-13:00</b>
             </td>
-            <td align="center" height="50">Mat</td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Che</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
         </tr>
         <tr>
             <td align="center" height="50">
-                <b>7<br>10:20-11:10</b>
+                <b>7<br>13:05-13:50</b>
             </td>
-            <td align="center" height="50">Eng</td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Mat</td>
-            <td align="center" height="50">Mat</td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Eng</td>
-            <td align="center" height="50">Eng</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
         </tr>
         <tr>
             <td align="center" height="50">
-                <b>8<br>10:20-11:10</b>
+                <b>8<br>14:05-14:50</b>
             </td>
-            <td align="center" height="50">Mat</td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Eng</td>
-            <td align="center" height="50">Mat</td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Eng</td>
-            <td align="center" height="50">Eng</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
         </tr>
         <tr>
             <td align="center" height="50">
-                <b>9<br>10:20-11:10</b>
+                <b>9<br>14:55-15:40</b>
             </td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Mat</td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Eng</td>
-            <td align="center" height="50">Eng</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
         </tr>
         <tr>
             <td align="center" height="50">
-                <b>10<br>10:20-11:10</b>
+                <b>10<br>15:45-16:30</b>
             </td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Mat</td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Eng</td>
-            <td align="center" height="50">Eng</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
         </tr>
         <tr>
             <td align="center" height="50">
-                <b>11<br>10:20-11:10</b>
+                <b>11<br>16:35-17:20</b>
             </td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Mat</td>
-            <td align="center" height="50">Che</td>
-            <td align="center" height="50">Eng</td>
-            <td align="center" height="50">Eng</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
+            <td align="center" height="50">x</td>
         </tr>
     </table>
 </section>

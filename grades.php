@@ -14,7 +14,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel</title>
+    <title>Oceny</title>
 
     <link rel="stylesheet" href="./styles/normalize.css" type="text/css">
     <link rel="stylesheet" href="./styles/webkit.css" type="text/css">
@@ -23,7 +23,7 @@
 <body>
 <nav class="sidenav">
     <div class="profile">
-        <img src="./img/avatar.jpg" class="avatar"></img>
+        <img src="./img/avatar.jpeg" class="avatar"></img>
         <p><?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name'] ?></p>
         <p><?php echo $_SESSION['class'] ?></p>
     </div>
@@ -31,12 +31,15 @@
     <a class="active" href="grades.php">Oceny</a>
     <a href="attendance.php">Frekwencja</a>
     <a href="timetable.php">Plan lekcji</a>
-    <a href="#">Sprawdziany</a>
+    <a href="exams.php">Sprawdziany</a>
     <a href="#">Wydarzenia</a>
     <a href="#">Tematy</a>
+    <a href="#">Uwagi</a>
 </nav>
 <section>
-    <h1 class="grades">Oceny</h1>
+    <header>
+        <h1 class="grades">Oceny</h1>
+    </header>
     <div>
         <table class="grades_table">
             <tr class="table_top">
@@ -72,7 +75,6 @@
                 $niemiecki = array();
                 $result4 = mysqli_query($conn, "SELECT * FROM `grades` WHERE `subject_id`=5 AND `students_id`=601;");
                 while ($row4 = mysqli_fetch_array($result4)) {
-                    echo $row4['grade'];
                     array_push($niemiecki, $row4['grade']);
                 }
                 mysqli_free_result($result4);
@@ -80,7 +82,6 @@
                 $matematyka = array();
                 $result5 = mysqli_query($conn, "SELECT * FROM `grades` WHERE `subject_id`=6 AND `students_id`=601;");
                 while ($row5 = mysqli_fetch_array($result5)) {
-                    echo $row5['grade'];
                     array_push($matematyka, $row5['grade']);
                 }
                 mysqli_free_result($result5);
@@ -88,7 +89,6 @@
                 $informatyka = array();
                 $result6 = mysqli_query($conn, "SELECT * FROM `grades` WHERE `subject_id`=7 AND `students_id`=601;");
                 while ($row6 = mysqli_fetch_array($result6)) {
-                    echo $row6['grade'];
                     array_push($informatyka, $row6['grade']);
                 }
                 mysqli_free_result($result6);
@@ -96,7 +96,6 @@
                 $historia = array();
                 $result7 = mysqli_query($conn, "SELECT * FROM `grades` WHERE `subject_id`=8 AND `students_id`=601;");
                 while ($row7 = mysqli_fetch_array($result7)) {
-                    echo $row7['grade'];
                     array_push($historia, $row7['grade']);
                 }
                 mysqli_free_result($result7);
@@ -104,7 +103,6 @@
                 $hit = array();
                 $result8 = mysqli_query($conn, "SELECT * FROM `grades` WHERE `subject_id`=9 AND `students_id`=601;");
                 while ($row8 = mysqli_fetch_array($result8)) {
-                    echo $row8['grade'];
                     array_push($hit, $row8['grade']);
                 }
                 mysqli_free_result($result8);
@@ -112,7 +110,6 @@
                 $wf = array();
                 $result9 = mysqli_query($conn, "SELECT * FROM `grades` WHERE `subject_id`=10 AND `students_id`=601;");
                 while ($row9 = mysqli_fetch_array($result9)) {
-                    echo $row9['grade'];
                     array_push($wf, $row9['grade']);
                 }
                 mysqli_free_result($result9);
@@ -120,7 +117,6 @@
                 $muzyka = array();
                 $result10 = mysqli_query($conn, "SELECT * FROM `grades` WHERE `subject_id`=11 AND `students_id`=601;");
                 while ($row10 = mysqli_fetch_array($result10)) {
-                    echo $row10['grade'];
                     array_push($muzyka, $row10['grade']);
                 }
                 mysqli_free_result($result10);
@@ -128,7 +124,6 @@
                 $plastyka = array();
                 $result11 = mysqli_query($conn, "SELECT * FROM `grades` WHERE `subject_id`=12 AND `students_id`=601;");
                 while ($row11 = mysqli_fetch_array($result11)) {
-                    echo $row11['grade'];
                     array_push($plastyka, $row11['grade']);
                 }
                 mysqli_free_result($result11);
@@ -136,7 +131,6 @@
                 $biologia = array();
                 $result12 = mysqli_query($conn, "SELECT * FROM `grades` WHERE `subject_id`=13 AND `students_id`=601;");
                 while ($row12 = mysqli_fetch_array($result12)) {
-                    echo $row12['grade'];
                     array_push($biologia, $row12['grade']);
                 }
                 mysqli_free_result($result12);
@@ -144,7 +138,6 @@
                 $geografia = array();
                 $result13 = mysqli_query($conn, "SELECT * FROM `grades` WHERE `subject_id`=14 AND `students_id`=601;");
                 while ($row13 = mysqli_fetch_array($result13)) {
-                    echo $row13['grade'];
                     array_push($geografia, $row13['grade']);
                 }
                 mysqli_free_result($result13);
@@ -152,10 +145,10 @@
                 $chemia = array();
                 $result14 = mysqli_query($conn, "SELECT * FROM `grades` WHERE `subject_id`=15 AND `students_id`=601;");
                 while ($row14 = mysqli_fetch_array($result14)) {
-                    echo $row14['grade'];
                     array_push($geografia, $row14['grade']);
                 }
                 mysqli_free_result($result14);
+                mysqli_close($conn);
 
                 if (mysqli_num_rows($result1) > 0) {
                     while ($row1 = mysqli_fetch_array($result1)) {

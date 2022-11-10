@@ -115,31 +115,6 @@ button.login_button {
     }
 }
 
-// GRADES.PHP
-.grades{
-    margin-top: 0;
-    padding: 20px;
-    background-color: #111;
-    text-align: center;
-}
-.grades_table, .grades_table th, .grades_table td {
-    height: 70vh; width: 80vw;
-    margin-left: auto; margin-right: auto;
-    border-collapse: collapse;
-}
-.grades_table th, .grades_table td {
-    height: 50px;
-    padding: 5px;
-    text-align: left;
-    background-color: rgba(17, 17, 17, 0.2);
-}
-.table_top th, .table_top td {
-    background-color: #111;
-}
-.grades_table tr:nth-child(even){
-    background-color: rgba(17, 17, 17, 0.7);
-}
-
 // PANEL.PHP
 
 .panel {
@@ -150,28 +125,74 @@ button.login_button {
     .p1 , .p2, .p3, .p4, .p5, .p6, .p7, .p8 {
         display: inline-block;
         height: 410px; width: 350px;
-        background-color: #111;
         margin: 10px;
+        background-color: #111;
         vertical-align: middle;
         border-radius: 10px;
     }
+    * p {
+        margin-left: 20px;
+    }
+    .p1 img {
+        width: 100px; height: 100px;
+    }
+}
+
+h3 {
+    text-align: center;
+}
+.graph {
+    background-color: #0078D7;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    margin-left: auto; margin-right: auto;
+}
+
+// GRADES.PHP
+.grades{
+    margin-top: 0;
+    padding: 20px;
+    background-color: #111;
+    text-align: center;
+}
+.grades_table, .grades_table th, .grades_table td {
+    height: 70vh; width: 80vw;
+    margin-top: 50px;
+    margin-left: auto; margin-right: auto;
+    border-collapse: collapse;
+
+    th, td {
+        height: 50px;
+        padding: 5px;
+        padding-left: 10px;
+        text-align: left;
+        background-color: rgba(17, 17, 17, 0.2);
+    }
+}
+
+.table_top th, .table_top td {
+    background-color: #111;
+}
+.grades_table tr:nth-child(even){
+    background-color: rgba(17, 17, 17, 0.7);
 }
 
 // attendance.php
 
 .attendance {
     width: 80vw; height: 80vh;
+    margin-top: 50px;
     border-style: none;
     border-collapse: collapse;
 
     .day {
         background-color: #111;
     }
-}
-.attendance tr:nth-child(even){
-    background-color: rgba(17, 17, 17, 0.7);
-}
-.attendance tr td {
-    border-style: none;
-    border-collapse: collapse;
+    tr:nth-child(even){
+        background-color: rgba(17, 17, 17, 0.7);
+    }
+    tr td {
+        border-style: none;
+        border-collapse: collapse;
+    }
 }

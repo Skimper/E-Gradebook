@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="./styles/webkit.css" type="text/css">
     <link rel="stylesheet" href="./styles/style.css" type="text/css">
 </head>
-<body>
+<body style="margin-left: -200px;">
     <header>
         <img class="logo_img" src="">
         <h1>ZALOGU SIĘ DO ...</h1>

@@ -249,6 +249,22 @@ CREATE TABLE IF NOT EXISTS `infproject`.`users_teachers` (
     ON UPDATE NO ACTION
 );
 
+CREATE TABLE IF NOT EXISTS `infproject`.`timetable` (
+  `id` INT NOT NULL,
+  `classes_id` VARCHAR(2) NOT NULL,
+  `leason` TINYINT(1) NOT NULL,
+  `subject_id` SMALLINT(2) UNSIGNED NOT NULL,
+  PRIMARY KEY (`id`),
+    FOREIGN KEY (`classes_id`)
+    REFERENCES `infproject`.`classes` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+
+    FOREIGN KEY (`subject_id`)
+    REFERENCES `infproject`.`subject` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+);
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
