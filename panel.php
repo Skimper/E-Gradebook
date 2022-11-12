@@ -151,21 +151,20 @@
             </script>
         </div>
         <div class="p4">
-            <?php 
+            <?php // Podgląd najbliższego planu lekcji (Penie i tak trzeba będzie to zmienić)
                 $conn = mysqli_connect(CONN['host'], CONN['user'], CONN['password'], CONN['database']);
                 mysqli_set_charset($conn, CONN['charset']);
 
                 if (!$conn) {
                     die("Connection failed: " . mysqli_connect_error());
                 }
-                
-                switch (getdate("wday")){
+                switch (getdate()['wday']){
                     case 0:
                         $day = "mon";
                         echo "<h3>Najbliższe lekcje</h3>";
                         break;
                     case 1:
-                        if (getdate("hours") > 16){
+                        if (getdate()['hours'] < 16){
                             $day = 'mon';
                             echo "<h3>Dzisiejsze lekcje</h3>";
                         } else {
@@ -174,7 +173,7 @@
                         }
                         break; 
                     case 2:
-                        if (getdate("hours") > 16){
+                        if (getdate()['hours'] < 16){
                             $day = 'wue';
                             echo "<h3>Dzisiejsze lekcje</h3>";
                         } else {
@@ -183,7 +182,7 @@
                         }
                         break; 
                     case 3:
-                        if (getdate("hours") > 16){
+                        if (getdate()['hours'] < 16){
                             $day = 'wed';
                             echo "<h3>Dzisiejsze lekcje</h3>";
                         } else {
@@ -192,7 +191,7 @@
                         }
                         break;
                     case 4:
-                        if (getdate("hours") > 16){
+                        if (getdate()['hours'] < 16){
                             $day = 'thu';
                             echo "<h3>Dzisiejsze lekcje</h3>";
                         } else {
@@ -201,7 +200,7 @@
                         }
                         break;
                     case 5:
-                        if (getdate("hours") > 16){
+                        if (getdate()['hours'] < 16){
                             $day = 'fri';
                             echo "<h3>Dzisiejsze lekcje</h3>";
                         } else {
@@ -216,27 +215,104 @@
                 }
 
                 $result = mysqli_query($conn, "
-                    // Tutaj trzeba zrobić zapytanie wypisujące lekcje z ostatniego dnia. Coś z relacjami nie działa?!
+                SELECT `timetable`.`classes_id`, `timetable`.`lesson`, `timetable`.`day`, `subject`.`name`
+                FROM `timetable` 
+                    LEFT JOIN `subject` ON `timetable`.`subject_id` = `subject`.`id`
+                WHERE `timetable`.`classes_id` = '".$_SESSION['class']."' AND `timetable`.`day` = '".$day."';
                 ");
                 while ($row = mysqli_fetch_array($result)) {
-                    echo "";
+                    echo "<p>" . $row['lesson'] . ". " . $row['name'] . "</p>";
                 }
                 mysqli_free_result($result);
             ?>
         </div>
         <div class="p5">
             <h3>Nadchodzące sprawdziany</h3>
+            <?php 
+                $conn = mysqli_connect(CONN['host'], CONN['user'], CONN['password'], CONN['database']);
+                mysqli_set_charset($conn, CONN['charset']);
+
+                if (!$conn) {
+                    die("Connection failed: " . mysqli_connect_error());
+                }
+
+                $result = mysqli_query($conn, "
+                SELECT `exams`.`topic`, `subject`.`name`, `exams`.`date`
+                FROM `exams` 
+                	LEFT JOIN `subject` ON `exams`.`subject_id` = `subject`.`id`
+                WHERE `exams`.`classes_id` = '4c';
+                ");
+                while ($row = mysqli_fetch_array($result)) {
+                    echo "<p>" . $row['name'] . ": " . $row['topic'] . " (" . $row['date'] . ")" .  "</p>";
+                }
+                mysqli_free_result($result);
+            ?>
         </div>
         <div class="p6">
             <h3>Zebrania i wydarzenia</h3>
+            <?php // Zebrania i jakieś tam szkolne gówna
+                $conn = mysqli_connect(CONN['host'], CONN['user'], CONN['password'], CONN['database']);
+                mysqli_set_charset($conn, CONN['charset']);
+
+                if (!$conn) {
+                    die("Connection failed: " . mysqli_connect_error());
+                }
+
+                $result = mysqli_query($conn, "
+                SELECT `meetings`.`topic`, `meetings`.`classes_id`, `meetings`.`date`
+                FROM `meetings`
+                WHERE `meetings`.`classes_id` = '".$_SESSION['class']."';
+                ");
+                while ($row = mysqli_fetch_array($result)) {
+                    echo "<p>" . $row['topic'] . " " . $row['date'] . "</p>";
+                }
+                mysqli_free_result($result);
+            ?>
         </div>
         <div class="p7">
             <h3>Zrealizowane tematy</h3>
+            <?php // Do zrobienia jak mi się będzie chciało dodać do bazy
+                $conn = mysqli_connect(CONN['host'], CONN['user'], CONN['password'], CONN['database']);
+                mysqli_set_charset($conn, CONN['charset']);
+
+                if (!$conn) {
+                    die("Connection failed: " . mysqli_connect_error());
+                }
+
+                $result = mysqli_query($conn, "
+                SELECT `topics`.`description`, `topics`.`classes_id`, `topics`.`date`
+                FROM `topics`
+                WHERE `topics`.`classes_id` = '".$_SESSION['class']."'
+                ORDER BY `topics`.`date` DESC
+                LIMIT 6;
+                ");
+                while ($row = mysqli_fetch_array($result)) {
+                    echo "<p><b>" . $row['date'] . "</b> " . $row['description'] . "</p>";
+                }
+                mysqli_free_result($result);
+            ?>
         </div>
         <div class="p8">
             <h3>Podsumowanie</h3>
-            <p>Ilość ocen: </p>
-            <p>Średnia ocen: </p>
+            <?php // Wszystko po trochu? Trzeba jeszcze zrobić te najwyższe średnie
+                $conn = mysqli_connect(CONN['host'], CONN['user'], CONN['password'], CONN['database']);
+                mysqli_set_charset($conn, CONN['charset']);
+
+                if (!$conn) {
+                    die("Connection failed: " . mysqli_connect_error());
+                }
+
+                $result = mysqli_query($conn, "
+                SELECT `grades`.`students_id`, AVG(`grades`.`grade`) AS `avg`, COUNT(`grades`.`grade`) AS `count`
+                FROM `grades`
+                WHERE `grades`.`students_id` = '".$_SESSION['id']."'
+                ");
+                while ($row = mysqli_fetch_array($result)) {
+                    echo "<p>Ilośc ocen: " . $row['count'] . "</p>";
+                    echo "<p>Średnia ocen: " . $row['avg'] . "</p>";
+                }
+                mysqli_free_result($result);
+            ?>
             <p>Najwyższa średnia: </p>
             <p>Najniższa średnia: </p>
             <p>Najniższa frekwencja: </p>
@@ -255,7 +331,7 @@
     }
 ?>
 <script>
-    RenderChart(<?php echo $ob . "," . $nb . "," . $nu;?>);
+    RenderChart(<?php echo $ob . "," . $nb . "," . $nu; ?>);
 </script>
 </body>
 </html>
