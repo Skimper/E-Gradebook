@@ -180,7 +180,7 @@
         </tr>
         <tr>
             <td align="center" height="50">
-                <b>7<br>12:15-13:00</b>
+                <b>6<br>12:15-13:00</b>
             </td>
             <td align="center" height="50"><?php if(isset($timetable['mon'][6])) echo $timetable['mon'][6]; ?></td>
             <td align="center" height="50"><?php if(isset($timetable['tue'][6])) echo $timetable['tue'][6]; ?></td>

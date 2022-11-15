@@ -42,11 +42,7 @@
     </header>
     <div>
         <table class="grades_table">
-            <tr class="table_top">
-                <th>Przedmiot</th>
-                <td><b>Oceny</b></td>
-            </tr>
-            <?php // Całe generowanie tablel z ocenami
+        <?php // Całe generowanie tablel z ocenami
                 $conn = mysqli_connect(CONN['host'], CONN['user'], CONN['password'], CONN['database']);
                 mysqli_set_charset($conn, CONN['charset']);
 
@@ -54,206 +50,422 @@
                     die("Connection failed: " . mysqli_connect_error());
                 }
 
-                $subject = array();
-
-                $result1 = mysqli_query($conn, "SELECT `subject`.* FROM `subject`;");
-
-                $polski = array();
-                $result2 = mysqli_query($conn, "SELECT * FROM `grades` WHERE `subject_id`=3 AND `students_id`=601;");
-                while ($row2 = mysqli_fetch_array($result2)) {
-                    array_push($polski, $row2['grade']);
+                $grades = array(
+                    "3" => array(),
+                    "4" => array(),
+                    "5" => array(),
+                    "6" => array(),
+                    "7" => array(),
+                    "8" => array(),
+                    "9" => array(),
+                    "10" => array(),
+                    "11" => array(),
+                    "12" => array(),
+                    "13" => array(),
+                    "14" => array(),
+                    "15" => array(),
+                    "16" => array(),
+                    "17" => array(),
+                );
+                $avg = array();
+                $result = mysqli_query($conn, "
+                SELECT `grades`.*, `grades`.`students_id`
+                FROM `grades`
+                WHERE `grades`.`students_id` = '".$_SESSION['id']."'
+                ORDER BY `grades`.`subject_id`;
+                ");
+                while ($row = mysqli_fetch_array($result)) {
+                    array_push($grades[$row['subject_id']], array($row['grade'], $row['weight'], $row['color'], $row['title'], $row['description'], $row['date']));
                 }
-                mysqli_free_result($result2);
-
-                $angielski = array();
-                $result3 = mysqli_query($conn, "SELECT * FROM `grades` WHERE `subject_id`=4 AND `students_id`=601;");
-                while ($row3 = mysqli_fetch_array($result3)) {
-                    array_push($angielski, $row3['grade']);
-                }
-                mysqli_free_result($result3);
-
-                $niemiecki = array();
-                $result4 = mysqli_query($conn, "SELECT * FROM `grades` WHERE `subject_id`=5 AND `students_id`=601;");
-                while ($row4 = mysqli_fetch_array($result4)) {
-                    array_push($niemiecki, $row4['grade']);
-                }
-                mysqli_free_result($result4);
-
-                $matematyka = array();
-                $result5 = mysqli_query($conn, "SELECT * FROM `grades` WHERE `subject_id`=6 AND `students_id`=601;");
-                while ($row5 = mysqli_fetch_array($result5)) {
-                    array_push($matematyka, $row5['grade']);
-                }
-                mysqli_free_result($result5);
-
-                $informatyka = array();
-                $result6 = mysqli_query($conn, "SELECT * FROM `grades` WHERE `subject_id`=7 AND `students_id`=601;");
-                while ($row6 = mysqli_fetch_array($result6)) {
-                    array_push($informatyka, $row6['grade']);
-                }
-                mysqli_free_result($result6);
-
-                $historia = array();
-                $result7 = mysqli_query($conn, "SELECT * FROM `grades` WHERE `subject_id`=8 AND `students_id`=601;");
-                while ($row7 = mysqli_fetch_array($result7)) {
-                    array_push($historia, $row7['grade']);
-                }
-                mysqli_free_result($result7);
-
-                $hit = array();
-                $result8 = mysqli_query($conn, "SELECT * FROM `grades` WHERE `subject_id`=9 AND `students_id`=601;");
-                while ($row8 = mysqli_fetch_array($result8)) {
-                    array_push($hit, $row8['grade']);
-                }
-                mysqli_free_result($result8);
-
-                $wf = array();
-                $result9 = mysqli_query($conn, "SELECT * FROM `grades` WHERE `subject_id`=10 AND `students_id`=601;");
-                while ($row9 = mysqli_fetch_array($result9)) {
-                    array_push($wf, $row9['grade']);
-                }
-                mysqli_free_result($result9);
-
-                $muzyka = array();
-                $result10 = mysqli_query($conn, "SELECT * FROM `grades` WHERE `subject_id`=11 AND `students_id`=601;");
-                while ($row10 = mysqli_fetch_array($result10)) {
-                    array_push($muzyka, $row10['grade']);
-                }
-                mysqli_free_result($result10);
-
-                $plastyka = array();
-                $result11 = mysqli_query($conn, "SELECT * FROM `grades` WHERE `subject_id`=12 AND `students_id`=601;");
-                while ($row11 = mysqli_fetch_array($result11)) {
-                    array_push($plastyka, $row11['grade']);
-                }
-                mysqli_free_result($result11);
-
-                $biologia = array();
-                $result12 = mysqli_query($conn, "SELECT * FROM `grades` WHERE `subject_id`=13 AND `students_id`=601;");
-                while ($row12 = mysqli_fetch_array($result12)) {
-                    array_push($biologia, $row12['grade']);
-                }
-                mysqli_free_result($result12);
-
-                $geografia = array();
-                $result13 = mysqli_query($conn, "SELECT * FROM `grades` WHERE `subject_id`=14 AND `students_id`=601;");
-                while ($row13 = mysqli_fetch_array($result13)) {
-                    array_push($geografia, $row13['grade']);
-                }
-                mysqli_free_result($result13);
-
-                $chemia = array();
-                $result14 = mysqli_query($conn, "SELECT * FROM `grades` WHERE `subject_id`=15 AND `students_id`=601;");
-                while ($row14 = mysqli_fetch_array($result14)) {
-                    array_push($geografia, $row14['grade']);
-                }
-                mysqli_free_result($result14);
-                mysqli_close($conn);
-
-                if (mysqli_num_rows($result1) > 0) {
-                    while ($row1 = mysqli_fetch_array($result1)) {
-                        echo "<tr>";
-                        echo "<th>" . $row1['name'] . "</th>";
-                        array_push($subject, $row1['name']);
-                        switch ($row1['name']) {
-                            case "Język polski":
-                                echo "<td>";
-                                for ($i=0; $i < count($polski); $i++) { 
-                                    echo $polski[$i] . ", ";
-                                }
-                                echo "</td>";
-                                break;
-                            case "Język angielski":
-                                echo "<td>";
-                                for ($i=0; $i < count($angielski); $i++) { 
-                                    echo $angielski[$i] . ", ";
-                                }
-                                echo "</td>";
-                                break;
-                            case "Język niemiecki":
-                                echo "<td>";
-                                for ($i=0; $i < count($niemiecki); $i++) { 
-                                    echo $niemiecki[$i] . ", ";
-                                }
-                                echo "</td>";
-                                break;
-                            case "Matematyka":
-                                echo "<td>";
-                                for ($i=0; $i < count($matematyka); $i++) { 
-                                    echo $matematyka[$i] . ", ";
-                                }
-                                echo "</td>";
-                                break;
-                            case "Informatyka":
-                                echo "<td>";
-                                for ($i=0; $i < count($informatyka); $i++) { 
-                                    echo $informatyka[$i] . ", ";
-                                }
-                                echo "</td>";
-                                break;
-                            case "Historia":
-                                echo "<td>";
-                                for ($i=0; $i < count($historia); $i++) { 
-                                    echo $historia[$i] . ", ";
-                                }
-                                echo "</td>";
-                                break;
-                            case "Historia i teraźniejszość":
-                                echo "<td>";
-                                for ($i=0; $i < count($hit); $i++) { 
-                                    echo $hit[$i] . ", ";
-                                }
-                                echo "</td>";
-                                break;
-                            case "Wychowanie fizyczne":
-                                echo "<td>";
-                                for ($i=0; $i < count($wf); $i++) { 
-                                    echo $wf[$i] . ", ";
-                                }
-                                echo "</td>";
-                                break;
-                            case "Muzyka":
-                                echo "<td>";
-                                for ($i=0; $i < count($muzyka); $i++) { 
-                                    echo $muzyka[$i] . ", ";
-                                }
-                                echo "</td>";
-                                break;
-                            case "Plastyka":
-                                echo "<td>";
-                                for ($i=0; $i < count($plastyka); $i++) { 
-                                    echo $plastyka[$i] . ", ";
-                                }
-                                echo "</td>";
-                                break;
-                            case "Biologia":
-                                echo "<td>";
-                                for ($i=0; $i < count($biologia); $i++) { 
-                                    echo $biologia[$i] . ", ";
-                                }
-                                echo "</td>";
-                                break;
-                            case "Geografia":
-                                echo "<td>";
-                                for ($i=0; $i < count($geografia); $i++) { 
-                                    echo $geografia[$i] . ", ";
-                                }
-                                echo "</td>";
-                                break;
-                            case "Chemia":
-                                echo "<td>";
-                                for ($i=0; $i < count($chemia); $i++) { 
-                                    echo $chemia[$i] . ", ";
-                                }
-                                echo "</td>";
-                                break;
-                        };
-                    }
-                } else {
-                    die("Nie udało się odczytać danych");
-                }
-                mysqli_free_result($result1);
+                mysqli_free_result($result);
             ?>
+            <tr class="table_top">
+                <th>Przedmiot</th>
+                <td><b>Oceny</b></td>
+                <td>Średnia</td>
+            </tr>
+            <tr>
+                <th>Język polski</th>
+                <td>
+                    <?php 
+                        if(isset($grades[3])) {
+                            for ($i=0; $i < count($grades[3]); $i++) { 
+                                if (isset($grades[3][$i][2])){
+                                    echo "<span class='grade' style='color: ".$grades[3][$i][0].";' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[3][$i][0] . ", ";
+                                } else { 
+                                    echo "<span class='grade' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[3][$i][0] . ", ";
+                                }
+                                echo "
+                                <div class='grade_info' style='display: none;'>
+                                    <p>Waga: " . $grades[3][$i][1] . "</p>
+                                    <p>Tytuł: " . $grades[3][$i][3] . "</p>
+                                    <p>Opis: " . $grades[3][$i][4] . "</p>
+                                    <p>Data: " . $grades[3][$i][5] . "</p>
+                                </div>
+                                ";
+                                echo "</span>";
+
+                                for ($j=0; $j < $grades[3][$i][1]; $j++) { 
+                                    array_push($avg, $grades[3][$j][0]);
+                                }
+                            }
+                        }
+                    ?>
+                </td> 
+                <td>
+                    <?php 
+                        $tmp = array_sum($avg)/count($avg);
+                        echo number_format((float)$tmp, 2, '.', '');
+                    ?>
+                </td>
+            </tr>
+            <tr>
+                <th>Język angielski</th>
+                <td>
+                <?php 
+                        if(isset($grades[4])) {
+                            for ($i=0; $i < count($grades[4]); $i++) { 
+                                if (isset($grades[4][$i][2])){
+                                    echo "<span class='grade' style='color: ".$grades[4][$i][0].";' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[4][$i][0] . ", ";
+                                } else { 
+                                    echo "<span class='grade' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[4][$i][0] . ", ";
+                                }
+                                echo "
+                                <div class='grade_info' style='display: none;'>
+                                    <p>Waga: " . $grades[4][$i][1] . "</p>
+                                    <p>Tytuł: " . $grades[4][$i][3] . "</p>
+                                    <p>Opis: " . $grades[4][$i][4] . "</p>
+                                    <p>Data: " . $grades[4][$i][5] . "</p>
+                                </div>
+                                ";
+                                echo "</span>";
+
+                                for ($j=0; $j < $grades[4][$i][1]; $j++) { 
+                                    array_push($avg, $grades[4][$i][0]);
+                                }
+                            }
+                        }
+                    ?>
+                </td> 
+            </tr>
+            <var><tr>
+                <th>Język niemiecki</th>
+                <td>
+                <?php 
+                        if(isset($grades[5])) {
+                            for ($i=0; $i < count($grades[5]); $i++) { 
+                                if (isset($grades[5][$i][2])){
+                                    echo "<span class='grade' style='color: ".$grades[5][$i][0].";' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[5][$i][0] . ", ";
+                                } else { 
+                                    echo "<span class='grade' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[5][$i][0] . ", ";
+                                }
+                                echo "
+                                <div class='grade_info' style='display: none;'>
+                                    <p>Waga: " . $grades[5][$i][1] . "</p>
+                                    <p>Tytuł: " . $grades[5][$i][3] . "</p>
+                                    <p>Opis: " . $grades[5][$i][4] . "</p>
+                                    <p>Data: " . $grades[5][$i][5] . "</p>
+                                </div>
+                                ";
+                                echo "</span>";
+
+                                for ($j=0; $j < $grades[5][$i][1]; $j++) { 
+                                    array_push($avg, $grades[5][$i][0]);
+                                }
+                            }
+                        }
+                    ?>
+                </td> 
+            </tr><tr>
+                <th>Matematyka</th>
+                <td>
+                <?php 
+                        if(isset($grades[6])) {
+                            for ($i=0; $i < count($grades[6]); $i++) { 
+                                if (isset($grades[6][$i][2])){
+                                    echo "<span class='grade' style='color: ".$grades[6][$i][0].";' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[6][$i][0] . ", ";
+                                } else { 
+                                    echo "<span class='grade' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[6][$i][0] . ", ";
+                                }
+                                echo "
+                                <div class='grade_info' style='display: none;'>
+                                    <p>Waga: " . $grades[6][$i][1] . "</p>
+                                    <p>Tytuł: " . $grades[6][$i][3] . "</p>
+                                    <p>Opis: " . $grades[6][$i][4] . "</p>
+                                    <p>Data: " . $grades[6][$i][5] . "</p>
+                                </div>
+                                ";
+                                echo "</span>";
+
+                                for ($j=0; $j < $grades[6][$i][1]; $j++) { 
+                                    array_push($avg, $grades[6][$i][0]);
+                                }
+                            }
+                        }
+                    ?>
+                </td> 
+            </tr></var>
+            <tr>
+                <th>Informatyka</th>
+                <td>
+                <?php 
+                        if(isset($grades[7])) {
+                            for ($i=0; $i < count($grades[7]); $i++) { 
+                                if (isset($grades[7][$i][2])){
+                                    echo "<span class='grade' style='color: ".$grades[7][$i][0].";' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[7][$i][0] . ", ";
+                                } else { 
+                                    echo "<span class='grade' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[7][$i][0] . ", ";
+                                }
+                                echo "
+                                <div class='grade_info' style='display: none;'>
+                                    <p>Waga: " . $grades[7][$i][1] . "</p>
+                                    <p>Tytuł: " . $grades[7][$i][3] . "</p>
+                                    <p>Opis: " . $grades[7][$i][4] . "</p>
+                                    <p>Data: " . $grades[7][$i][5] . "</p>
+                                </div>
+                                ";
+                                echo "</span>";
+
+                                for ($j=0; $j < $grades[7][$i][1]; $j++) { 
+                                    array_push($avg, $grades[7][$i][0]);
+                                }
+                            }
+                        }
+                    ?>
+                </td> 
+            </tr>
+            <tr>
+                <th>Historia</th>
+                <td>
+                <?php 
+                        if(isset($grades[8])) {
+                            for ($i=0; $i < count($grades[8]); $i++) { 
+                                if (isset($grades[8][$i][2])){
+                                    echo "<span class='grade' style='color: ".$grades[8][$i][0].";' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[8][$i][0] . ", ";
+                                } else { 
+                                    echo "<span class='grade' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[8][$i][0] . ", ";
+                                }
+                                echo "
+                                <div class='grade_info' style='display: none;'>
+                                    <p>Waga: " . $grades[8][$i][1] . "</p>
+                                    <p>Tytuł: " . $grades[8][$i][3] . "</p>
+                                    <p>Opis: " . $grades[8][$i][4] . "</p>
+                                    <p>Data: " . $grades[8][$i][5] . "</p>
+                                </div>
+                                ";
+                                echo "</span>";
+
+                                for ($j=0; $j < $grades[8][$i][1]; $j++) { 
+                                    array_push($avg, $grades[8][$i][0]);
+                                }
+                            }
+                        }
+                    ?>
+                </td> 
+            </tr>
+            <tr>
+                <th>Historia i teraźniejszość</th>
+                <td>
+                <?php 
+                        if(isset($grades[9])) {
+                            for ($i=0; $i < count($grades[9]); $i++) { 
+                                if (isset($grades[9][$i][2])){
+                                    echo "<span class='grade' style='color: ".$grades[9][$i][0].";' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[9][$i][0] . ", ";
+                                } else { 
+                                    echo "<span class='grade' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[9][$i][0] . ", ";
+                                }
+                                echo "
+                                <div class='grade_info' style='display: none;'>
+                                    <p>Waga: " . $grades[9][$i][1] . "</p>
+                                    <p>Tytuł: " . $grades[9][$i][3] . "</p>
+                                    <p>Opis: " . $grades[9][$i][4] . "</p>
+                                    <p>Data: " . $grades[9][$i][5] . "</p>
+                                </div>
+                                ";
+                                echo "</span>";
+
+                                for ($j=0; $j < $grades[9][$i][1]; $j++) { 
+                                    array_push($avg, $grades[9][$i][0]);
+                                }
+                            }
+                        }
+                    ?>
+                </td> 
+            </tr>
+            <tr>
+                <th>Wychowanie fizyczne</th>
+                <td>
+                <?php 
+                        if(isset($grades[10])) {
+                            for ($i=0; $i < count($grades[10]); $i++) { 
+                                if (isset($grades[10][$i][2])){
+                                    echo "<span class='grade' style='color: ".$grades[10][$i][0].";' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[10][$i][0] . ", ";
+                                } else { 
+                                    echo "<span class='grade' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[10][$i][0] . ", ";
+                                }
+                                echo "
+                                <div class='grade_info' style='display: none;'>
+                                    <p>Waga: " . $grades[10][$i][1] . "</p>
+                                    <p>Tytuł: " . $grades[10][$i][3] . "</p>
+                                    <p>Opis: " . $grades[10][$i][4] . "</p>
+                                    <p>Data: " . $grades[10][$i][5] . "</p>
+                                </div>
+                                ";
+                                echo "</span>";
+
+                                for ($j=0; $j < $grades[10][$i][1]; $j++) { 
+                                    array_push($avg, $grades[10][$i][0]);
+                                }
+                            }
+                        }
+                    ?>
+                </td> 
+            </tr>
+            <tr>
+                <th>Muzyka</th>
+                <td>
+                <?php 
+                        if(isset($grades[11])) {
+                            for ($i=0; $i < count($grades[11]); $i++) { 
+                                if (isset($grades[11][$i][2])){
+                                    echo "<span class='grade' style='color: ".$grades[11][$i][0].";' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[11][$i][0] . ", ";
+                                } else { 
+                                    echo "<span class='grade' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[11][$i][0] . ", ";
+                                }
+                                echo "
+                                <div class='grade_info' style='display: none;'>
+                                    <p>Waga: " . $grades[11][$i][1] . "</p>
+                                    <p>Tytuł: " . $grades[11][$i][3] . "</p>
+                                    <p>Opis: " . $grades[11][$i][4] . "</p>
+                                    <p>Data: " . $grades[11][$i][5] . "</p>
+                                </div>
+                                ";
+                                echo "</span>";
+
+                                for ($j=0; $j < $grades[11][$i][1]; $j++) { 
+                                    array_push($avg, $grades[11][$i][0]);
+                                }
+                            }
+                        }
+                    ?>
+                </td> 
+            </tr>
+            <tr>
+                <th>Plastyka</th>
+                <td>
+                <?php 
+                        if(isset($grades[12])) {
+                            for ($i=0; $i < count($grades[12]); $i++) { 
+                                if (isset($grades[12][$i][2])){
+                                    echo "<span class='grade' style='color: ".$grades[12][$i][0].";' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[12][$i][0] . ", ";
+                                } else { 
+                                    echo "<span class='grade' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[12][$i][0] . ", ";
+                                }
+                                echo "
+                                <div class='grade_info' style='display: none;'>
+                                    <p>Waga: " . $grades[12][$i][1] . "</p>
+                                    <p>Tytuł: " . $grades[12][$i][3] . "</p>
+                                    <p>Opis: " . $grades[12][$i][4] . "</p>
+                                    <p>Data: " . $grades[12][$i][5] . "</p>
+                                </div>
+                                ";
+                                echo "</span>";
+
+                                for ($j=0; $j < $grades[12][$i][1]; $j++) { 
+                                    array_push($avg, $grades[12][$i][0]);
+                                }
+                            }
+                        }
+                    ?>
+                </td> 
+            </tr>
+            <tr>
+                <th>Biologia</th>
+                <td>
+                    <?php 
+                        if(isset($grades[13])) {
+                            for ($i=0; $i < count($grades[13]); $i++) { 
+                                if (isset($grades[13][$i][2])){
+                                    echo "<span class='grade' style='color: ".$grades[13][$i][0].";' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[13][$i][0] . ", ";
+                                } else { 
+                                    echo "<span class='grade' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[13][$i][0] . ", ";
+                                }
+                                echo "
+                                <div class='grade_info' style='display: none;'>
+                                    <p>Waga: " . $grades[13][$i][1] . "</p>
+                                    <p>Tytuł: " . $grades[13][$i][3] . "</p>
+                                    <p>Opis: " . $grades[13][$i][4] . "</p>
+                                    <p>Data: " . $grades[13][$i][5] . "</p>
+                                </div>
+                                ";
+                                echo "</span>";
+
+                                for ($j=0; $j < $grades[13][$i][1]; $j++) { 
+                                    array_push($avg, $grades[13][$i][0]);
+                                }
+                            }
+                        }
+                    ?>
+                </td> 
+            </tr>
+            <tr>
+                <th>Geografia</th>
+                <td>
+                    <?php 
+                        if(isset($grades[14])) {
+                            for ($i=0; $i < count($grades[14]); $i++) { 
+                                if (isset($grades[14][$i][2])){
+                                    echo "<span class='grade' style='color: ".$grades[14][$i][0].";' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[14][$i][0] . ", ";
+                                } else { 
+                                    echo "<span class='grade' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[14][$i][0] . ", ";
+                                }
+                                echo "
+                                <div class='grade_info' style='display: none;'>
+                                    <p>Waga: " . $grades[14][$i][1] . "</p>
+                                    <p>Tytuł: " . $grades[14][$i][3] . "</p>
+                                    <p>Opis: " . $grades[14][$i][4] . "</p>
+                                    <p>Data: " . $grades[14][$i][5] . "</p>
+                                </div>
+                                ";
+                                echo "</span>";
+
+                                for ($j=0; $j < $grades[14][$i][1]; $j++) { 
+                                    array_push($avg, $grades[14][$i][0]);
+                                }
+                            }
+                        }
+                    ?>
+                </td> 
+            </tr>
+            <tr>
+                <th>Chemia</th>
+                <td>
+                    <?php 
+                        if(isset($grades[15])) {
+                            for ($i=0; $i < count($grades[15]); $i++) { 
+                                if (isset($grades[15][$i][2])){
+                                    echo "<span class='grade' style='color: ".$grades[15][$i][0].";' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[15][$i][0] . ", ";
+                                } else { 
+                                    echo "<span class='grade' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[15][$i][0] . ", ";
+                                }
+                                echo "
+                                <div class='grade_info' style='display: none;'>
+                                    <p>Waga: " . $grades[15][$i][1] . "</p>
+                                    <p>Tytuł: " . $grades[15][$i][3] . "</p>
+                                    <p>Opis: " . $grades[15][$i][4] . "</p>
+                                    <p>Data: " . $grades[15][$i][5] . "</p>
+                                </div>
+                                ";
+                                echo "</span>";
+
+                                for ($j=0; $j < $grades[15][$i][1]; $j++) { 
+                                    array_push($avg, $grades[15][$i][0]);
+                                }
+                            }
+                        }
+                    ?>
+                </td> 
+            </tr>
         </table>
     </div>
 </section>
@@ -268,5 +480,7 @@
         header("Location: http://localhost/infprojectpage/index.php");
     }
 ?>
+<script src="./js/grade.js"></script>
+
 </body>
 </html>

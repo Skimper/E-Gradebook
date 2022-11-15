@@ -122,7 +122,7 @@ button.login_button {
     margin-left: auto; margin-right: auto;
     padding: 20px;
     
-    .p1 , .p2, .p3, .p4, .p5, .p6, .p7, .p8 {
+    .p1, .p2, .p3, .p4, .p5, .p6, .p7, .p8 {
         display: inline-block;
         height: 410px; width: 350px;
         margin: 10px;
@@ -195,4 +195,15 @@ h3 {
         border-style: none;
         border-collapse: collapse;
     }
+}
+.grade {
+    
+}
+.grade_info {
+    position: absolute;
+    width: 250px;
+    padding: 10px;
+    background-color: #111;
+
+    border-radius: 5px;
 }

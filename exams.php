@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="./styles/normalize.css" type="text/css">
     <link rel="stylesheet" href="./styles/webkit.css" type="text/css">
     <link rel="stylesheet" href="./styles/style.css" type="text/css">
+
+    <script src="./js/keyborad.js"></script>
 </head>
 <body>
 <nav class="sidenav">
@@ -75,7 +77,7 @@
         </tr>
         <tr>
             <td align="center" height="50">
-                <b>1<br>9:30-10:20</b>
+                <b>1<br>7:45-8:30</b>
             </td>
             <td align="center" height="50"></td>
             <td align="center" height="50"></td>
@@ -87,7 +89,7 @@
         </tr>
         <tr>
             <td align="center" height="50">
-                <b>2<br>10:20-11:10</b>
+                <b>2<br>8:35-9:20</b>
             </td>
             <td align="center" height="50"></td>
             <td align="center" height="50"></td>
@@ -99,7 +101,7 @@
         </tr>
         <tr>
             <td align="center" height="50">
-                <b>3<br>10:20-11:10</b>
+                <b>3<br>9:25-10:10</b>
             </td>
             <td align="center" height="50"></td>
             <td align="center" height="50"></td>
@@ -111,7 +113,7 @@
         </tr>
         <tr>
             <td align="center" height="50">
-                <b>4<br>10:20-11:10</b>
+                <b>4<br>10:15-11:00</b>
             </td>
             <td align="center" height="50"></td>
             <td align="center" height="50"></td>
@@ -123,7 +125,7 @@
         </tr>
         <tr>
             <td align="center" height="50">
-                <b>5<br>10:20-11:10</b>
+                <b>5<br>11:15-12:00</b>
             </td>
             <td align="center" height="50"></td>
             <td align="center" height="50"></td>
@@ -135,7 +137,7 @@
         </tr>
         <tr>
             <td align="center" height="50">
-                <b>7<br>10:20-11:10</b>
+                <b>6<br>12:15-13:00</b>
             </td>
             <td align="center" height="50"></td>
             <td align="center" height="50"></td>
@@ -147,7 +149,7 @@
         </tr>
         <tr>
             <td align="center" height="50">
-                <b>7<br>10:20-11:10</b>
+                <b>7<br>13:05-13:50</b>
             </td>
             <td align="center" height="50"></td>
             <td align="center" height="50"></td>
@@ -159,7 +161,7 @@
         </tr>
         <tr>
             <td align="center" height="50">
-                <b>8<br>10:20-11:10</b>
+                <b>8<br>14:05-14:50</b>
             </td>
             <td align="center" height="50"></td>
             <td align="center" height="50"></td>
@@ -171,7 +173,7 @@
         </tr>
         <tr>
             <td align="center" height="50">
-                <b>9<br>10:20-11:10</b>
+                <b>9<br>14:55-15:40</b>
             </td>
             <td align="center" height="50"></td>
             <td align="center" height="50"></td>
@@ -183,7 +185,7 @@
         </tr>
         <tr>
             <td align="center" height="50">
-                <b>10<br>10:20-11:10</b>
+                <b>10<br>15:45-16:30</b>
             </td>
             <td align="center" height="50"></td>
             <td align="center" height="50"></td>
@@ -195,7 +197,7 @@
         </tr>
         <tr>
             <td align="center" height="50">
-                <b>11<br>10:20-11:10</b>
+                <b>11<br>16:35-17:20</b>
             </td>
             <td align="center" height="50"></td>
             <td align="center" height="50"></td>

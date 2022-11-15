@@ -45,9 +45,9 @@
     <div class="panel">
         <div class="p1">
             <h3>Dane ucznia</h3>
-            <p>Imię i nazwisko: <?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name']; ?></p>
-            <p>Email: <?php echo $_SESSION['email']; ?></p>
-            <p>Klasa: <?php echo $_SESSION['class']; ?></p>
+            <p><b>Imię i nazwisko:</b> <?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name']; ?></p>
+            <p><b>Email:</b> <?php echo $_SESSION['email']; ?></p>
+            <p><b>Klasa:</b> <?php echo $_SESSION['class']; ?></p>
         </div>
         <div class="p2">
             <h3>Ostatnie oceny</h3>
@@ -66,7 +66,7 @@
                 WHERE `grades`.`date` > ' ". date('Y-m-d',(strtotime ( '-7 day' , strtotime (date('Y-m-d'))))) ." ' AND `grades`.`students_id` = '" . $_SESSION['id'] . "';
                 ");
                 while ($row = mysqli_fetch_array($result)) {
-                    echo "<p>" . $row['name'] . ": " . $row['grade'] . "</p>";
+                    echo "<p><b>" . $row['name'] . "</b>: " . $row['grade'] . "</p>";
                 }
                 mysqli_free_result($result);
             ?>
@@ -90,7 +90,7 @@
                 WHERE `attendance`.`students_id` = '" . $_SESSION['id'] . "' AND `attendance`.`type` = 'ob';
                 ");
                 while ($row = mysqli_fetch_array($result)) {
-                    echo "<p>Obecność: ". $row['ob'] ."</p>";
+                    echo "<p><b>Obecność: </b>". $row['ob'] ."</p>";
                     $ob = $row['ob'];
                 }
                 mysqli_free_result($result);
@@ -101,7 +101,7 @@
                 WHERE `attendance`.`students_id` = '" . $_SESSION['id'] . "' AND `attendance`.`type` = 'no';
                 ");
                 while ($row = mysqli_fetch_array($result)) {
-                    echo "<p>Nieobecność nieusprawiedliwiona: ". $row['nb'] ."</p>";
+                    echo "<p><b>Nieobecność nieusprawiedliwiona:</b> ". $row['nb'] ."</p>";
                     $nb = $row['nb'];
                 }
                 mysqli_free_result($result);
@@ -112,7 +112,7 @@
                 WHERE `attendance`.`students_id` = '" . $_SESSION['id'] . "' AND `attendance`.`type` = 'nu';
                 ");
                 while ($row = mysqli_fetch_array($result)) {
-                    echo "<p>Nieobecność usprawiedliwiona: ". $row['nu'] ."</p>";
+                    echo "<p><b>Nieobecność usprawiedliwiona:</b> ". $row['nu'] ."</p>";
                     $nu = $row['nu'];
                 }
                 mysqli_free_result($result);
@@ -218,17 +218,18 @@
                 SELECT `timetable`.`classes_id`, `timetable`.`lesson`, `timetable`.`day`, `subject`.`name`
                 FROM `timetable` 
                     LEFT JOIN `subject` ON `timetable`.`subject_id` = `subject`.`id`
-                WHERE `timetable`.`classes_id` = '".$_SESSION['class']."' AND `timetable`.`day` = '".$day."';
+                WHERE `timetable`.`classes_id` = '".$_SESSION['class']."' AND `timetable`.`day` = '".$day."'
+                ORDER BY `timetable`.`lesson`;
                 ");
                 while ($row = mysqli_fetch_array($result)) {
-                    echo "<p>" . $row['lesson'] . ". " . $row['name'] . "</p>";
+                    echo "<p><b>" . $row['lesson'] . "</b>. " . $row['name'] . "</p>";
                 }
                 mysqli_free_result($result);
             ?>
         </div>
         <div class="p5">
             <h3>Nadchodzące sprawdziany</h3>
-            <?php 
+            <?php // Sprawdziany, pracy domowych tu chyba na razie nie będzie
                 $conn = mysqli_connect(CONN['host'], CONN['user'], CONN['password'], CONN['database']);
                 mysqli_set_charset($conn, CONN['charset']);
 
@@ -243,7 +244,7 @@
                 WHERE `exams`.`classes_id` = '4c';
                 ");
                 while ($row = mysqli_fetch_array($result)) {
-                    echo "<p>" . $row['name'] . ": " . $row['topic'] . " (" . $row['date'] . ")" .  "</p>";
+                    echo "<p><b>" . $row['name'] . "</b>: " . $row['topic'] . " (" . $row['date'] . ")" .  "</p>";
                 }
                 mysqli_free_result($result);
             ?>
@@ -264,14 +265,14 @@
                 WHERE `meetings`.`classes_id` = '".$_SESSION['class']."';
                 ");
                 while ($row = mysqli_fetch_array($result)) {
-                    echo "<p>" . $row['topic'] . " " . $row['date'] . "</p>";
+                    echo "<p><b>" . $row['date'] . "</b> - " . $row['topic'] . "</p>";
                 }
                 mysqli_free_result($result);
             ?>
         </div>
         <div class="p7">
             <h3>Zrealizowane tematy</h3>
-            <?php // Do zrobienia jak mi się będzie chciało dodać do bazy
+            <?php // Ostatnie 6 tematów
                 $conn = mysqli_connect(CONN['host'], CONN['user'], CONN['password'], CONN['database']);
                 mysqli_set_charset($conn, CONN['charset']);
 
@@ -294,7 +295,7 @@
         </div>
         <div class="p8">
             <h3>Podsumowanie</h3>
-            <?php // Wszystko po trochu? Trzeba jeszcze zrobić te najwyższe średnie
+            <?php // Wszystko po trochu? Trzeba jeszcze zrobić te najwyższe średnie. DOKOŃCZYĆ TO!
                 $conn = mysqli_connect(CONN['host'], CONN['user'], CONN['password'], CONN['database']);
                 mysqli_set_charset($conn, CONN['charset']);
 
@@ -308,14 +309,49 @@
                 WHERE `grades`.`students_id` = '".$_SESSION['id']."'
                 ");
                 while ($row = mysqli_fetch_array($result)) {
-                    echo "<p>Ilośc ocen: " . $row['count'] . "</p>";
-                    echo "<p>Średnia ocen: " . $row['avg'] . "</p>";
+                    echo "<p><b>Ilośc ocen:</b> " . $row['count'] . "</p>";
+                    echo "<p><b>Średnia ocen:</b> " . $row['avg'] . "</p>";
                 }
                 mysqli_free_result($result);
+
+                $grades = array(
+                    "3" => array(),
+                    "4" => array(),
+                    "5" => array(),
+                    "6" => array(),
+                    "7" => array(),
+                    "8" => array(),
+                    "9" => array(),
+                    "10" => array(),
+                    "11" => array(),
+                    "12" => array(),
+                    "13" => array(),
+                    "14" => array(),
+                    "15" => array(),
+                    "16" => array(),
+                    "17" => array(),
+                );
+
+                $result = mysqli_query($conn, "
+                SELECT `grades`.`grade`, `grades`.`weight`, `grades`.`students_id`, `grades`.`subject_id`
+                FROM `grades`
+                WHERE `grades`.`students_id` = '".$_SESSION['id']."'
+                ORDER BY `grades`.`subject_id`;
+                ");
+                while ($row = mysqli_fetch_array($result)) {
+                    array_push($grades[$row['subject_id']], array($row['grade'], $row['weight']));
+                }
+                mysqli_free_result($result);
+
+                for ($i=3; $i < count($grades); $i++) { 
+                    for ($j=0; $j < count($grades[$i]); $j++) { 
+                        
+                    }
+                }
             ?>
-            <p>Najwyższa średnia: </p>
-            <p>Najniższa średnia: </p>
-            <p>Najniższa frekwencja: </p>
+            <p><b>Najwyższa średnia:</b> </p>
+            <p><b>Najniższa średnia:</b> </p>
+            <p><b>Najniższa frekwencja:</b> </p>
         </div>
     </div>
 </section>
