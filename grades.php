@@ -80,9 +80,9 @@
                 mysqli_free_result($result);
             ?>
             <tr class="table_top">
-                <th>Przedmiot</th>
+                <th style="width:30%">Przedmiot</th>
                 <td><b>Oceny</b></td>
-                <td>Średnia</td>
+                <td style="width:10%">Średnia</td>
             </tr>
             <tr>
                 <th>Język polski</th>
@@ -114,15 +114,18 @@
                 </td> 
                 <td>
                     <?php 
+                    if (isset($avg[0])){
                         $tmp = array_sum($avg)/count($avg);
                         echo number_format((float)$tmp, 2, '.', '');
+                        $avg = array();
+                    }
                     ?>
                 </td>
             </tr>
             <tr>
                 <th>Język angielski</th>
                 <td>
-                <?php 
+                    <?php 
                         if(isset($grades[4])) {
                             for ($i=0; $i < count($grades[4]); $i++) { 
                                 if (isset($grades[4][$i][2])){
@@ -146,12 +149,21 @@
                             }
                         }
                     ?>
-                </td> 
+                </td>
+                <td>
+                    <?php 
+                    if (isset($avg[0])){
+                        $tmp = array_sum($avg)/count($avg);
+                        echo number_format((float)$tmp, 2, '.', '');
+                        $avg = array();
+                    }
+                    ?>
+                </td>
             </tr>
-            <var><tr>
+            <tr>
                 <th>Język niemiecki</th>
                 <td>
-                <?php 
+                    <?php 
                         if(isset($grades[5])) {
                             for ($i=0; $i < count($grades[5]); $i++) { 
                                 if (isset($grades[5][$i][2])){
@@ -175,11 +187,21 @@
                             }
                         }
                     ?>
-                </td> 
-            </tr><tr>
+                </td>
+                <td>
+                    <?php 
+                    if (isset($avg[0])){
+                        $tmp = array_sum($avg)/count($avg);
+                        echo number_format((float)$tmp, 2, '.', '');
+                        $avg = array();
+                    }
+                    ?>
+                </td>
+            </tr>
+            <tr>
                 <th>Matematyka</th>
                 <td>
-                <?php 
+                    <?php 
                         if(isset($grades[6])) {
                             for ($i=0; $i < count($grades[6]); $i++) { 
                                 if (isset($grades[6][$i][2])){
@@ -203,12 +225,21 @@
                             }
                         }
                     ?>
-                </td> 
-            </tr></var>
+                </td>
+                <td>
+                    <?php 
+                    if (isset($avg[0])){
+                        $tmp = array_sum($avg)/count($avg);
+                        echo number_format((float)$tmp, 2, '.', '');
+                        $avg = array();
+                    }
+                    ?>
+                </td>
+            </tr>
             <tr>
                 <th>Informatyka</th>
                 <td>
-                <?php 
+                    <?php 
                         if(isset($grades[7])) {
                             for ($i=0; $i < count($grades[7]); $i++) { 
                                 if (isset($grades[7][$i][2])){
@@ -232,7 +263,16 @@
                             }
                         }
                     ?>
-                </td> 
+                </td>
+                <td>
+                    <?php 
+                    if (isset($avg[0])){
+                        $tmp = array_sum($avg)/count($avg);
+                        echo number_format((float)$tmp, 2, '.', '');
+                        $avg = array();
+                    }
+                    ?>
+                </td>
             </tr>
             <tr>
                 <th>Historia</th>
@@ -261,7 +301,16 @@
                             }
                         }
                     ?>
-                </td> 
+                </td>
+                <td>
+                    <?php 
+                    if (isset($avg[0])){
+                        $tmp = array_sum($avg)/count($avg);
+                        echo number_format((float)$tmp, 2, '.', '');
+                        $avg = array();
+                    }
+                    ?>
+                </td>
             </tr>
             <tr>
                 <th>Historia i teraźniejszość</th>
@@ -290,7 +339,16 @@
                             }
                         }
                     ?>
-                </td> 
+                </td>
+                <td>
+                    <?php 
+                    if (isset($avg[0])){
+                        $tmp = array_sum($avg)/count($avg);
+                        echo number_format((float)$tmp, 2, '.', '');
+                        $avg = array();
+                    }
+                    ?>
+                </td>
             </tr>
             <tr>
                 <th>Wychowanie fizyczne</th>
@@ -319,12 +377,21 @@
                             }
                         }
                     ?>
-                </td> 
+                </td>
+                <td>
+                    <?php 
+                    if (isset($avg[0])){
+                        $tmp = array_sum($avg)/count($avg);
+                        echo number_format((float)$tmp, 2, '.', '');
+                        $avg = array();
+                    }
+                    ?>
+                </td>
             </tr>
             <tr>
                 <th>Muzyka</th>
                 <td>
-                <?php 
+                    <?php 
                         if(isset($grades[11])) {
                             for ($i=0; $i < count($grades[11]); $i++) { 
                                 if (isset($grades[11][$i][2])){
@@ -348,12 +415,21 @@
                             }
                         }
                     ?>
-                </td> 
+                </td>
+                <td>
+                    <?php 
+                    if (isset($avg[0])){
+                        $tmp = array_sum($avg)/count($avg);
+                        echo number_format((float)$tmp, 2, '.', '');
+                        $avg = array();
+                    }
+                    ?>
+                </td>
             </tr>
             <tr>
                 <th>Plastyka</th>
                 <td>
-                <?php 
+                    <?php 
                         if(isset($grades[12])) {
                             for ($i=0; $i < count($grades[12]); $i++) { 
                                 if (isset($grades[12][$i][2])){
@@ -377,7 +453,16 @@
                             }
                         }
                     ?>
-                </td> 
+                </td>
+                <td>
+                    <?php 
+                    if (isset($avg[0])){
+                        $tmp = array_sum($avg)/count($avg);
+                        echo number_format((float)$tmp, 2, '.', '');
+                        $avg = array();
+                    }
+                    ?>
+                </td>
             </tr>
             <tr>
                 <th>Biologia</th>
@@ -406,7 +491,16 @@
                             }
                         }
                     ?>
-                </td> 
+                </td>
+                <td>
+                    <?php 
+                    if (isset($avg[0])){
+                        $tmp = array_sum($avg)/count($avg);
+                        echo number_format((float)$tmp, 2, '.', '');
+                        $avg = array();
+                    }
+                    ?>
+                </td>
             </tr>
             <tr>
                 <th>Geografia</th>
@@ -435,7 +529,16 @@
                             }
                         }
                     ?>
-                </td> 
+                </td>
+                <td>
+                    <?php 
+                    if (isset($avg[0])){
+                        $tmp = array_sum($avg)/count($avg);
+                        echo number_format((float)$tmp, 2, '.', '');
+                        $avg = array();
+                    }
+                    ?>
+                </td>
             </tr>
             <tr>
                 <th>Chemia</th>
@@ -464,7 +567,16 @@
                             }
                         }
                     ?>
-                </td> 
+                </td>
+                <td>
+                    <?php 
+                    if (isset($avg[0])){
+                        $tmp = array_sum($avg)/count($avg);
+                        echo number_format((float)$tmp, 2, '.', '');
+                        $avg = array();
+                    }
+                    ?>
+                </td>
             </tr>
         </table>
     </div>

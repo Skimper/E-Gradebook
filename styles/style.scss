@@ -177,6 +177,15 @@ h3 {
     background-color: rgba(17, 17, 17, 0.7);
 }
 
+.grade_info {
+    position: absolute;
+    width: 250px;
+    padding: 10px;
+    background-color: #111;
+
+    border-radius: 5px;
+}
+
 // attendance.php
 
 .attendance {
@@ -195,15 +204,4 @@ h3 {
         border-style: none;
         border-collapse: collapse;
     }
-}
-.grade {
-    
-}
-.grade_info {
-    position: absolute;
-    width: 250px;
-    padding: 10px;
-    background-color: #111;
-
-    border-radius: 5px;
 }
