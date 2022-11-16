@@ -295,7 +295,7 @@
         </div>
         <div class="p8">
             <h3>Podsumowanie</h3>
-            <?php // Wszystko po trochu? Trzeba jeszcze zrobić te najwyższe średnie. DOKOŃCZYĆ TO!
+            <?php // Wszystko po trochu? Trzeba jeszcze zrobić te najwyższe średnie. DOKOŃCZYĆ TO! Haha no i dokończyłem zamiast usunąć
                 $conn = mysqli_connect(CONN['host'], CONN['user'], CONN['password'], CONN['database']);
                 mysqli_set_charset($conn, CONN['charset']);
 
@@ -343,14 +343,30 @@
                 }
                 mysqli_free_result($result);
 
-                for ($i=3; $i < count($grades); $i++) { 
-                    for ($j=0; $j < count($grades[$i]); $j++) { 
-                        
-                    }
+                $avg = array();
+                $result = mysqli_query($conn, "
+                SELECT cast(sum(`grade` * `weight`) / sum(`weight`) as decimal(8, 2)) as `weight`, `grades`.`students_id`, `grades`.`subject_id`, `subject`.`name`
+                FROM `grades`
+                    LEFT JOIN `subject` ON `grades`.`subject_id` = `subject`.`id`
+                WHERE `grades`.`students_id` = '".$_SESSION['id']."'
+                GROUP BY `grades`.`subject_id`;
+                ");
+                while ($row = mysqli_fetch_array($result)) {
+                    $avg[$row['name']] = $row['weight'];
+                }
+                mysqli_free_result($result);
+
+                $max = array_keys($avg, max($avg));
+                $min = array_keys($avg, min($avg));
+
+                if(!empty($avg)){
+                    echo "<p><b>Najwyższa średnia: </b>" . max($avg) . " (" . $max[0] . ")</p>";
+                    echo "<p><b>Najniższa średnia: </b>" . min($avg) . " (" . $min[0] . ")</p>";
+                } else {
+                    echo "<p><b>Najwyższa średnia: </b></p>";
+                    echo "<p><b>Najniższa średnia: </b></p>";
                 }
             ?>
-            <p><b>Najwyższa średnia:</b> </p>
-            <p><b>Najniższa średnia:</b> </p>
             <p><b>Najniższa frekwencja:</b> </p>
         </div>
     </div>

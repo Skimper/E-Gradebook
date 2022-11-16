@@ -128,7 +128,7 @@
                     <?php 
                         if(isset($grades[4])) {
                             for ($i=0; $i < count($grades[4]); $i++) { 
-                                if (isset($grades[4][$i][2])){
+                                if (isset($grades[4][$j][2])){
                                     echo "<span class='grade' style='color: ".$grades[4][$i][0].";' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[4][$i][0] . ", ";
                                 } else { 
                                     echo "<span class='grade' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[4][$i][0] . ", ";
@@ -166,7 +166,7 @@
                     <?php 
                         if(isset($grades[5])) {
                             for ($i=0; $i < count($grades[5]); $i++) { 
-                                if (isset($grades[5][$i][2])){
+                                if (isset($grades[5][$j][2])){
                                     echo "<span class='grade' style='color: ".$grades[5][$i][0].";' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[5][$i][0] . ", ";
                                 } else { 
                                     echo "<span class='grade' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[5][$i][0] . ", ";
@@ -204,7 +204,7 @@
                     <?php 
                         if(isset($grades[6])) {
                             for ($i=0; $i < count($grades[6]); $i++) { 
-                                if (isset($grades[6][$i][2])){
+                                if (isset($grades[6][$j][2])){
                                     echo "<span class='grade' style='color: ".$grades[6][$i][0].";' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[6][$i][0] . ", ";
                                 } else { 
                                     echo "<span class='grade' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[6][$i][0] . ", ";
@@ -242,7 +242,7 @@
                     <?php 
                         if(isset($grades[7])) {
                             for ($i=0; $i < count($grades[7]); $i++) { 
-                                if (isset($grades[7][$i][2])){
+                                if (isset($grades[7][$j][2])){
                                     echo "<span class='grade' style='color: ".$grades[7][$i][0].";' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[7][$i][0] . ", ";
                                 } else { 
                                     echo "<span class='grade' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[7][$i][0] . ", ";
@@ -280,7 +280,7 @@
                 <?php 
                         if(isset($grades[8])) {
                             for ($i=0; $i < count($grades[8]); $i++) { 
-                                if (isset($grades[8][$i][2])){
+                                if (isset($grades[8][$j][2])){
                                     echo "<span class='grade' style='color: ".$grades[8][$i][0].";' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[8][$i][0] . ", ";
                                 } else { 
                                     echo "<span class='grade' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[8][$i][0] . ", ";
@@ -318,7 +318,7 @@
                 <?php 
                         if(isset($grades[9])) {
                             for ($i=0; $i < count($grades[9]); $i++) { 
-                                if (isset($grades[9][$i][2])){
+                                if (isset($grades[9][$j][2])){
                                     echo "<span class='grade' style='color: ".$grades[9][$i][0].";' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[9][$i][0] . ", ";
                                 } else { 
                                     echo "<span class='grade' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[9][$i][0] . ", ";
@@ -356,7 +356,7 @@
                 <?php 
                         if(isset($grades[10])) {
                             for ($i=0; $i < count($grades[10]); $i++) { 
-                                if (isset($grades[10][$i][2])){
+                                if (isset($grades[10][$j][2])){
                                     echo "<span class='grade' style='color: ".$grades[10][$i][0].";' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[10][$i][0] . ", ";
                                 } else { 
                                     echo "<span class='grade' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[10][$i][0] . ", ";
@@ -394,7 +394,7 @@
                     <?php 
                         if(isset($grades[11])) {
                             for ($i=0; $i < count($grades[11]); $i++) { 
-                                if (isset($grades[11][$i][2])){
+                                if (isset($grades[11][$j][2])){
                                     echo "<span class='grade' style='color: ".$grades[11][$i][0].";' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[11][$i][0] . ", ";
                                 } else { 
                                     echo "<span class='grade' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[11][$i][0] . ", ";
@@ -432,7 +432,7 @@
                     <?php 
                         if(isset($grades[12])) {
                             for ($i=0; $i < count($grades[12]); $i++) { 
-                                if (isset($grades[12][$i][2])){
+                                if (isset($grades[12][$j][2])){
                                     echo "<span class='grade' style='color: ".$grades[12][$i][0].";' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[12][$i][0] . ", ";
                                 } else { 
                                     echo "<span class='grade' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[12][$i][0] . ", ";
@@ -470,7 +470,7 @@
                     <?php 
                         if(isset($grades[13])) {
                             for ($i=0; $i < count($grades[13]); $i++) { 
-                                if (isset($grades[13][$i][2])){
+                                if (isset($grades[13][$j][2])){
                                     echo "<span class='grade' style='color: ".$grades[13][$i][0].";' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[13][$i][0] . ", ";
                                 } else { 
                                     echo "<span class='grade' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[13][$i][0] . ", ";
@@ -508,7 +508,7 @@
                     <?php 
                         if(isset($grades[14])) {
                             for ($i=0; $i < count($grades[14]); $i++) { 
-                                if (isset($grades[14][$i][2])){
+                                if (isset($grades[14][$j][2])){
                                     echo "<span class='grade' style='color: ".$grades[14][$i][0].";' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[14][$i][0] . ", ";
                                 } else { 
                                     echo "<span class='grade' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[14][$i][0] . ", ";
@@ -546,7 +546,7 @@
                     <?php 
                         if(isset($grades[15])) {
                             for ($i=0; $i < count($grades[15]); $i++) { 
-                                if (isset($grades[15][$i][2])){
+                                if (isset($grades[15][$j][2])){
                                     echo "<span class='grade' style='color: ".$grades[15][$i][0].";' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[15][$i][0] . ", ";
                                 } else { 
                                     echo "<span class='grade' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[15][$i][0] . ", ";
