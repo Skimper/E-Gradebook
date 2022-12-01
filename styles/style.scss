@@ -2,6 +2,7 @@ html {
     margin-left: 200px;
 }
 body {
+    //background-color: #aae6a3;
     background-image: linear-gradient(to right, #000428, #004e92);
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -191,6 +192,27 @@ h3 {
 .attendance {
     width: 80vw; height: 80vh;
     margin-top: 50px;
+    border-style: none;
+    border-collapse: collapse;
+
+    .day {
+        background-color: #111;
+    }
+    tr:nth-child(even){
+        background-color: rgba(17, 17, 17, 0.7);
+    }
+    tr td {
+        border-style: none;
+        border-collapse: collapse;
+    }
+}
+
+// exams.php
+
+.exams {
+    width: 80vw; height: 40vh;
+    margin-top: 50px;
+    margin-bottom: 50px;
     border-style: none;
     border-collapse: collapse;
 

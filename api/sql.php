@@ -1,5 +1,5 @@
 <?php
-    define('CONN', array(
+    define('DB', array(
         'host' => 'localhost', 
         'user' => 'root', 
         'password' => '', 

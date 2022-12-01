@@ -8,6 +8,11 @@
 
     require('./api/sql.php');
 ?>
+<?php 
+    ini_set('display_errors', '1');
+    ini_set('display_startup_errors', '1');
+    error_reporting(E_ALL);
+?>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -52,8 +57,8 @@
         <div class="p2">
             <h3>Ostatnie oceny</h3>
             <?php // No kto by pomyślał że tu jest skrypt od wyświetlania ostatnich ocen, miłego dnia ;)
-                $conn = mysqli_connect(CONN['host'], CONN['user'], CONN['password'], CONN['database']);
-                mysqli_set_charset($conn, CONN['charset']);
+                $conn = mysqli_connect(DB['host'], DB['user'], DB['password'], DB['database']);
+                mysqli_set_charset($conn, DB['charset']);
 
                 if (!$conn) {
                     die("Connection failed: " . mysqli_connect_error());
@@ -77,8 +82,8 @@
                 <canvas id="myChart" width="100px" height="100px"></canvas>
             </div>
             <?php // A tu frekwencja, a raczej jej podgląd
-                $conn = mysqli_connect(CONN['host'], CONN['user'], CONN['password'], CONN['database']);
-                mysqli_set_charset($conn, CONN['charset']);
+                $conn = mysqli_connect(DB['host'], DB['user'], DB['password'], DB['database']);
+                mysqli_set_charset($conn, DB['charset']);
 
                 if (!$conn) {
                     die("Connection failed: " . mysqli_connect_error());
@@ -152,8 +157,8 @@
         </div>
         <div class="p4">
             <?php // Podgląd najbliższego planu lekcji (Penie i tak trzeba będzie to zmienić)
-                $conn = mysqli_connect(CONN['host'], CONN['user'], CONN['password'], CONN['database']);
-                mysqli_set_charset($conn, CONN['charset']);
+                $conn = mysqli_connect(DB['host'], DB['user'], DB['password'], DB['database']);
+                mysqli_set_charset($conn, DB['charset']);
 
                 if (!$conn) {
                     die("Connection failed: " . mysqli_connect_error());
@@ -230,8 +235,8 @@
         <div class="p5">
             <h3>Nadchodzące sprawdziany</h3>
             <?php // Sprawdziany, pracy domowych tu chyba na razie nie będzie
-                $conn = mysqli_connect(CONN['host'], CONN['user'], CONN['password'], CONN['database']);
-                mysqli_set_charset($conn, CONN['charset']);
+                $conn = mysqli_connect(DB['host'], DB['user'], DB['password'], DB['database']);
+                mysqli_set_charset($conn, DB['charset']);
 
                 if (!$conn) {
                     die("Connection failed: " . mysqli_connect_error());
@@ -252,8 +257,8 @@
         <div class="p6">
             <h3>Zebrania i wydarzenia</h3>
             <?php // Zebrania i jakieś tam szkolne gówna
-                $conn = mysqli_connect(CONN['host'], CONN['user'], CONN['password'], CONN['database']);
-                mysqli_set_charset($conn, CONN['charset']);
+                $conn = mysqli_connect(DB['host'], DB['user'], DB['password'], DB['database']);
+                mysqli_set_charset($conn, DB['charset']);
 
                 if (!$conn) {
                     die("Connection failed: " . mysqli_connect_error());
@@ -273,8 +278,8 @@
         <div class="p7">
             <h3>Zrealizowane tematy</h3>
             <?php // Ostatnie 6 tematów
-                $conn = mysqli_connect(CONN['host'], CONN['user'], CONN['password'], CONN['database']);
-                mysqli_set_charset($conn, CONN['charset']);
+                $conn = mysqli_connect(DB['host'], DB['user'], DB['password'], DB['database']);
+                mysqli_set_charset($conn, DB['charset']);
 
                 if (!$conn) {
                     die("Connection failed: " . mysqli_connect_error());
@@ -296,8 +301,8 @@
         <div class="p8">
             <h3>Podsumowanie</h3>
             <?php // Wszystko po trochu? Trzeba jeszcze zrobić te najwyższe średnie. DOKOŃCZYĆ TO! Haha no i dokończyłem zamiast usunąć
-                $conn = mysqli_connect(CONN['host'], CONN['user'], CONN['password'], CONN['database']);
-                mysqli_set_charset($conn, CONN['charset']);
+                $conn = mysqli_connect(DB['host'], DB['user'], DB['password'], DB['database']);
+                mysqli_set_charset($conn, DB['charset']);
 
                 if (!$conn) {
                     die("Connection failed: " . mysqli_connect_error());
@@ -310,7 +315,7 @@
                 ");
                 while ($row = mysqli_fetch_array($result)) {
                     echo "<p><b>Ilośc ocen:</b> " . $row['count'] . "</p>";
-                    echo "<p><b>Średnia ocen:</b> " . $row['avg'] . "</p>";
+                    echo "<p><b>Średnia ocen:</b> " . number_format((float)$row['avg'], 2, '.', '') . "</p>";
                 }
                 mysqli_free_result($result);
 

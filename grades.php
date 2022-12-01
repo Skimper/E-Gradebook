@@ -5,8 +5,13 @@
         header('Location: index.php');
         exit;
     }
-
+    
     require('./api/sql.php');
+?>
+<?php 
+    ini_set('display_errors', '1');
+    ini_set('display_startup_errors', '1');
+    error_reporting(E_ALL);
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -43,8 +48,8 @@
     <div>
         <table class="grades_table">
         <?php // Całe generowanie tablel z ocenami
-                $conn = mysqli_connect(CONN['host'], CONN['user'], CONN['password'], CONN['database']);
-                mysqli_set_charset($conn, CONN['charset']);
+                $conn = mysqli_connect(DB['host'], DB['user'], DB['password'], DB['database']);
+                mysqli_set_charset($conn, DB['charset']);
 
                 if (!$conn) {
                     die("Connection failed: " . mysqli_connect_error());
