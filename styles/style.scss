@@ -227,3 +227,46 @@ h3 {
         border-collapse: collapse;
     }
 }
+
+.exam {
+    margin: auto;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    padding-top: 10px;
+    width: 140px;
+    height: 30px;
+    background-color: #0088f7;
+    border-radius: 5px;
+    cursor: pointer;
+    transition-duration: 0.3s;
+
+    &:hover{
+        background-color: #004e92;
+    }
+}
+
+.examinfo {
+    margin-top: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    height: 260px;
+    border-color: #111;
+    border-style: dashed;
+    opacity: 90;
+    text-align: center;
+
+    .subject {
+        width: 100%;
+        height: 50px;
+        background-color: #111;
+        margin: 0;
+
+        p {
+            padding-top: 15px;
+        }
+    }
+    .otherinfo {
+
+    }
+}

@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="./styles/style.css" type="text/css">
 
     <script src="./js/keyborad.js"></script>
+    <script src="./js/gradeinfo.js"></script>
 </head>
 <body>
 <nav class="sidenav">
@@ -71,7 +72,7 @@
             $day8 = date('Y-m-d', strtotime('+'.(7-$day).' days'));
             $day14 = date('Y-m-d', strtotime('+'.(13-$day).' days'));
 
-            $day15 = date('Y-m-d', strtotime('+'.(14-$day).' days'));
+            $day8 = date('Y-m-d', strtotime('+'.(14-$day).' days'));
             $day21 = date('Y-m-d', strtotime('+'.(20-$day).' days'));
 
             $day22 = date('Y-m-d', strtotime('+'.(21-$day).' days'));
@@ -86,30 +87,56 @@
 
             $timetable = array(
                 $day1 => array(
+                    0 => array(),
+                    1 => array(),
+                    2 => array(),
+                    3 => array(),
+                    4 => array(),
+                    5 => array(),
                 ),
                 $day8 => array(
+                    0 => array(),
+                    1 => array(),
+                    2 => array(),
+                    3 => array(),
+                    4 => array(),
+                    5 => array(),
                 ),
-                $day15 => array(
+                $day14 => array(
+                    0 => array(),
+                    1 => array(),
+                    2 => array(),
+                    3 => array(),
+                    4 => array(),
+                    5 => array(),
                 ),
                 $day22 => array(
+                    0 => array(),
+                    1 => array(),
+                    2 => array(),
+                    3 => array(),
+                    4 => array(),
+                    5 => array(),
                 ),
             );
 
+            
             while ($row = mysqli_fetch_array($result)) {
-                if ($row['date'] >= $day1 || $row['date'] <= $day7)
-                    $timetable[$day1][date('w', strtotime($row['date']))] = array($row['name'], $row['topic'], $row['description'], $row['date'], $row['from']);
+                $wday = date('w', strtotime($row['date']));
+                if ($row['date'] >= $day1 || $row['date'] <= $day7){
+                    //$timetable[$day1][date('w', strtotime($row['date']))] = array($row['name'], $row['topic'], $row['description'], $row['date'], $row['from']);
+                    array_push($timetable[$day1][$wday], array($row['name'], $row['topic'], $row['description'], $row['date'], $row['from']));
+                    //array_push($timetable[$day1][0], array('cock', 'xx'));
+                    //array_push($timetable[$day1][date('w', strtotime($row['date']))], array($row['name'], $row['topic'], $row['description'], $row['date'], $row['from']));
+                } 
                 else if ($row['date'] >= $day8 || $row['date'] <= $day14)
                     $timetable[$day8][date('w', strtotime($row['date']))] = array($row['name'], $row['topic'], $row['description'], $row['date'], $row['from']);
-                else if ($row['date'] >= $day15|| $row['date'] <= $day21)
-                    $timetable[$day15][date('w', strtotime($row['date']))] = array($row['name'], $row['topic'], $row['description'], $row['date'], $row['from']);
+                else if ($row['date'] >= $day8|| $row['date'] <= $day21)
+                    $timetable[$day8][date('w', strtotime($row['date']))] = array($row['name'], $row['topic'], $row['description'], $row['date'], $row['from']);
                 else if ($row['date'] >= $day22 || $row['date'] <= $day27)
                     $timetable[$day22][date('w', strtotime($row['date']))] = array($row['name'], $row['topic'], $row['description'], $row['date'], $row['from']);
             }
-            mysqli_free_result($result); // TODO: Teraz te dane musze się wyświetlać w tabeli, ez.
-
-            echo "<pre>";
-            print_r($timetable);
-            echo "</pre>";
+            mysqli_free_result($result);
         ?>
         <tr>
             <td class="day" align="center" height="50"
@@ -137,47 +164,241 @@
                 <b>Piątek</b>
             </td>
         </tr>
-        <tr>
+        <tr> <!-- To by trzeba zrobić w pętli bo to rozwiązanie ma swoje problemy. Ale teraz mi sie nie chce -->
             <td align="center" height="50">
                 <b><?php echo $day1 ?><br><?php echo $day7 ?></b>
             </td>
-            <td align="center" height="50"></td>
-            <td align="center" height="50"></td>
-            <td align="center" height="50"></td>
-            <td align="center" height="50"></td>
-            <td align="center" height="50"></td>
+            <td align="center" height="50">
+                <?php
+                    if(isset($timetable[$day1][1][0][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day1][1][0][0]."', '".$timetable[$day1][1][0][1]."', '".$timetable[$day1][1][0][2]."', '".$timetable[$day1][1][0][3]."', '".$timetable[$day1][1][0][4]."');'>".$timetable[$day1][1][0][0]."</p>"; 
+                    if(isset($timetable[$day1][1][1][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day1][1][1][0]."', '".$timetable[$day1][1][1][1]."', '".$timetable[$day1][1][1][2]."', '".$timetable[$day1][1][1][3]."', '".$timetable[$day1][1][1][4]."');'>".$timetable[$day1][1][1][0]."</p>"; 
+                    if(isset($timetable[$day1][1][2][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day1][1][2][0]."', '".$timetable[$day1][1][2][1]."', '".$timetable[$day1][1][2][2]."', '".$timetable[$day1][1][2][3]."', '".$timetable[$day1][1][2][4]."');'>".$timetable[$day1][1][2][0]."</p>"; 
+                ?>
+            </td>
+            <td align="center" height="50">
+                <?php
+                    if(isset($timetable[$day1][2][0][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo(".$timetable[$day1][2][0][0].",".$timetable[$day1][2][0][1].", '".$timetable[$day1][2][0][2]."', '".$timetable[$day1][2][0][3]."', '".$timetable[$day1][2][0][4]."');'>".$timetable[$day1][2][0][0]."</p>"; 
+                    if(isset($timetable[$day1][2][1][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day1][2][1][0]."', '".$timetable[$day1][2][1][1]."', '".$timetable[$day1][2][1][2]."', '".$timetable[$day1][2][1][3]."', '".$timetable[$day1][2][1][4]."');'>".$timetable[$day1][2][1][0]."</p>"; 
+                    if(isset($timetable[$day1][2][2][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day1][2][2][0]."', '".$timetable[$day1][2][2][1]."', '".$timetable[$day1][2][2][2]."', '".$timetable[$day1][2][2][3]."', '".$timetable[$day1][2][2][4]."');'>".$timetable[$day1][2][2][0]."</p>"; 
+                ?>
+            </td>
+            <td align="center" height="50">
+                <?php
+                    if(isset($timetable[$day1][3][0][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day1][3][0][0]."', '".$timetable[$day1][3][0][1]."', '".$timetable[$day1][3][0][2]."', '".$timetable[$day1][3][0][3]."', '".$timetable[$day1][3][0][4]."');'>".$timetable[$day1][3][0][0]."</p>"; 
+                        //echo '<p class="exam" onclick="showGradeInfo("\'.$timetable[$day1][3][0][0].\'", "\'.$timetable[$day1][3][0][1].\'", "\'.$timetable[$day1][3][0][2].\'", "\'.$timetable[$day1][3][0][3].\'", "\'.$timetable[$day1][3][0][4].\'");">'.$timetable[$day1][3][0][0].'</p>';
+                    if(isset($timetable[$day1][3][1][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day1][3][1][0]."', '".$timetable[$day1][3][1][1]."', '".$timetable[$day1][3][1][2]."', '".$timetable[$day1][3][1][3]."', '".$timetable[$day1][3][1][4]."');'>".$timetable[$day1][3][1][0]."</p>"; 
+                    if(isset($timetable[$day1][3][2][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day1][3][2][0]."', '".$timetable[$day1][3][2][1]."', '".$timetable[$day1][3][2][2]."', '".$timetable[$day1][3][2][3]."', '".$timetable[$day1][3][2][4]."');'>".$timetable[$day1][3][2][0]."</p>"; 
+                ?>
+            </td>
+            <td align="center" height="50">
+                <?php
+                    if(isset($timetable[$day1][4][0][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day1][4][0][0]."', '".$timetable[$day1][4][0][1]."', '".$timetable[$day1][4][0][2]."', '".$timetable[$day1][4][0][3]."', '".$timetable[$day1][4][0][4]."');'>".$timetable[$day1][4][0][0]."</p>"; 
+                    if(isset($timetable[$day1][4][1][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day1][4][1][0]."', '".$timetable[$day1][4][1][1]."', '".$timetable[$day1][4][1][2]."', '".$timetable[$day1][4][1][3]."', '".$timetable[$day1][4][1][4]."');'>".$timetable[$day1][4][1][0]."</p>"; 
+                    if(isset($timetable[$day1][4][2][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day1][4][2][0]."', '".$timetable[$day1][4][2][1]."', '".$timetable[$day1][4][2][2]."', '".$timetable[$day1][4][2][3]."', '".$timetable[$day1][4][2][4]."');'>".$timetable[$day1][4][2][0]."</p>"; 
+                ?>
+            </td>
+            <td align="center" height="50">
+                <?php
+                    if(isset($timetable[$day1][5][0][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day1][5][0][0]."', '".$timetable[$day1][5][0][1]."', '".$timetable[$day1][5][0][2]."', '".$timetable[$day1][5][0][3]."', '".$timetable[$day1][5][0][4]."');'>".$timetable[$day1][5][0][0]."</p>"; 
+                    if(isset($timetable[$day1][5][1][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day1][5][1][0]."', '".$timetable[$day1][5][1][1]."', '".$timetable[$day1][5][1][2]."', '".$timetable[$day1][5][1][3]."', '".$timetable[$day1][5][1][4]."');'>".$timetable[$day1][5][1][0]."</p>"; 
+                    if(isset($timetable[$day1][5][2][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day1][5][2][0]."', '".$timetable[$day1][5][2][1]."', '".$timetable[$day1][5][2][2]."', '".$timetable[$day1][5][2][3]."', '".$timetable[$day1][5][2][4]."');'>".$timetable[$day1][5][2][0]."</p>"; 
+                ?>
+            </td>
         </tr>
         <tr>
             <td align="center" height="50">
             <b><?php echo $day8 ?><br><?php echo $day14 ?></b>
             </td>
-            <td align="center" height="50"></td>
-            <td align="center" height="50"></td>
-            <td align="center" height="50"></td>
-            <td align="center" height="50"></td>
-            <td align="center" height="50"></td>
+            <td align="center" height="50">
+                <?php
+                    if(isset($timetable[$day8][1][0][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day8][1][0][0]."', '".$timetable[$day8][1][0][1]."', '".$timetable[$day8][1][0][2]."', '".$timetable[$day8][1][0][3]."', '".$timetable[$day8][1][0][4]."');'>".$timetable[$day8][1][0][0]."</p>"; 
+                    if(isset($timetable[$day8][1][1][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day8][1][1][0]."', '".$timetable[$day8][1][1][1]."', '".$timetable[$day8][1][1][2]."', '".$timetable[$day8][1][1][3]."', '".$timetable[$day8][1][1][4]."');'>".$timetable[$day8][1][1][0]."</p>"; 
+                    if(isset($timetable[$day8][1][2][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day8][1][2][0]."', '".$timetable[$day8][1][2][1]."', '".$timetable[$day8][1][2][2]."', '".$timetable[$day8][1][2][3]."', '".$timetable[$day8][1][2][4]."');'>".$timetable[$day8][1][2][0]."</p>"; 
+                ?>
+            </td>
+            <td align="center" height="50">
+                <?php
+                    if(isset($timetable[$day8][2][0][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day8][2][0][0]."', '".$timetable[$day8][2][0][1]."', '".$timetable[$day8][2][0][2]."', '".$timetable[$day8][2][0][3]."', '".$timetable[$day8][2][0][4]."');'>".$timetable[$day8][2][0][0]."</p>"; 
+                    if(isset($timetable[$day8][2][1][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day8][2][1][0]."', '".$timetable[$day8][2][1][1]."', '".$timetable[$day8][2][1][2]."', '".$timetable[$day8][2][1][3]."', '".$timetable[$day8][2][1][4]."');'>".$timetable[$day8][2][1][0]."</p>"; 
+                    if(isset($timetable[$day8][2][2][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day8][2][2][0]."', '".$timetable[$day8][2][2][1]."', '".$timetable[$day8][2][2][2]."', '".$timetable[$day8][2][2][3]."', '".$timetable[$day8][2][2][4]."');'>".$timetable[$day8][2][2][0]."</p>"; 
+                ?>
+            </td>
+            <td align="center" height="50">
+                <?php
+                    if(isset($timetable[$day8][3][0][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day8][3][0][0]."', '".$timetable[$day8][3][0][1]."', '".$timetable[$day8][3][0][2]."', '".$timetable[$day8][3][0][3]."', '".$timetable[$day8][3][0][4]."');'>".$timetable[$day8][3][0][0]."</p>"; 
+                    if(isset($timetable[$day8][3][1][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day8][3][1][0]."', '".$timetable[$day8][3][1][1]."', '".$timetable[$day8][3][1][2]."', '".$timetable[$day8][3][1][3]."', '".$timetable[$day8][3][1][4]."');'>".$timetable[$day8][3][1][0]."</p>"; 
+                    if(isset($timetable[$day8][3][2][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day8][3][2][0]."', '".$timetable[$day8][3][2][1]."', '".$timetable[$day8][3][2][2]."', '".$timetable[$day8][3][2][3]."', '".$timetable[$day8][3][2][4]."');'>".$timetable[$day8][3][2][0]."</p>"; 
+                ?>
+            </td>
+            <td align="center" height="50">
+                <?php
+                    if(isset($timetable[$day8][4][0][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day8][4][0][0]."', '".$timetable[$day8][4][0][1]."', '".$timetable[$day8][4][0][2]."', '".$timetable[$day8][4][0][3]."', '".$timetable[$day8][4][0][4]."');'>".$timetable[$day8][4][0][0]."</p>"; 
+                    if(isset($timetable[$day8][4][1][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day8][4][1][0]."', '".$timetable[$day8][4][1][1]."', '".$timetable[$day8][4][1][2]."', '".$timetable[$day8][4][1][3]."', '".$timetable[$day8][4][1][4]."');'>".$timetable[$day8][4][1][0]."</p>"; 
+                    if(isset($timetable[$day8][4][2][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day8][4][2][0]."', '".$timetable[$day8][4][2][1]."', '".$timetable[$day8][4][2][2]."', '".$timetable[$day8][4][2][3]."', '".$timetable[$day8][4][2][4]."');'>".$timetable[$day8][4][2][0]."</p>"; 
+                ?>
+            </td>
+            <td align="center" height="50">
+                <?php
+                    if(isset($timetable[$day8][5][0][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day8][5][0][0]."', '".$timetable[$day8][5][0][1]."', '".$timetable[$day8][5][0][2]."', '".$timetable[$day8][5][0][3]."', '".$timetable[$day8][5][0][4]."');'>".$timetable[$day8][5][0][0]."</p>"; 
+                    if(isset($timetable[$day8][5][1][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day8][5][1][0]."', '".$timetable[$day8][5][1][1]."', '".$timetable[$day8][5][1][2]."', '".$timetable[$day8][5][1][3]."', '".$timetable[$day8][5][1][4]."');'>".$timetable[$day8][5][1][0]."</p>"; 
+                    if(isset($timetable[$day8][5][2][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day8][5][2][0]."', '".$timetable[$day8][5][2][1]."', '".$timetable[$day8][5][2][2]."', '".$timetable[$day8][5][2][3]."', '".$timetable[$day8][5][2][4]."');'>".$timetable[$day8][5][2][0]."</p>"; 
+                ?>
+            </td>
         </tr>
         <tr>
             <td align="center" height="50">
-            <b><?php echo $day15 ?><br><?php echo $day21 ?></b>
+            <b><?php echo $day14 ?><br><?php echo $day21 ?></b>
             </td>
-            <td align="center" height="50"></td>
-            <td align="center" height="50"></td>
-            <td align="center" height="50"></td>
-            <td align="center" height="50"></td>
-            <td align="center" height="50"></td>
+            <td align="center" height="50">
+                <?php
+                    if(isset($timetable[$day14][1][0][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day14][1][0][0]."', '".$timetable[$day14][1][0][1]."', '".$timetable[$day14][1][0][2]."', '".$timetable[$day14][1][0][3]."', '".$timetable[$day14][1][0][4]."');'>".$timetable[$day14][1][0][0]."</p>"; 
+                    if(isset($timetable[$day14][1][1][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day14][1][1][0]."', '".$timetable[$day14][1][1][1]."', '".$timetable[$day14][1][1][2]."', '".$timetable[$day14][1][1][3]."', '".$timetable[$day14][1][1][4]."');'>".$timetable[$day14][1][1][0]."</p>"; 
+                    if(isset($timetable[$day14][1][2][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day14][1][2][0]."', '".$timetable[$day14][1][2][1]."', '".$timetable[$day14][1][2][2]."', '".$timetable[$day14][1][2][3]."', '".$timetable[$day14][1][2][4]."');'>".$timetable[$day14][1][2][0]."</p>"; 
+                ?>
+            </td>
+            <td align="center" height="50">
+                <?php
+                    if(isset($timetable[$day14][2][0][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day14][2][0][0]."', '".$timetable[$day14][2][0][1]."', '".$timetable[$day14][2][0][2]."', '".$timetable[$day14][2][0][3]."', '".$timetable[$day14][2][0][4]."');'>".$timetable[$day14][2][0][0]."</p>"; 
+                    if(isset($timetable[$day14][2][1][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day14][2][1][0]."', '".$timetable[$day14][2][1][1]."', '".$timetable[$day14][2][1][2]."', '".$timetable[$day14][2][1][3]."', '".$timetable[$day14][2][1][4]."');'>".$timetable[$day14][2][1][0]."</p>"; 
+                    if(isset($timetable[$day14][2][2][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day14][2][2][0]."', '".$timetable[$day14][2][2][1]."', '".$timetable[$day14][2][2][2]."', '".$timetable[$day14][2][2][3]."', '".$timetable[$day14][2][2][4]."');'>".$timetable[$day14][2][2][0]."</p>"; 
+                ?>
+            </td>
+            <td align="center" height="50">
+                <?php
+                    if(isset($timetable[$day14][3][0][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day14][3][0][0]."', '".$timetable[$day14][3][0][1]."', '".$timetable[$day14][3][0][2]."', '".$timetable[$day14][3][0][3]."', '".$timetable[$day14][3][0][4]."');'>".$timetable[$day14][3][0][0]."</p>"; 
+                    if(isset($timetable[$day14][3][1][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day14][3][1][0]."', '".$timetable[$day14][3][1][1]."', '".$timetable[$day14][3][1][2]."', '".$timetable[$day14][3][1][3]."', '".$timetable[$day14][3][1][4]."');'>".$timetable[$day14][3][1][0]."</p>"; 
+                    if(isset($timetable[$day14][3][2][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day14][3][2][0]."', '".$timetable[$day14][3][2][1]."', '".$timetable[$day14][3][2][2]."', '".$timetable[$day14][3][2][3]."', '".$timetable[$day14][3][2][4]."');'>".$timetable[$day14][3][2][0]."</p>"; 
+                ?>
+            </td>
+            <td align="center" height="50">
+                <?php
+                    if(isset($timetable[$day14][4][0][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day14][4][0][0]."', '".$timetable[$day14][4][0][1]."', '".$timetable[$day14][4][0][2]."', '".$timetable[$day14][4][0][3]."', '".$timetable[$day14][4][0][4]."');'>".$timetable[$day14][4][0][0]."</p>"; 
+                    if(isset($timetable[$day14][4][1][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day14][4][1][0]."', '".$timetable[$day14][4][1][1]."', '".$timetable[$day14][4][1][2]."', '".$timetable[$day14][4][1][3]."', '".$timetable[$day14][4][1][4]."');'>".$timetable[$day14][4][1][0]."</p>"; 
+                    if(isset($timetable[$day14][4][2][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day14][4][2][0]."', '".$timetable[$day14][4][2][1]."', '".$timetable[$day14][4][2][2]."', '".$timetable[$day14][4][2][3]."', '".$timetable[$day14][4][2][4]."');'>".$timetable[$day14][4][2][0]."</p>"; 
+                ?>
+            </td>
+            <td align="center" height="50">
+                <?php
+                    if(isset($timetable[$day14][5][0][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day14][5][0][0]."', '".$timetable[$day14][5][0][1]."', '".$timetable[$day14][5][0][2]."', '".$timetable[$day14][5][0][3]."', '".$timetable[$day14][5][0][4]."');'>".$timetable[$day14][5][0][0]."</p>"; 
+                    if(isset($timetable[$day14][5][1][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day14][5][1][0]."', '".$timetable[$day14][5][1][1]."', '".$timetable[$day14][5][1][2]."', '".$timetable[$day14][5][1][3]."', '".$timetable[$day14][5][1][4]."');'>".$timetable[$day14][5][1][0]."</p>"; 
+                    if(isset($timetable[$day14][5][2][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day14][5][2][0]."', '".$timetable[$day14][5][2][1]."', '".$timetable[$day14][5][2][2]."', '".$timetable[$day14][5][2][3]."', '".$timetable[$day14][5][2][4]."');'>".$timetable[$day14][5][2][0]."</p>"; 
+                ?>
+            </td>
         </tr>
         <tr>
             <td align="center" height="50">
             <b><?php echo $day22 ?><br><?php echo $day27 ?></b>
             </td>
-            <td align="center" height="50"></td>
-            <td align="center" height="50"></td>
-            <td align="center" height="50"></td>
-            <td align="center" height="50"></td>
-            <td align="center" height="50"></td>
+            <td align="center" height="50">
+                <?php
+                    if(isset($timetable[$day22][1][0][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day22][1][0][0]."', '".$timetable[$day22][1][0][1]."', '".$timetable[$day22][1][0][2]."', '".$timetable[$day22][1][0][3]."', '".$timetable[$day22][1][0][4]."');'>".$timetable[$day22][1][0][0]."</p>"; 
+                    if(isset($timetable[$day22][1][1][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day22][1][1][0]."', '".$timetable[$day22][1][1][1]."', '".$timetable[$day22][1][1][2]."', '".$timetable[$day22][1][1][3]."', '".$timetable[$day22][1][1][4]."');'>".$timetable[$day22][1][1][0]."</p>"; 
+                    if(isset($timetable[$day22][1][2][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day22][1][2][0]."', '".$timetable[$day22][1][2][1]."', '".$timetable[$day22][1][2][2]."', '".$timetable[$day22][1][2][3]."', '".$timetable[$day22][1][2][4]."');'>".$timetable[$day22][1][2][0]."</p>"; 
+                ?>
+            </td>
+            <td align="center" height="50">
+                <?php
+                    if(isset($timetable[$day22][2][0][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day22][2][0][0]."', '".$timetable[$day22][2][0][1]."', '".$timetable[$day22][2][0][2]."', '".$timetable[$day22][2][0][3]."', '".$timetable[$day22][2][0][4]."');'>".$timetable[$day22][2][0][0]."</p>"; 
+                    if(isset($timetable[$day22][2][1][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day22][2][1][0]."', '".$timetable[$day22][2][1][1]."', '".$timetable[$day22][2][1][2]."', '".$timetable[$day22][2][1][3]."', '".$timetable[$day22][2][1][4]."');'>".$timetable[$day22][2][1][0]."</p>"; 
+                    if(isset($timetable[$day22][2][2][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day22][2][2][0]."', '".$timetable[$day22][2][2][1]."', '".$timetable[$day22][2][2][2]."', '".$timetable[$day22][2][2][3]."', '".$timetable[$day22][2][2][4]."');'>".$timetable[$day22][2][2][0]."</p>"; 
+                ?>
+            </td>
+            <td align="center" height="50">
+                <?php
+                    if(isset($timetable[$day22][3][0][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day22][3][0][0]."', '".$timetable[$day22][3][0][1]."', '".$timetable[$day22][3][0][2]."', '".$timetable[$day22][3][0][3]."', '".$timetable[$day22][3][0][4]."');'>".$timetable[$day22][3][0][0]."</p>"; 
+                    if(isset($timetable[$day22][3][1][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day22][3][1][0]."', '".$timetable[$day22][3][1][1]."', '".$timetable[$day22][3][1][2]."', '".$timetable[$day22][3][1][3]."', '".$timetable[$day22][3][1][4]."');'>".$timetable[$day22][3][1][0]."</p>"; 
+                    if(isset($timetable[$day22][3][2][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day22][3][2][0]."', '".$timetable[$day22][3][2][1]."', '".$timetable[$day22][3][2][2]."', '".$timetable[$day22][3][2][3]."', '".$timetable[$day22][3][2][4]."');'>".$timetable[$day22][3][2][0]."</p>"; 
+                ?>
+            </td>
+            <td align="center" height="50">
+                <?php
+                    if(isset($timetable[$day22][4][0][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day22][4][0][0]."', '".$timetable[$day22][4][0][1]."', '".$timetable[$day22][4][0][2]."', '".$timetable[$day22][4][0][3]."', '".$timetable[$day22][4][0][4]."');'>".$timetable[$day22][4][0][0]."</p>"; 
+                    if(isset($timetable[$day22][4][1][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day22][4][1][0]."', '".$timetable[$day22][4][1][1]."', '".$timetable[$day22][4][1][2]."', '".$timetable[$day22][4][1][3]."', '".$timetable[$day22][4][1][4]."');'>".$timetable[$day22][4][1][0]."</p>"; 
+                    if(isset($timetable[$day22][4][2][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day22][4][2][0]."', '".$timetable[$day22][4][2][1]."', '".$timetable[$day22][4][2][2]."', '".$timetable[$day22][4][2][3]."', '".$timetable[$day22][4][2][4]."');'>".$timetable[$day22][4][2][0]."</p>"; 
+                ?>
+            </td>
+            <td align="center" height="50">
+                <?php
+                    if(isset($timetable[$day22][5][0][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day22][5][0][0]."', '".$timetable[$day22][5][0][1]."', '".$timetable[$day22][5][0][2]."', '".$timetable[$day22][5][0][3]."', '".$timetable[$day22][5][0][4]."');'>".$timetable[$day22][5][0][0]."</p>"; 
+                    if(isset($timetable[$day22][5][1][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day22][5][1][0]."', '".$timetable[$day22][5][1][1]."', '".$timetable[$day22][5][1][2]."', '".$timetable[$day22][5][1][3]."', '".$timetable[$day22][5][1][4]."');'>".$timetable[$day22][5][1][0]."</p>"; 
+                    if(isset($timetable[$day22][5][2][0])) 
+                        echo "<p class='exam' onclick='showGradeInfo('".$timetable[$day22][5][2][0]."', '".$timetable[$day22][5][2][1]."', '".$timetable[$day22][5][2][2]."', '".$timetable[$day22][5][2][3]."', '".$timetable[$day22][5][2][4]."');'>".$timetable[$day22][5][2][0]."</p>"; 
+                ?>
+            </td>
         </tr>
     </table>
+</section>
+<section>
+    <div class="examinfo">
+        <div class="subject">
+            <p id="subject">Język polski</p>
+        </div>
+        <div class="otherinfo">
+            <p id="tlte">Tytuł sprawdzianu</p>
+            <p id="description">Opis</p><br />
+            <p id="date">Termin</p>
+            <p id="from">Zapowiedziano</p>
+        </div>
+    </div>
 </section>
 <?php
     if (isset($_GET['menu']) && $_GET['menu'] == "logout")
