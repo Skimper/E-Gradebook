@@ -38,7 +38,7 @@
     <a href="timetable.php">Plan lekcji</a>
     <a href="exams.php">Sprawdziany</a>
     <a href="#">Wydarzenia</a>
-    <a href="#">Tematy</a>
+    <a href="topics.php">Tematy</a>
     <a href="#">Uwagi</a>
 </nav>
 <section>
@@ -598,6 +598,5 @@
     }
 ?>
 <script src="./js/grade.js"></script>
-
 </body>
 </html>

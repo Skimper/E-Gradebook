@@ -209,9 +209,9 @@ h3 {
 
 // exams.php
 
-.exams {
+.exams, .homework {
     width: 80vw; height: 40vh;
-    margin-top: 50px;
+    margin-top: 20px;
     margin-bottom: 50px;
     border-style: none;
     border-collapse: collapse;
@@ -230,6 +230,27 @@ h3 {
 
 .exam {
     margin: auto;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    padding-top: 10px;
+    width: 140px;
+    height: 30px;
+    background-color: #0088f7;
+    border-radius: 5px;
+    cursor: pointer;
+    transition-duration: 0.3s;
+
+    &:hover{
+        background-color: #004e92;
+    }
+}
+
+.exam_holder {
+    text-align: center;
+}
+
+.exam_button {
+    display: inline-block;
     margin-top: 2px;
     margin-bottom: 2px;
     padding-top: 10px;
@@ -266,5 +287,26 @@ h3 {
         padding: 10px;
         margin: 0;
         background-color: rgba(17, 17, 17, 0.7);
+    }
+}
+
+// topics.php
+
+.topics {
+    width: 80vw; height: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    border-style: none;
+    border-collapse: collapse;
+
+    .day {
+        background-color: #111;
+    }
+    tr:nth-child(even){
+        background-color: rgba(17, 17, 17, 0.7);
+    }
+    tr td {
+        border-style: none;
+        border-collapse: collapse;
     }
 }
