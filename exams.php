@@ -40,9 +40,9 @@
     <a href="attendance.php">Frekwencja</a>
     <a href="timetable.php">Plan lekcji</a>
     <a class="active" href="exams.php">Sprawdziany</a>
-    <a href="#">Wydarzenia</a>
+    <a href="meetings.php">Wydarzenia</a>
     <a href="topics.php">Tematy</a>
-    <a href="#">Uwagi</a>
+    <a href="comments.php">Uwagi</a>
 </nav>
 <section>
     <header>
@@ -68,9 +68,8 @@
         $day7 = date('Y-m-d', strtotime('+'.(6-$day).' days'));
         $day8 = date('Y-m-d', strtotime('+'.(7-$day).' days'));
         $day14 = date('Y-m-d', strtotime('+'.(13-$day).' days'));
+        $day15 = date('Y-m-d', strtotime('+'.(14-$day).' days'));
         $day8 = date('Y-m-d', strtotime('+'.(7-$day).' days'));
-        $day14 = date('Y-m-d', strtotime('+'.(13-$day).' days'));
-        $day8 = date('Y-m-d', strtotime('+'.(14-$day).' days'));
         $day21 = date('Y-m-d', strtotime('+'.(20-$day).' days'));
         $day22 = date('Y-m-d', strtotime('+'.(21-$day).' days'));
         $day27 = date('Y-m-d', strtotime('+'.(27-$day).' days'));
@@ -579,7 +578,7 @@
         </tr>
         <tr>
             <td align="center" height="50">
-            <b><?php echo $day14 ?><br><?php echo $day21 ?></b>
+            <b><?php echo $day15 ?><br><?php echo $day21 ?></b>
             </td>
             <td align="center" height="50">
                 <?php
@@ -700,6 +699,9 @@
             <p id="date">Termin</p>
             <p id="from">Zapowiedziano</p>
         </div>
+        <div class="references">
+            <p>Brak materiałów</p>
+        </div>
     </div>
 </section>
 <?php
@@ -713,7 +715,6 @@
         header("Location: http://localhost/infprojectpage/index.php");
     }
 ?>
-
 <script src="./js/examshomework.js"></script>
 </body>
 </html>

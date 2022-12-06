@@ -37,9 +37,9 @@
     <a href="attendance.php">Frekwencja</a>
     <a class="active" href="timetable.php">Plan lekcji</a>
     <a href="exams.php">Sprawdziany</a>
-    <a href="#">Wydarzenia</a>
+    <a href="meetings.php">Wydarzenia</a>
     <a href="topics.php">Tematy</a>
-    <a href="#">Uwagi</a>
+    <a href="comments.php">Uwagi</a>
 </nav>
 <section>
     <header>

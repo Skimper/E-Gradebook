@@ -40,9 +40,9 @@
     <a href="attendance.php">Frekwencja</a>
     <a href="timetable.php">Plan lekcji</a>
     <a href="exams.php">Sprawdziany</a>
-    <a href="#">Wydarzenia</a>
+    <a href="meetings.php">Wydarzenia</a>
     <a class="active" href="topics.php">Tematy</a>
-    <a href="#">Uwagi</a>
+    <a href="comments.php">Uwagi</a>
 </nav>
 <section>
     <header>
@@ -69,7 +69,6 @@
             <td class="day" align="center" height="50" style="width: 20px;"><b>Przedmiot</b></td>
             <td class="day" align="center" height="50" style="width: 20px;"><b>Data</b></td>
             <td class="day" align="center" height="50" style="width: 200px;"><b>Temat</b></td>
-            
         </tr>
         <?php
             while ($row = mysqli_fetch_array($result)) {

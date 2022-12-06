@@ -209,7 +209,7 @@ h3 {
 
 // exams.php
 
-.exams, .homework {
+.exams, .homework, .comments {
     width: 80vw; height: 40vh;
     margin-top: 20px;
     margin-bottom: 50px;
@@ -245,11 +245,11 @@ h3 {
     }
 }
 
-.exam_holder {
+.exam_holder, .comments_holder {
     text-align: center;
 }
 
-.exam_button {
+.exam_button, .comments_button {
     display: inline-block;
     margin-top: 2px;
     margin-bottom: 2px;
@@ -270,13 +270,13 @@ h3 {
     margin-top: 0;
     margin-left: auto;
     margin-right: auto;
-    width: 500px;
+    width: 700px;
     height: 300px;
-    opacity: 90;
     text-align: center;
 
     .subject {
-        width: 100%;
+        float: left;
+        width: 60%;
         height: 50px;
         padding-top: 5px;
         padding-bottom: 5px;
@@ -284,15 +284,26 @@ h3 {
         margin: 0;
     }
     .otherinfo {
-        padding: 10px;
+        float: left;
+        width: 60%;
+        height: 220px;
+        padding-top: 10px;
+        padding-bottom: 10px;
         margin: 0;
+        background-color: rgba(17, 17, 17, 0.7);
+    }
+    .references {
+        float: left;
+        margin-top: -60px;
+        height: 100%;
+        width: 40%;
         background-color: rgba(17, 17, 17, 0.7);
     }
 }
 
 // topics.php
 
-.topics {
+.topics, .comments {
     width: 80vw; height: auto;
     margin-top: 50px;
     margin-bottom: 50px;
@@ -308,5 +319,44 @@ h3 {
     tr td {
         border-style: none;
         border-collapse: collapse;
+    }
+}
+
+// comments.php
+
+// meetings.php
+
+.examinfo { // PAMIĘTAĆ O ZMIENAIE TEGO
+    margin-top: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 700px;
+    height: 300px;
+    text-align: center;
+
+    .subject {
+        float: left;
+        width: 60%;
+        height: 50px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        background-color: #111;
+        margin: 0;
+    }
+    .otherinfo {
+        float: left;
+        width: 60%;
+        height: 220px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin: 0;
+        background-color: rgba(17, 17, 17, 0.7);
+    }
+    .references {
+        float: left;
+        margin-top: -60px;
+        height: 100%;
+        width: 40%;
+        background-color: rgba(17, 17, 17, 0.7);
     }
 }
