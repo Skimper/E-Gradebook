@@ -1,5 +1,6 @@
-//@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');
+:root {
 
+}
 html {
     margin-left: 200px;
 }
@@ -18,6 +19,21 @@ header {
 }
 h1 {
     color: whitesmoke;
+}
+a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.noscript {
+    width: 100%;
+    background-color: #111;
+    padding-top: 1px;
+    padding-bottom: 25px;
+
+    p, a {
+        margin-left: 20px;
+    }
 }
 
 .sidenav {
@@ -182,7 +198,7 @@ h3 {
 
 // GRADES.PHP
 
-.grades{
+.grades, .settings_header {
     margin-top: 0;
     padding: 20px;
     background-color: #111;
@@ -199,7 +215,7 @@ h3 {
         padding: 5px;
         padding-left: 10px;
         text-align: left;
-        background-color: rgba(17, 17, 17, 0.2);
+        background-color: rgba(17, 17, 17, 0.3);
     }
 }
 
@@ -207,7 +223,7 @@ h3 {
     background-color: #111;
 }
 .grades_table tr:nth-child(even){
-    background-color: rgba(17, 17, 17, 0.7);
+    background-color: rgba(17, 17, 17, 0.8);
 }
 
 .grade_info {
@@ -236,6 +252,7 @@ h3 {
     tr td {
         border-style: none;
         border-collapse: collapse;
+        background-color: rgba(17, 17, 17, 0.3);
     }
 }
 
@@ -257,6 +274,7 @@ h3 {
     tr td {
         border-style: none;
         border-collapse: collapse;
+        background-color: rgba(17, 17, 17, 0.3);
     }
 }
 
@@ -351,6 +369,7 @@ h3 {
     tr td {
         border-style: none;
         border-collapse: collapse;
+        background-color: rgba(17, 17, 17, 0.3);
     }
 }
 
@@ -395,25 +414,156 @@ h3 {
 // settings.php
 
 .settings {
-    width: 80vw; height: 100%;
-    margin-left: auto; margin-right: auto;
-    padding: 20px;
-    
-    .p1, .p2, .p3 {
-        display: inline-block;
-        height: 410px; width: 350px;
-        margin: 10px;
-        background-color: #111;
-        vertical-align: middle;
-        border-radius: 10px;
+    .p1, .p2, .p3, .p4, .p5, .p6, .p7 {
+        width: 90%;
+        height: 120px;
+        margin-left: auto; margin-right: auto;
+        
+        border: #ffffff;
+        border-bottom-style: solid;
+        border-width: 1px;
+        display: flex;
+        justify-content: space-between;
+
+        .settings_label {
+            padding-top: 40px;
+            margin-left: 20px;
+
+            .title {
+                font-size: 20px;
+            }
+        }
+        .settings_setup {
+            padding-top: 45px;
+            margin-right: 20px;
+        }
+        
+        .font_button {
+            padding: 5px;
+            display: inline-block;
+            cursor: pointer;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        .contrast_button {
+            display: inline-block;
+            padding: 5px;
+            border-style: solid;
+            border-width: 1px;
+            cursor: pointer;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+        .split {
+            margin-top: 20px;
+            height: 40px;
+            width: 1px;
+            background-color: white;
+            display: inline-block;
+        }
+        .normal {
+            margin-left: 30px;
+        }
+        .contrast {
+            color: #ffff15;
+            background-color: black;
+        }
+
+        p {
+            margin: 0;
+        }
     }
-    .p2 {
-        width: 750px !important;
-    }
-    * p {
-        margin-left: 20px;
-    }
-    .p1 img {
-        width: 100px; height: 100px;
-    }
+}
+
+.settings_header {
+    margin-bottom: 0px ;
+}
+
+.theme_box {
+    margin-top: -5px;
+    width: 35px;
+    height: 35px;
+    border-color: #111;
+    border-radius: 5px;
+    border-style: solid;
+    display: inline-block;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.theme1 {
+    background: #73c8a9;
+    background: -webkit-linear-gradient(to right, #73c8a9, #373b44);
+    background: linear-gradient(to right, #73c8a9, #373b44);
+}
+.theme2 {
+    background: #83a4d4;
+    background: -webkit-linear-gradient(to right, #b6fbff, #83a4d4);  
+    background: linear-gradient(to right, #b6fbff, #83a4d4);
+}
+.theme3 {
+    background: #485563;
+    background: -webkit-linear-gradient(to right, #29323c, #485563);
+    background: linear-gradient(to right, #29323c, #485563);
+}
+.theme4 {
+    background: #556270;
+    background: -webkit-linear-gradient(to right, #FF6B6B, #556270);
+    background: linear-gradient(to right, #FF6B6B, #556270);
+}
+.theme5 {
+    background: #9D50BB;
+    background: -webkit-linear-gradient(to right, #6E48AA, #9D50BB);
+    background: linear-gradient(to right, #6E48AA, #9D50BB);
+}
+.theme6 {
+    background: #B3FFAB;
+    background: -webkit-linear-gradient(to right, #12FFF7, #B3FFAB);
+    background: linear-gradient(to right, #12FFF7, #B3FFAB);
+}
+.theme7 {
+    background: #e52d27;
+    background: -webkit-linear-gradient(to right, #b31217, #e52d27);
+    background: linear-gradient(to right, #b31217, #e52d27);
+
+}
+.theme8 {
+    background: #F0C27B;
+    background: -webkit-linear-gradient(to right, #4B1248, #F0C27B);
+    background: linear-gradient(to right, #4B1248, #F0C27B);
+}
+.theme9 {
+    background: #FF4E50;
+    background: -webkit-linear-gradient(to right, #F9D423, #FF4E50);
+    background: linear-gradient(to right, #F9D423, #FF4E50);
+}
+.theme10 {
+    background: #ADD100;
+    background: -webkit-linear-gradient(to right, #7B920A, #ADD100);
+    background: linear-gradient(to right, #7B920A, #ADD100);
+}
+.theme11 {
+    background: #FBD3E9;
+    background: -webkit-linear-gradient(to right, #BB377D, #FBD3E9);
+    background: linear-gradient(to right, #BB377D, #FBD3E9);
+}
+.theme12 {
+    background: #606c88;
+    background: -webkit-linear-gradient(to left, #3f4c6b, #606c88);
+    background: linear-gradient(to left, #3f4c6b, #606c88);
+}
+.theme13 {
+    background: #00d2ff;
+    background: -webkit-linear-gradient(to left, #3a7bd5, #00d2ff);
+    background: linear-gradient(to left, #3a7bd5, #00d2ff);
+}
+.theme14 {
+    background: #004e92;
+    background: -webkit-linear-gradient(to right, #000428, #004e92);
+    background: linear-gradient(to right, #000428, #004e92);
 }

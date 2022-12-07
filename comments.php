@@ -28,7 +28,7 @@
 <body>
 <nav class="sidenav">
     <div class="profile">
-        <img src="./img/avatar.jpeg" class="avatar"></img>
+        <img alt="Twoje zdjęcie profilowe" src="./img/avatar.jpeg" class="avatar"></img>
         <p><?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name'] ?></p>
         <p><?php echo $_SESSION['class'] ?></p>
     </div>
@@ -53,8 +53,8 @@
     </div>
     <?php
         $conn = mysqli_connect(DB['host'], DB['user'], DB['password'], DB['database']);
-
         mysqli_set_charset($conn, DB['charset']);
+        
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
@@ -109,15 +109,7 @@
     </table>
 </section>
 <?php
-    if (isset($_GET['menu']) && $_GET['menu'] == "logout")
-        Logout();
 
-    function Logout() {
-        $_SESSION = array();
-
-        session_destroy();
-        header("Location: http://localhost/infprojectpage/index.php");
-    }
 ?>
 
 <script src="./js/commentspraise.js"></script>

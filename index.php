@@ -85,6 +85,5 @@
             ?>
         </p>
     </div>
-<script src="./js/keyborad.js"></script>
 </body>
 </html>

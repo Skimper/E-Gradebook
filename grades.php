@@ -28,7 +28,7 @@
 <body>
 <nav class="sidenav">
     <div class="profile">
-        <img src="./img/avatar.jpeg" class="avatar"></img>
+        <img alt="Twoje zdjęcie profilowe" src="./img/avatar.jpeg" class="avatar"></img>
         <p><?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name'] ?></p>
         <p><?php echo $_SESSION['class'] ?></p>
     </div>
@@ -589,7 +589,7 @@
     </div>
 </section>
 <?php
-    if (isset($_GET['menu']) && $_GET['menu'] == "logout")
+    if (isset($_GET['action']) && $_GET['action'] == "logout")
         Logout();
 
     function Logout() {
