@@ -24,8 +24,6 @@
     <link rel="stylesheet" href="./styles/normalize.css" type="text/css">
     <link rel="stylesheet" href="./styles/webkit.css" type="text/css">
     <link rel="stylesheet" href="./styles/style.css" type="text/css">
-
-    <script src="./js/keyborad.js"></script>
 </head>
 <body>
 <nav class="sidenav">
@@ -42,6 +40,8 @@
     <a href="meetings.php">Wydarzenia</a>
     <a href="topics.php">Tematy</a>
     <a class="active" href="comments.php">Uwagi</a>
+
+    <a class="bottom" href="settings.php">Ustawienia</a>
 </nav>
 <section>
     <header>
@@ -108,19 +108,6 @@
         ?>
     </table>
 </section>
-<section>
-    <div class="examinfo" id="examinfo" style="display: none;">
-        <div class="subject">
-            <h4 id="subject">Język polski</h4>
-        </div>
-        <div class="otherinfo">
-            <p id="title">Tytuł sprawdzianu</p>
-            <p id="description">Opis</p>
-            <p id="date">Termin</p>
-            <p id="from">Zapowiedziano</p>
-        </div>
-    </div>
-</section>
 <?php
     if (isset($_GET['menu']) && $_GET['menu'] == "logout")
         Logout();
@@ -134,5 +121,6 @@
 ?>
 
 <script src="./js/commentspraise.js"></script>
+<script src="./js/keyborad.js"></script>
 </body>
 </html>

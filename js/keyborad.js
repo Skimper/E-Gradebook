@@ -34,6 +34,30 @@ document.addEventListener('keydown', (e) => {
 				
 			}
 			break;
+		case "1":
+			window.location.href = 'panel.php';
+			break;
+		case "2":
+			window.location.href = 'grades.php';
+			break;
+		case "3":
+			window.location.href = 'attendance.php';
+			break;
+		case "4":
+			window.location.href = 'timetable.php';
+			break;
+		case "5":
+			window.location.href = 'exams.php';
+			break;
+		case "6":
+			window.location.href = 'meetings.php';
+			break;
+		case "7":
+			window.location.href = 'topics.php';
+			break;
+		case "8":
+			window.location.href = 'comments.php';
+			break;
 		default: 
 			return; 
    }

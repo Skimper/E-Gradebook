@@ -42,6 +42,8 @@
     <a href="meetings.php">Wydarzenia</a>
     <a href="topics.php">Tematy</a>
     <a href="comments.php">Uwagi</a>
+
+    <a class="bottom" href="settings.php">Ustawienia</a>
 </nav>
 <section>
     <header>
@@ -53,6 +55,7 @@
             <p><b>Imię i nazwisko:</b> <?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name']; ?></p>
             <p><b>Email:</b> <?php echo $_SESSION['email']; ?></p>
             <p><b>Klasa:</b> <?php echo $_SESSION['class']; ?></p>
+            <p class="profile_button">Profil ucznia</p>
         </div>
         <div class="p2">
             <h3>Ostatnie oceny</h3>
@@ -390,5 +393,6 @@
 <script>
     RenderChart(<?php echo $ob . "," . $nb . "," . $nu; ?>);
 </script>
+<script src="./js/keyborad.js"></script>
 </body>
 </html>

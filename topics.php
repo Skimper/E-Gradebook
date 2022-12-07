@@ -19,13 +19,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sprawdziany i zadania</title>
+    <title>Zrealizowane tematy</title>
 
     <link rel="stylesheet" href="./styles/normalize.css" type="text/css">
     <link rel="stylesheet" href="./styles/webkit.css" type="text/css">
     <link rel="stylesheet" href="./styles/style.css" type="text/css">
-
-    <script src="./js/keyborad.js"></script>
     <script src="./js/gradeinfo.js"></script>
 </head>
 <body>
@@ -43,10 +41,12 @@
     <a href="meetings.php">Wydarzenia</a>
     <a class="active" href="topics.php">Tematy</a>
     <a href="comments.php">Uwagi</a>
+
+    <a class="bottom" href="settings.php">Ustawienia</a>
 </nav>
 <section>
     <header>
-        <h1 class="grades">Sprawdziany i zadania</h1>
+        <h1 class="grades">Zrealizowane tematy</h1>
     </header>
     <table class="topics" border="5" cellspacing="0" align="center">
         <?php
@@ -110,5 +110,6 @@
         header("Location: http://localhost/infprojectpage/index.php");
     }
 ?>
+<script src="./js/keyborad.js"></script>
 </body>
 </html>

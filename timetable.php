@@ -40,6 +40,8 @@
     <a href="meetings.php">Wydarzenia</a>
     <a href="topics.php">Tematy</a>
     <a href="comments.php">Uwagi</a>
+
+    <a class="bottom" href="settings.php">Ustawienia</a>
 </nav>
 <section>
     <header>

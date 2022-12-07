@@ -24,8 +24,6 @@
     <link rel="stylesheet" href="./styles/normalize.css" type="text/css">
     <link rel="stylesheet" href="./styles/webkit.css" type="text/css">
     <link rel="stylesheet" href="./styles/style.css" type="text/css">
-
-    <script src="./js/keyborad.js"></script>
     <script src="./js/gradeinfo.js"></script>
 </head>
 <body>
@@ -43,6 +41,8 @@
     <a href="meetings.php">Wydarzenia</a>
     <a href="topics.php">Tematy</a>
     <a href="comments.php">Uwagi</a>
+
+    <a class="bottom" href="settings.php">Ustawienia</a>
 </nav>
 <section>
     <header>

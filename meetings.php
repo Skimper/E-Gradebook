@@ -19,13 +19,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sprawdziany i zadania</title>
+    <title>Wydarzenia</title>
 
     <link rel="stylesheet" href="./styles/normalize.css" type="text/css">
     <link rel="stylesheet" href="./styles/webkit.css" type="text/css">
     <link rel="stylesheet" href="./styles/style.css" type="text/css">
-
-    <script src="./js/keyborad.js"></script>
     <script src="./js/gradeinfo.js"></script>
 </head>
 <body>
@@ -43,10 +41,12 @@
     <a class="active" href="meetings.php">Wydarzenia</a>
     <a href="topics.php">Tematy</a>
     <a href="comments.php">Uwagi</a>
+
+    <a class="bottom" href="settings.php">Ustawienia</a>
 </nav>
 <section>
     <header>
-        <h1 class="grades" id="grades_title">Sprawdziany</h1>
+        <h1 class="grades" id="grades_title">Wydarzenia</h1>
     </header>
     <?php
         $conn = mysqli_connect(DB['host'], DB['user'], DB['password'], DB['database']);
@@ -129,7 +129,7 @@
         }
         mysqli_free_result($result);
     ?>
-    <table class="exams" id="exams" border="5" cellspacing="0" align="center" style="display: table;">
+    <table class="events" id="exams" border="5" cellspacing="0" align="center" style="display: table;">
         <tr>
             <td class="day" align="center" height="50"
                 width="100">
@@ -379,18 +379,13 @@
     </table>
 </section>
 <section>
-    <div class="meetinfo" id="examinfo" style="display: none;">
+    <div class="meetinfo" id="meetinfo" style="display: block;">
         <div class="subject">
             <h4 id="subject">Język polski</h4>
         </div>
         <div class="otherinfo">
-            <p id="title">Tytuł sprawdzianu</p>
-            <p id="description">Opis</p>
+            <p id="title">Tytuł spotkania</p>
             <p id="date">Termin</p>
-            <p id="from">Zapowiedziano</p>
-        </div>
-        <div class="references">
-            <p>Brak materiałów</p>
         </div>
     </div>
 </section>
@@ -406,5 +401,7 @@
     }
 ?>
 
+<script src="./js/meetinfo.js"></script>
+<script src="./js/keyborad.js"></script>
 </body>
 </html>

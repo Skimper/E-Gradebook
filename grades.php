@@ -40,6 +40,8 @@
     <a href="meetings.php">Wydarzenia</a>
     <a href="topics.php">Tematy</a>
     <a href="comments.php">Uwagi</a>
+
+    <a class="bottom" href="settings.php">Ustawienia</a>
 </nav>
 <section>
     <header>
@@ -87,7 +89,7 @@
             <tr class="table_top">
                 <th style="width:30%">Przedmiot</th>
                 <td><b>Oceny</b></td>
-                <td style="width:10%">Średnia</td>
+                <td style="width:10%"><b>Średnia</b></td>
             </tr>
             <tr>
                 <th>Język polski</th>
@@ -598,5 +600,6 @@
     }
 ?>
 <script src="./js/grade.js"></script>
+<script src="./js/keyborad.js"></script>
 </body>
 </html>

@@ -1,3 +1,5 @@
+//@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');
+
 html {
     margin-left: 200px;
 }
@@ -7,7 +9,8 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    //font-family: 'Kanit', sans-serif;
+    font-family: "Lato", sans-serif;
     color: white;
 }
 header {
@@ -15,10 +18,6 @@ header {
 }
 h1 {
     color: whitesmoke;
-}
-
-body {
-  font-family: "Lato", sans-serif;
 }
 
 .sidenav {
@@ -37,16 +36,30 @@ body {
     padding: 16px 1px 1px 16px;
     text-decoration: none;
     font-size: 22px;
-    color: #818181;
+    color: #8a8a8a;
     display: block;
+    transition-duration: 0.2s;
 
+    &.bottom {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 183px;
+    }
+    @media screen and (max-height: 750px){
+        &.bottom {
+            position: relative;
+            top: 20vh;
+        }
+    }
     &:hover {
-        background-color: rgb(214, 214, 214);
+        background-color: rgb(75, 75, 75);
     }
     &.active {
-        background-color: rgb(214, 214, 214);
+        background-color: rgb(75, 75, 75);
     }
 }
+
 
 .profile {
     padding-bottom: 20px;
@@ -149,7 +162,26 @@ h3 {
     margin-left: auto; margin-right: auto;
 }
 
+.profile_button {
+    top: 180px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-60%);
+    padding: 10px;
+    border-radius: 5px;
+    width: 150px;
+    background-color: #8a8a8a;
+    text-align: center;
+    cursor: pointer;
+    transition-duration: 0.3s;
+
+    &:hover {
+        background-color: #4b4b4b;
+    }
+}
+
 // GRADES.PHP
+
 .grades{
     margin-top: 0;
     padding: 20px;
@@ -209,7 +241,7 @@ h3 {
 
 // exams.php
 
-.exams, .homework, .comments {
+.exams, .homework, .comments, .events {
     width: 80vw; height: 40vh;
     margin-top: 20px;
     margin-bottom: 50px;
@@ -322,21 +354,29 @@ h3 {
     }
 }
 
+// events.php
+
+.events {
+    margin-top: 50px !important;
+}
+
 // comments.php
+
+.comments {
+    margin-top: 20px !important;
+}
 
 // meetings.php
 
-.examinfo { // PAMIĘTAĆ O ZMIENAIE TEGO
+.meetinfo { // PAMIĘTAĆ O ZMIENAIE TEGO
     margin-top: 0;
     margin-left: auto;
     margin-right: auto;
-    width: 700px;
-    height: 300px;
+    width: 600px;
+    height: 150px;
     text-align: center;
 
     .subject {
-        float: left;
-        width: 60%;
         height: 50px;
         padding-top: 5px;
         padding-bottom: 5px;
@@ -344,19 +384,36 @@ h3 {
         margin: 0;
     }
     .otherinfo {
-        float: left;
-        width: 60%;
-        height: 220px;
+        height: 120px;
         padding-top: 10px;
         padding-bottom: 10px;
         margin: 0;
         background-color: rgba(17, 17, 17, 0.7);
     }
-    .references {
-        float: left;
-        margin-top: -60px;
-        height: 100%;
-        width: 40%;
-        background-color: rgba(17, 17, 17, 0.7);
+}
+
+// settings.php
+
+.settings {
+    width: 80vw; height: 100%;
+    margin-left: auto; margin-right: auto;
+    padding: 20px;
+    
+    .p1, .p2, .p3 {
+        display: inline-block;
+        height: 410px; width: 350px;
+        margin: 10px;
+        background-color: #111;
+        vertical-align: middle;
+        border-radius: 10px;
+    }
+    .p2 {
+        width: 750px !important;
+    }
+    * p {
+        margin-left: 20px;
+    }
+    .p1 img {
+        width: 100px; height: 100px;
     }
 }
