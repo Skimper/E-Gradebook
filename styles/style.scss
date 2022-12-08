@@ -1,26 +1,22 @@
-:root {
-    --bg1: #000428;
-    --bg2: #004e92;
-    --color1: #000428;
-}
+@import url(./variable.css);
 
 html {
     margin-left: 200px;
 }
 body {
-    background-image: linear-gradient(to right, #000428, #004e92);
+    background-image: linear-gradient(to right, var(--color4), var(--color8));
     background-repeat: no-repeat;
     background-attachment: fixed;
 
     font-family: "Lato", sans-serif;
-    color: white;
+    color: var(--color12);
     //font-size: 120% !important;
 }
 header {
     text-align: center;
 }
 h1 {
-    color: whitesmoke;
+    color: var(--color11);
 }
 a {
     color: inherit;
@@ -29,7 +25,7 @@ a {
 
 .noscript {
     width: 100%;
-    background-color: #111;
+    background-color: var(--color1);
     padding-top: 1px;
     padding-bottom: 25px;
 
@@ -45,7 +41,7 @@ a {
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #111;
+  background-color: var(--color1);
   overflow-x: hidden;
 }
 
@@ -54,7 +50,7 @@ a {
     padding: 16px 1px 1px 16px;
     text-decoration: none;
     font-size: 22px;
-    color: #8a8a8a;
+    color: var(--color10);
     display: block;
     transition-duration: 0.2s;
 
@@ -71,10 +67,10 @@ a {
         }
     }
     &:hover {
-        background-color: rgb(75, 75, 75);
+        background-color: var(--color9);
     }
     &.active {
-        background-color: rgb(75, 75, 75);
+        background-color: var(--color9);
     }
 }
 
@@ -82,8 +78,9 @@ a {
 .profile {
     padding-bottom: 20px;
     padding-top: 20px;
-    background-color: rgb(26, 26, 26);
-
+    background-color: var(--color0);
+    color: var(--color11);
+    
     p {
         text-align: center;
         height: 0px;
@@ -114,36 +111,41 @@ form.login_form {
 }
 label.login_label {
     font-size: 26;
-    color: #ffffff;
+    color: var(--color12);
     font-weight: 600;
 }
 input.login_input {
     height: 30px; width: 300px;
     background-color: transparent;
     font-weight: 600;
-    color: white;
+    color: var(--color12);
     border-style: none;
     border-collapse: unset;
     outline: none;
 
     border-bottom: 2px !important;
     border-bottom-style: solid !important;
-    border-bottom-color: #4976FF !important;
+    border-bottom-color: var(--color5) !important;
+
+    transition-duration: 0.2s;
 
     &:hover {
-        border-bottom-color: #0078D7 !important;
+        border-bottom-color: var(--color8) !important;
     }
 }
 button.login_button {
     height: 30px; width: 140px;
     
-    background-color: #0078D7;
+    background-color: var(--color6);
     border-style: none;
     border-collapse: unset;
     outline: none;
+    cursor: pointer;
+
+    transition-duration: 0.2s;
 
     &:hover {
-        background-color: #0088f7;
+        background-color: var(--color7);
     }
 }
 
@@ -158,7 +160,7 @@ button.login_button {
         display: inline-block;
         height: 410px; width: 350px;
         margin: 10px;
-        background-color: #111;
+        background-color: var(--color1);
         vertical-align: middle;
         border-radius: 10px;
     }
@@ -174,7 +176,7 @@ h3 {
     text-align: center;
 }
 .graph {
-    background-color: #0078D7;
+    background-color: var(--color6);
     width: 200px; height: 200px;
     border-radius: 50%;
     margin-left: auto; margin-right: auto;
@@ -188,13 +190,13 @@ h3 {
     padding: 10px;
     border-radius: 5px;
     width: 150px;
-    background-color: #8a8a8a;
+    background-color: var(--color8);
     text-align: center;
     cursor: pointer;
     transition-duration: 0.3s;
 
     &:hover {
-        background-color: #4b4b4b;
+        background-color: var(--color7);
     }
 }
 
@@ -203,7 +205,7 @@ h3 {
 .grades, .settings_header {
     margin-top: 0;
     padding: 20px;
-    background-color: #111;
+    background-color: var(--color1);
     text-align: center;
 }
 .grades_table, .grades_table th, .grades_table td {
@@ -217,22 +219,22 @@ h3 {
         padding: 5px;
         padding-left: 10px;
         text-align: left;
-        background-color: rgba(17, 17, 17, 0.3);
+        background-color: var(--color3);
     }
 }
 
 .table_top th, .table_top td {
-    background-color: #111;
+    background-color: var(--color1);
 }
 .grades_table tr:nth-child(even){
-    background-color: rgba(17, 17, 17, 0.8);
+    background-color: var(--color2);
 }
 
 .grade_info {
     position: absolute;
     width: 250px;
     padding: 10px;
-    background-color: #111;
+    background-color: var(--color1);
 
     border-radius: 5px;
 }
@@ -246,15 +248,15 @@ h3 {
     border-collapse: collapse;
 
     .day {
-        background-color: #111;
+        background-color: var(--color1);
     }
     tr:nth-child(even){
-        background-color: rgba(17, 17, 17, 0.7);
+        background-color: var(--color2);
     }
     tr td {
         border-style: none;
         border-collapse: collapse;
-        background-color: rgba(17, 17, 17, 0.3);
+        background-color: var(--color3);
     }
 }
 
@@ -268,15 +270,15 @@ h3 {
     border-collapse: collapse;
 
     .day {
-        background-color: #111;
+        background-color: var(--color1);
     }
     tr:nth-child(even){
-        background-color: rgba(17, 17, 17, 0.7);
+        background-color: var(--color2);
     }
     tr td {
         border-style: none;
         border-collapse: collapse;
-        background-color: rgba(17, 17, 17, 0.3);
+        background-color: var(--color3);
     }
 }
 
@@ -287,13 +289,13 @@ h3 {
     padding-top: 10px;
     width: 140px;
     height: 30px;
-    background-color: #0088f7;
+    background-color: var(--color8);
     border-radius: 5px;
     cursor: pointer;
     transition-duration: 0.3s;
 
     &:hover{
-        background-color: #004e92;
+        background-color: var(--color7);
     }
 }
 
@@ -308,13 +310,13 @@ h3 {
     padding-top: 10px;
     width: 140px;
     height: 30px;
-    background-color: #0088f7;
+    background-color: var(--color8);
     border-radius: 5px;
     cursor: pointer;
     transition-duration: 0.3s;
 
     &:hover{
-        background-color: #004e92;
+        background-color: var(--color7);
     }
 }
 
@@ -332,7 +334,7 @@ h3 {
         height: 50px;
         padding-top: 5px;
         padding-bottom: 5px;
-        background-color: #111;
+        background-color: var(--color1);
         margin: 0;
     }
     .otherinfo {
@@ -342,14 +344,14 @@ h3 {
         padding-top: 10px;
         padding-bottom: 10px;
         margin: 0;
-        background-color: rgba(17, 17, 17, 0.7);
+        background-color: var(--color2);
     }
     .references {
         float: left;
         margin-top: -60px;
         height: 100%;
         width: 40%;
-        background-color: rgba(17, 17, 17, 0.7);
+        background-color: var(--color2);
     }
 }
 
@@ -363,15 +365,15 @@ h3 {
     border-collapse: collapse;
 
     .day {
-        background-color: #111;
+        background-color: var(--color1);
     }
     tr:nth-child(even){
-        background-color: rgba(17, 17, 17, 0.7);
+        background-color: var(--color2);
     }
     tr td {
         border-style: none;
         border-collapse: collapse;
-        background-color: rgba(17, 17, 17, 0.3);
+        background-color: var(--color3);
     }
 }
 
@@ -401,7 +403,7 @@ h3 {
         height: 50px;
         padding-top: 5px;
         padding-bottom: 5px;
-        background-color: #111;
+        background-color: var(--color1);
         margin: 0;
     }
     .otherinfo {
@@ -409,7 +411,7 @@ h3 {
         padding-top: 10px;
         padding-bottom: 10px;
         margin: 0;
-        background-color: rgba(17, 17, 17, 0.7);
+        background-color: var(--color2);
     }
 }
 
@@ -421,7 +423,8 @@ h3 {
         height: 120px;
         margin-left: auto; margin-right: auto;
         
-        border: #ffffff;
+        border: var(--color13);
+        color: var(--color13);
         border-bottom-style: solid;
         border-width: 1px;
         display: flex;
@@ -465,7 +468,7 @@ h3 {
             margin-top: 20px;
             height: 40px;
             width: 1px;
-            background-color: white;
+            background-color: var(--color12);
             display: inline-block;
         }
         .normal {
@@ -475,7 +478,6 @@ h3 {
             color: #ffff15;
             background-color: black;
         }
-
         p {
             margin: 0;
         }
@@ -490,7 +492,7 @@ h3 {
     margin-top: -5px;
     width: 35px;
     height: 35px;
-    border-color: #111;
+    border-color: var(--color1);
     border-radius: 5px;
     border-style: solid;
     display: inline-block;
@@ -499,9 +501,9 @@ h3 {
 }
 
 .theme1 {
-    background: #73c8a9;
-    background: -webkit-linear-gradient(to right, #73c8a9, #373b44);
-    background: linear-gradient(to right, #73c8a9, #373b44);
+    background: var(--color9);
+    background: -webkit-linear-gradient(to right, #004e92, #000428);
+    background: linear-gradient(to right, #004e92, #000428);
 }
 .theme2 {
     background: #83a4d4;
@@ -565,7 +567,51 @@ h3 {
     background: linear-gradient(to left, #3a7bd5, #00d2ff);
 }
 .theme14 {
-    background: #004e92;
-    background: -webkit-linear-gradient(to right, #000428, #004e92);
-    background: linear-gradient(to right, #000428, #004e92);
+    background: #73c8a9;
+    background: -webkit-linear-gradient(to right, #73c8a9, #373b44);
+    background: linear-gradient(to right, #73c8a9, #373b44);
+}
+.theme_dark {
+    background: #f5f5f5;
+    background: -webkit-linear-gradient(to left, #929292, #f5f5f5);
+    background: linear-gradient(to left, #929292, #f5f5f5);
+}
+.theme_white {
+    background: #111;
+    background: -webkit-linear-gradient(to left, #111, #1b1b1b);
+    background: linear-gradient(to left, #111, #1b1b1b);
+}
+
+// profile.php
+
+.profile_panel {
+    width: 80vw; height: 100%;
+    margin-left: auto; margin-right: auto;
+    padding: 20px;
+    
+    .p1, .p2, .p3, .p4, .p5, .p6 {
+        padding: 10px;
+        height: 500px; width: 330px;
+        margin: 10px;
+        background-color: var(--color1);
+        vertical-align: middle;
+        border-radius: 10px;
+        display: inline-block;
+
+        .avatar {
+            margin-left: 125px;
+        }
+    }
+    .p5 {
+        height: 250px; width: 1080px;
+    }
+    .p6 {
+        height: 250px; width: 320px;
+    }
+    * p {
+        margin-left: 20px;
+    }
+    .p1 img {
+        width: 100px; height: 100px;
+    }
 }

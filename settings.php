@@ -27,10 +27,18 @@
 
     <script src="./js/accessibility.js"></script>
     <script src="./js/theme.js"></script>
+
+    <noscript>
+        <div class="noscript"> 
+            <p>Aby dziennik mógł działać poprawnie, wymagana jest obsługa JavaScript.</p>
+            <a target="_blank" href="https://www.geeksforgeeks.org/how-to-enable-javascript-in-my-browser/">W przypadku problemów skorzystaj z tego poradnika.</a>
+        </div>
+    </noscript>
 </head>
 <body>
 <script>
     accessibilityContrast(<?php if(isset($_GET['contrast'])) echo $_GET['contrast']; else echo $_SESSION['contrast']; ?>);
+    setColor(<?php if(isset($_GET['color'])) echo $_GET['color']; else echo $_SESSION['color']; ?>);
     setTheme(<?php if(isset($_GET['theme'])) echo $_GET['theme']; else echo $_SESSION['theme']; ?>);
     accessibilityFont(<?php if(isset($_GET['font'])) echo $_GET['font']; else echo $_SESSION['font']; ?>);
 </script>
@@ -70,8 +78,18 @@
             </div>
         </div>
         <div class="p2">
-            <div class="settings_label">
+        <div class="settings_label">
                 <p class="title">Motyw</p>
+                <p class="description">Wybierz motyw dziennika</p>
+            </div>
+            <div class="settings_setup">
+                <a href="?action=color&color=0"><div class="theme_box theme_white"></div></a>
+                <a href="?action=color&color=1"><div class="theme_box theme_dark"></div></a>
+            </div>
+        </div>
+        <div class="p3">
+            <div class="settings_label">
+                <p class="title">Zestaw kolorów</p>
                 <p class="description">Wybierz kolorystykę dziennika</p>
             </div>
             <div class="settings_setup">
@@ -90,9 +108,6 @@
                 <a href="?action=theme&theme=13"><div class="theme_box theme13"></div></a>
                 <a href="?action=theme&theme=14"><div class="theme_box theme14"></div></a>
             </div>
-        </div>
-        <div class="p3">
-            
         </div>
         <div class="p4">
             
@@ -117,6 +132,8 @@
         SetContrast($_GET['contrast']);
     if (isset($_GET['action']) && $_GET['action'] == "theme")
         SetTheme($_GET['theme']);
+    if (isset($_GET['action']) && $_GET['action'] == "color")
+        SetColor($_GET['color']);
 
     function SetFont($font){
         $conn = mysqli_connect(DB['host'], DB['user'], DB['password'], DB['database']);
@@ -154,6 +171,17 @@
 
         mysqli_query($conn, "UPDATE `users_students` SET `theme` = '".$theme."' WHERE `users_students`.`students_id` = ".$_SESSION['id'].";");
         $_SESSION['theme'] = $theme;
+    }
+    function SetColor($color) {
+        $conn = mysqli_connect(DB['host'], DB['user'], DB['password'], DB['database']);
+        mysqli_set_charset($conn, DB['charset']);
+
+        if (!$conn) {
+            die("Connection failed: " . mysqli_connect_error());
+        }
+
+        mysqli_query($conn, "UPDATE `users_students` SET `color` = '".$color."' WHERE `users_students`.`students_id` = ".$_SESSION['id'].";");
+        $_SESSION['color'] = $color;
     }
 
     function Logout() {

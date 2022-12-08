@@ -4,10 +4,11 @@ function accessibilityContrast(contrast) {
             document.body.style.color = "yellow";
             document.body.style.background = "black";
             
-            let h1list = document.querySelectorAll('h1');
-                h1list.forEach(el => el.style.color = "#ffffaa");
-            let navlist = document.querySelectorAll('nav a');
-                navlist.forEach(el => el.style.color = "#ffffaa");
+            let root = document.querySelector(':root');
+                root.style.setProperty('--color10', 'yellow');
+                root.style.setProperty('--color11', 'yellow');
+                root.style.setProperty('--color12', 'yellow');
+                root.style.setProperty('--color13', 'yellow');
             break;
         case false:
             return;

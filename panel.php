@@ -26,13 +26,6 @@
     <link rel="stylesheet" href="./styles/style.css" type="text/css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
-
-    <noscript>
-        <div class="noscript"> 
-            <p>Aby dziennik mógł działać poprawnie, wymagana jest obsługa JavaScript.</p>
-            <a target="_blank" href="https://www.geeksforgeeks.org/how-to-enable-javascript-in-my-browser/">W przypadku problemów skorzystaj z tego poradnika.</a>
-        </div>
-    </noscript>
 </head>
 <body>
 <nav class="sidenav">

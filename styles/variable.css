@@ -1,0 +1,38 @@
+:root {
+    /* Profile background */
+    --color0: #1a1a1a;
+    /*--color0: #d4d4d4;*/
+
+    --color1: #111111;
+    --color2: rgba(17, 17, 17, 0.7);
+    --color3: rgba(17, 17, 17, 0.3);
+
+    /*--color1: #eeeeee;*/
+    /*--color2: rgba(238, 238, 238, 0.7);*/
+    /*--color3: rgba(238, 238, 238, 0.3);*/
+
+    /* https://meyerweb.com/eric/tools/color-blend/ */
+    /* Midpoints 4 > 1,2,3,4,6 */
+
+    --color4: #000428; /* bg */
+    --color5: #002252;
+    --color6: #003068; 
+    --color7: #003F7D; /* hover */
+    --color8: #004e92; /* bg */
+
+    /* UI */
+    --color9: #555555;
+    --color10: #8B8B8B;
+    --color11: #e0e0e0;
+
+    /* Text */
+    --color12: #f5f5f5;
+    --color13: #f5f5f5;
+
+    /*--color9: #b3b3b3; */
+    /*--color10: #686868; */
+    /*--color0: #dbdbdb; */
+    
+    /*--color12: #111111; */
+    /*--color13: #131313; */
+}
