@@ -55,7 +55,7 @@
                     }
                 
                     $result = mysqli_query($conn, "
-                    SELECT `users_students`.`email`, `users_students`.`password`, `students`.`id`, `students`.`classes_id`, `students`.`first_name`, `students`.`last_name`
+                    SELECT `users_students`.*, `students`.`id`, `students`.`classes_id`, `students`.`first_name`, `students`.`last_name`
                     FROM `users_students` 
 	                    LEFT JOIN `students` ON `users_students`.`students_id` = `students`.`id`
                     WHERE `users_students`.`email` = '".$email."' AND `users_students`.`password` = '".$password."';
@@ -73,6 +73,10 @@
                             $_SESSION['class'] = $row['classes_id'];
                             $_SESSION['first_name'] = $row['first_name'];
                             $_SESSION['last_name'] = $row['last_name'];
+
+                            $_SESSION['theme'] = $row['theme'];
+                            $_SESSION['contrast'] = $row['contrast'];
+                            $_SESSION['font'] = $row['font'];
 
                             header("Location: panel.php");
                         } else {

@@ -270,5 +270,6 @@
         header("Location: http://localhost/infprojectpage/index.php");
     }
 ?>
+<script src="./js/keyborad.js"></script>
 </body>
 </html>

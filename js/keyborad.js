@@ -58,7 +58,7 @@ document.addEventListener('keydown', (e) => {
 		case "8":
 			window.location.href = 'comments.php';
 			break;
-		case "8":
+		case "0":
 			window.location.href = 'settings.php';
 			break;
 		default: 

@@ -45,7 +45,7 @@
 </nav>
 <section>
     <header>
-        <h1 class="grades">Plan lekcji</h1>
+        <h1 class="grades">Frekwencja</h1>
     </header>
     <table class="attendance" border="5" cellspacing="0" align="center">
         <?php // TUTAJ TE FREKFENCJE ZROBIĆ

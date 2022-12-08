@@ -1,18 +1,20 @@
 :root {
-
+    --bg1: #000428;
+    --bg2: #004e92;
+    --color1: #000428;
 }
+
 html {
     margin-left: 200px;
 }
 body {
-    //background-color: #aae6a3;
     background-image: linear-gradient(to right, #000428, #004e92);
     background-repeat: no-repeat;
     background-attachment: fixed;
 
-    //font-family: 'Kanit', sans-serif;
     font-family: "Lato", sans-serif;
     color: white;
+    //font-size: 120% !important;
 }
 header {
     text-align: center;

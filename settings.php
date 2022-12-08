@@ -26,8 +26,14 @@
     <link rel="stylesheet" href="./styles/style.css" type="text/css">
 
     <script src="./js/accessibility.js"></script>
+    <script src="./js/theme.js"></script>
 </head>
 <body>
+<script>
+    accessibilityContrast(<?php if(isset($_GET['contrast'])) echo $_GET['contrast']; else echo $_SESSION['contrast']; ?>);
+    setTheme(<?php if(isset($_GET['theme'])) echo $_GET['theme']; else echo $_SESSION['theme']; ?>);
+    accessibilityFont(<?php if(isset($_GET['font'])) echo $_GET['font']; else echo $_SESSION['font']; ?>);
+</script>
 <nav class="sidenav">
     <div class="profile">
         <img alt="Twoje zdjęcie profilowe" src="./img/avatar.jpeg" class="avatar"></img>
@@ -56,11 +62,11 @@
                 <p class="description">Dostosuj kontrast i wielkość czcionki</p>
             </div>
             <div class="settings_setup">
-                <a href="?action=font&size=0"><p class="font_button">A</p></a>
-                <a href="?action=font&size=1"><p class="font_button">A+</p></a>
-                <a href="?action=font&size=2"><p class="font_button">A++</p></a>
-                <a href="?action=contrast&contrast=false"><p id="normal" class="contrast_button normal">Abc</p></a>
-                <a href="?action=contrast&contrast=true"><p class="contrast_button contrast">Abc</p></a>
+                <a href="?action=font&font=0"><p class="font_button">A</p></a>
+                <a href="?action=font&font=1"><p class="font_button">A+</p></a>
+                <a href="?action=font&font=2"><p class="font_button">A++</p></a>
+                <a href="?action=contrast&contrast=0"><p id="normal" class="contrast_button normal">Abc</p></a>
+                <a href="?action=contrast&contrast=1"><p class="contrast_button contrast">Abc</p></a>
             </div>
         </div>
         <div class="p2">
@@ -106,13 +112,13 @@
     if (isset($_GET['action']) && $_GET['action'] == "logout")
         Logout();
     if (isset($_GET['action']) && $_GET['action'] == "font")
-        SetFont($_GET['size']); 
+        SetFont($_GET['font']); 
     if (isset($_GET['action']) && $_GET['action'] == "contrast")
         SetContrast($_GET['contrast']);
     if (isset($_GET['action']) && $_GET['action'] == "theme")
         SetTheme($_GET['theme']);
 
-    function SetFont($size){
+    function SetFont($font){
         $conn = mysqli_connect(DB['host'], DB['user'], DB['password'], DB['database']);
         mysqli_set_charset($conn, DB['charset']);
 
@@ -120,7 +126,9 @@
             die("Connection failed: " . mysqli_connect_error());
         }
 
-        mysqli_query($conn, "UPDATE `users_students` SET `theme` = '".$size."' WHERE `users_students`.`students_id` = ".$_SESSION['id'].";");
+        mysqli_query($conn, "UPDATE `users_students` SET `font` = '".$font."' WHERE `users_students`.`students_id` = ".$_SESSION['id'].";");
+        mysqli_close($conn);
+        $_SESSION['font'] = $font;
     }
 
     function SetContrast($contrast){
@@ -131,6 +139,9 @@
             die("Connection failed: " . mysqli_connect_error());
         }
 
+        mysqli_query($conn, "UPDATE `users_students` SET `contrast` = '".$contrast."' WHERE `users_students`.`students_id` = ".$_SESSION['id'].";");
+        mysqli_close($conn);
+        $_SESSION['contrast'] = $contrast;
     }
 
     function SetTheme($theme){
@@ -141,6 +152,8 @@
             die("Connection failed: " . mysqli_connect_error());
         }
 
+        mysqli_query($conn, "UPDATE `users_students` SET `theme` = '".$theme."' WHERE `users_students`.`students_id` = ".$_SESSION['id'].";");
+        $_SESSION['theme'] = $theme;
     }
 
     function Logout() {

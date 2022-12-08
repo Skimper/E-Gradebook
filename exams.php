@@ -716,5 +716,6 @@
     }
 ?>
 <script src="./js/examshomework.js"></script>
+<script src="./js/keyborad.js"></script>
 </body>
 </html>

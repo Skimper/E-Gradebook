@@ -62,7 +62,7 @@
             <p><b>Imię i nazwisko:</b> <?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name']; ?></p>
             <p><b>Email:</b> <?php echo $_SESSION['email']; ?></p>
             <p><b>Klasa:</b> <?php echo $_SESSION['class']; ?></p>
-            <p class="profile_button">Profil ucznia</p>
+            <a href="profile.php"><p class="profile_button">Profil ucznia</p></a>
         </div>
         <div class="p2">
             <h3>Ostatnie oceny</h3>
