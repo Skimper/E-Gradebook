@@ -32,6 +32,10 @@ a {
     p, a {
         margin-left: 20px;
     }
+    .tutorial {
+        text-decoration: underline;
+        color: red;
+    }
 }
 
 .sidenav {
@@ -125,11 +129,14 @@ input.login_input {
 
     border-bottom: 2px !important;
     border-bottom-style: solid !important;
-    border-bottom-color: var(--color5) !important;
+    border-bottom-color: var(--color7) !important;
 
     transition-duration: 0.2s;
 
     &:hover {
+        border-bottom-color: var(--color8) !important;
+    }
+    &:focus {
         border-bottom-color: var(--color8) !important;
     }
 }
@@ -599,11 +606,24 @@ h3 {
         display: inline-block;
 
         .avatar {
-            margin-left: 125px;
+            margin-left: 115px;
         }
     }
     .p5 {
         height: 250px; width: 1080px;
+
+        .top {
+            width: 93.8%;
+            height: 50px;
+            margin-left: 35px;
+        }
+        .left, .right {
+            float: left;
+            margin-left: 35px;
+            
+            width: 45%;
+            height: 200px;
+        }
     }
     .p6 {
         height: 250px; width: 320px;
@@ -611,7 +631,68 @@ h3 {
     * p {
         margin-left: 20px;
     }
-    .p1 img {
+    .avatar {
         width: 100px; height: 100px;
+    }
+}
+
+.change_profile {
+    display: inline-block;
+
+    input {
+        margin-left: 5px;
+    }
+    
+    p {
+        display: inline-block;
+    }
+
+    button {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.edit_icon {
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    position: absolute;
+    cursor: pointer;
+    border-radius: 50%;
+
+    transition-duration: 0.2s;
+    
+    &:hover {
+        background-color: var(--color9);
+    }
+}
+
+.security {
+    line-height: 50%;
+    display: inline-block;
+
+    p {
+        display: inline-block;
+    }
+    input {
+        padding: 5px;
+        border-color: var(--color13);
+        background-color: transparent;
+        border-radius: 5px;
+        border-width: 4px;
+        outline: none;
+        border-style: solid;
+        color: var(--color12);
+    }
+    button {
+        padding: 5px;
+        border-radius: 5px;
+        border-width: 4px;
+        border-style: solid;
+        background-color: transparent;
+        border-color: var(--color13);
+        color: var(--color12);
+        cursor: pointer;
     }
 }

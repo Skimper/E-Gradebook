@@ -77,6 +77,13 @@
                             $_SESSION['theme'] = $row['theme'];
                             $_SESSION['contrast'] = $row['contrast'];
                             $_SESSION['font'] = $row['font'];
+                            $_SESSION['color'] = $row['color'];
+
+                            $conn = mysqli_connect(DB['host'], DB['user'], DB['password'], DB['database']);
+                            mysqli_query($conn, "
+                            UPDATE `users_students` SET `last_login` = '".date("Y-m-d")."', `ip` = '".$_SERVER['REMOTE_ADDR']."' WHERE `users_students`.`students_id` = ".$_SESSION['id']."; 
+                            ");
+                            mysqli_close($conn);
 
                             header("Location: panel.php");
                         } else {

@@ -16,7 +16,6 @@ function get_browser() {
     };
  }
 
-var browser=get_browser(); // browser.name = 'Chrome'
-                           // browser.version = '40'
+const browser=get_browser();
 
-console.log(browser);
+document.getElementById("browser_version").innerHTML = "Wersja przeglądarki: " + browser.name + " " + browser.version;

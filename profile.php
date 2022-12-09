@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="./styles/style.css" type="text/css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="./js/profile.js"></script>
 </head>
 <body>
 <nav class="sidenav">
@@ -78,15 +79,17 @@
                 $row2 = mysqli_fetch_assoc($result2);
             }
             mysqli_free_result($result2);
-
         ?>
         <div class="p1">
             <div>
                 <h3>Profil ucznia</h3>
                 <img class="avatar" alt="Twoje zdjęcie profilowe" src="./img/avatar.jpeg" />
-                <p><b>Imię i nazwisko:</b> <?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name']; ?></p>
-                <p><b>Klasa: </b> <?php echo $_SESSION['class']; ?></p>
-                <p><b>Email:</b> <?php echo $_SESSION['email']; ?></p>
+                
+                <div id="profile">
+                    <p><b>Imię i nazwisko:</b> <span><?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name']; ?></p>
+                    <p><b>Email:</b> <?php echo $_SESSION['email']; ?></p>
+                    <p><b>Klasa: </b> <?php echo $_SESSION['class']; ?></p>
+                </div>
             </div>
         </div>
         <div class="p2">
@@ -134,13 +137,51 @@
             </div>
         </div>
         <div class="p5">
-            <div>
-                <h3>Ważne informacje</h3>
+            <?php
+                $conn = mysqli_connect(DB['host'], DB['user'], DB['password'], DB['database']);
+                mysqli_set_charset($conn, DB['charset']);
+
+                if (!$conn) {
+                    die("Connection failed: " . mysqli_connect_error());
+                }
+
+                $result = mysqli_query($conn, "
+                SELECT `users_students`.*, `users_students`.`students_id`
+                FROM `users_students`
+                WHERE `users_students`.`students_id` = '".$_SESSION['id']."';
+                ");
+                if (mysqli_num_rows($result) > 0) {
+                    $row = mysqli_fetch_assoc($result);
+                }
+                mysqli_free_result($result);
+            ?>
+            <div class="top">
+                <h3>Bezpieczeństwo</h3>
+            </div>
+            <div class="left">
+                <p class="security"><b>Adres email:</b></p>
+                <form class="security" method="POST">
+                    <input type="email" value="<?php echo $_SESSION['email']; ?>">
+                </form>
+                <p><b>Hasło:</b> </p>
+                <form class="security" action="profile.php" method="POST">
+                    <p class="security">Nowe hasło: </p>
+                    <input type="password" name="password"><br />
+                    <p class="security">Potwierdź nowe hasło: </p>
+                    <input type="password" name="passwordc">
+                    <button>Zmień hasło</button>
+                </form>
+            </div>
+            <div class="right">
+                <p>Ostatnie logowanie: <?php echo $row['last_login'] . " (" . $row['ip'] . ")" ?></p>
+                <p>Ostatnia zmiana hasła: <?php echo $row['last_login'] ?></p>
             </div>
         </div>
         <div class="p6">
             <div>
-                <h3>Ważne informacje</h3>
+                <h3>Informacje</h3>
+                <p id="browser_version"></p>
+                <p id="app_version">Wersja aplikacji: 1.0.0</p>
             </div>
         </div>
 </section>
@@ -150,8 +191,27 @@
     if (isset($_GET['action']) && $_GET['action'] == "avatar")  
         ChangeAvatar();
 
+    if (isset($_POST['password']) && $_POST['passwordc'])  
+        ChangePassword($_POST['password'], $_POST['passwordc']);
+
     function ChangeAvatar() {
         
+    }
+
+    function ChangePassword($pass, $passc) {
+        $newpass = hash('sha256', $pass);
+        $newpassc = hash('sha256', $passc);
+
+        if($newpass === $newpassc) {
+            $conn = mysqli_connect(DB['host'], DB['user'], DB['password'], DB['database']);
+            mysqli_set_charset($conn, DB['charset']);
+            if (!$conn) {
+                die("Connection failed: " . mysqli_connect_error());
+            }
+            $result = mysqli_query($conn, "
+            UPDATE `users_students` SET `password` = '".$newpassc."' WHERE `users_students`.`students_id` = ".$_SESSION['id'].";
+            ");
+        }
     }
 
     function Logout() {
@@ -161,6 +221,10 @@
         header("Location: http://localhost/infprojectpage/index.php");
     }
 ?>
+<script src="./js/debuginfo.js"></script>
 <script src="./js/keyborad.js"></script>
+<script>
+    get_browser();
+</script>
 </body>
 </html>

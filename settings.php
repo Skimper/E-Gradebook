@@ -13,6 +13,77 @@
     ini_set('display_startup_errors', '1');
     error_reporting(E_ALL);
 ?>
+<?php
+    if (isset($_GET['action']) && $_GET['action'] == "logout")
+        Logout();
+    if (isset($_GET['action']) && $_GET['action'] == "font")
+        SetFont($_GET['font']); 
+    if (isset($_GET['action']) && $_GET['action'] == "contrast")
+        SetContrast($_GET['contrast']);
+    if (isset($_GET['action']) && $_GET['action'] == "theme")
+        SetTheme($_GET['theme']);
+    if (isset($_GET['action']) && $_GET['action'] == "color")
+        SetColor($_GET['color']);
+
+    function SetFont($font){
+        $conn = mysqli_connect(DB['host'], DB['user'], DB['password'], DB['database']);
+        mysqli_set_charset($conn, DB['charset']);
+
+        if (!$conn) {
+            die("Connection failed: " . mysqli_connect_error());
+        }
+
+        mysqli_query($conn, "UPDATE `users_students` SET `font` = '".$font."' WHERE `users_students`.`students_id` = ".$_SESSION['id'].";");
+        mysqli_close($conn);
+        $_SESSION['font'] = $font;
+    }
+
+    function SetContrast($contrast){
+        $conn = mysqli_connect(DB['host'], DB['user'], DB['password'], DB['database']);
+        mysqli_set_charset($conn, DB['charset']);
+
+        if (!$conn) {
+            die("Connection failed: " . mysqli_connect_error());
+        }
+
+        mysqli_query($conn, "UPDATE `users_students` SET `contrast` = '".$contrast."' WHERE `users_students`.`students_id` = ".$_SESSION['id'].";");
+        mysqli_close($conn);
+        $_SESSION['contrast'] = $contrast;
+
+        $_SESSION['theme'] = 1; // Motyw wraca do standardowego, bo po co komu te kolory jak używa wysokiego kontrastu
+        $_SESSION['color'] = 0; // Rip dla tego kto będzie testował jak to działa ;)
+    }
+
+    function SetTheme($theme){
+        $conn = mysqli_connect(DB['host'], DB['user'], DB['password'], DB['database']);
+        mysqli_set_charset($conn, DB['charset']);
+
+        if (!$conn) {
+            die("Connection failed: " . mysqli_connect_error());
+        }
+
+        mysqli_query($conn, "UPDATE `users_students` SET `theme` = '".$theme."' WHERE `users_students`.`students_id` = ".$_SESSION['id'].";");
+        $_SESSION['theme'] = $theme;
+    }
+    function SetColor($color){
+        $conn = mysqli_connect(DB['host'], DB['user'], DB['password'], DB['database']);
+        mysqli_set_charset($conn, DB['charset']);
+
+        if (!$conn) {
+            die("Connection failed: " . mysqli_connect_error());
+        }
+
+        mysqli_query($conn, "UPDATE `users_students` SET `color` = '".$color."' WHERE `users_students`.`students_id` = ".$_SESSION['id'].";");
+        $_SESSION['color'] = $color;
+    }
+
+    function Logout() {
+        $_SESSION = array();
+
+        session_destroy();
+        header("Location: http://localhost/infprojectpage/index.php");
+    }
+?>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -28,19 +99,24 @@
     <script src="./js/accessibility.js"></script>
     <script src="./js/theme.js"></script>
 
+    <script>
+        if(typeof window.history.pushState == 'function') {
+            window.history.pushState({}, "Hide", "settings.php");
+        }
+    </script>
     <noscript>
         <div class="noscript"> 
             <p>Aby dziennik mógł działać poprawnie, wymagana jest obsługa JavaScript.</p>
-            <a target="_blank" href="https://www.geeksforgeeks.org/how-to-enable-javascript-in-my-browser/">W przypadku problemów skorzystaj z tego poradnika.</a>
+            <a class="tutorial" target="_blank" href="https://www.geeksforgeeks.org/how-to-enable-javascript-in-my-browser/">W przypadku problemów skorzystaj z tego poradnika!</a>
         </div>
     </noscript>
 </head>
 <body>
 <script>
-    accessibilityContrast(<?php if(isset($_GET['contrast'])) echo $_GET['contrast']; else echo $_SESSION['contrast']; ?>);
-    setColor(<?php if(isset($_GET['color'])) echo $_GET['color']; else echo $_SESSION['color']; ?>);
-    setTheme(<?php if(isset($_GET['theme'])) echo $_GET['theme']; else echo $_SESSION['theme']; ?>);
-    accessibilityFont(<?php if(isset($_GET['font'])) echo $_GET['font']; else echo $_SESSION['font']; ?>);
+    accessibilityContrast(<?php echo $_SESSION['contrast']; ?>);
+    setColor(<?php echo $_SESSION['color']; ?>);
+    setTheme(<?php echo $_SESSION['theme']; ?>);
+    accessibilityFont(<?php echo $_SESSION['font']; ?>);
 </script>
 <nav class="sidenav">
     <div class="profile">
@@ -123,74 +199,6 @@
         </div>
     </div>
 </section>
-<?php
-    if (isset($_GET['action']) && $_GET['action'] == "logout")
-        Logout();
-    if (isset($_GET['action']) && $_GET['action'] == "font")
-        SetFont($_GET['font']); 
-    if (isset($_GET['action']) && $_GET['action'] == "contrast")
-        SetContrast($_GET['contrast']);
-    if (isset($_GET['action']) && $_GET['action'] == "theme")
-        SetTheme($_GET['theme']);
-    if (isset($_GET['action']) && $_GET['action'] == "color")
-        SetColor($_GET['color']);
-
-    function SetFont($font){
-        $conn = mysqli_connect(DB['host'], DB['user'], DB['password'], DB['database']);
-        mysqli_set_charset($conn, DB['charset']);
-
-        if (!$conn) {
-            die("Connection failed: " . mysqli_connect_error());
-        }
-
-        mysqli_query($conn, "UPDATE `users_students` SET `font` = '".$font."' WHERE `users_students`.`students_id` = ".$_SESSION['id'].";");
-        mysqli_close($conn);
-        $_SESSION['font'] = $font;
-    }
-
-    function SetContrast($contrast){
-        $conn = mysqli_connect(DB['host'], DB['user'], DB['password'], DB['database']);
-        mysqli_set_charset($conn, DB['charset']);
-
-        if (!$conn) {
-            die("Connection failed: " . mysqli_connect_error());
-        }
-
-        mysqli_query($conn, "UPDATE `users_students` SET `contrast` = '".$contrast."' WHERE `users_students`.`students_id` = ".$_SESSION['id'].";");
-        mysqli_close($conn);
-        $_SESSION['contrast'] = $contrast;
-    }
-
-    function SetTheme($theme){
-        $conn = mysqli_connect(DB['host'], DB['user'], DB['password'], DB['database']);
-        mysqli_set_charset($conn, DB['charset']);
-
-        if (!$conn) {
-            die("Connection failed: " . mysqli_connect_error());
-        }
-
-        mysqli_query($conn, "UPDATE `users_students` SET `theme` = '".$theme."' WHERE `users_students`.`students_id` = ".$_SESSION['id'].";");
-        $_SESSION['theme'] = $theme;
-    }
-    function SetColor($color) {
-        $conn = mysqli_connect(DB['host'], DB['user'], DB['password'], DB['database']);
-        mysqli_set_charset($conn, DB['charset']);
-
-        if (!$conn) {
-            die("Connection failed: " . mysqli_connect_error());
-        }
-
-        mysqli_query($conn, "UPDATE `users_students` SET `color` = '".$color."' WHERE `users_students`.`students_id` = ".$_SESSION['id'].";");
-        $_SESSION['color'] = $color;
-    }
-
-    function Logout() {
-        $_SESSION = array();
-
-        session_destroy();
-        header("Location: http://localhost/infprojectpage/index.php");
-    }
-?>
 <script src="./js/keyborad.js"></script>
 </body>
 </html>
