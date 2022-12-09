@@ -13,6 +13,42 @@
     ini_set('display_startup_errors', '1');
     error_reporting(E_ALL);
 ?>
+<?php
+    if (isset($_GET['action']) && $_GET['action'] == "logout")
+        Logout();
+    if (isset($_GET['action']) && $_GET['action'] == "avatar")  
+        ChangeAvatar();
+
+    if (isset($_POST['password']) && $_POST['passwordc'])  
+        ChangePassword($_POST['password'], $_POST['passwordc']);
+
+    function ChangeAvatar() {
+        
+    }
+
+    function ChangePassword($pass, $passc) {
+        $newpass = hash('sha256', $pass);
+        $newpassc = hash('sha256', $passc);
+
+        if($newpass === $newpassc) {
+            $conn = mysqli_connect(DB['host'], DB['user'], DB['password'], DB['database']);
+            mysqli_set_charset($conn, DB['charset']);
+            if (!$conn) {
+                die("Connection failed: " . mysqli_connect_error());
+            }
+            $result = mysqli_query($conn, "
+            UPDATE `users_students` SET `password` = '".$newpassc."' WHERE `users_students`.`students_id` = ".$_SESSION['id'].";
+            ");
+        }
+    }
+
+    function Logout() {
+        $_SESSION = array();
+
+        session_destroy();
+        header("Location: http://localhost/infprojectpage/index.php");
+    }
+?>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -185,42 +221,6 @@
             </div>
         </div>
 </section>
-<?php
-    if (isset($_GET['action']) && $_GET['action'] == "logout")
-        Logout();
-    if (isset($_GET['action']) && $_GET['action'] == "avatar")  
-        ChangeAvatar();
-
-    if (isset($_POST['password']) && $_POST['passwordc'])  
-        ChangePassword($_POST['password'], $_POST['passwordc']);
-
-    function ChangeAvatar() {
-        
-    }
-
-    function ChangePassword($pass, $passc) {
-        $newpass = hash('sha256', $pass);
-        $newpassc = hash('sha256', $passc);
-
-        if($newpass === $newpassc) {
-            $conn = mysqli_connect(DB['host'], DB['user'], DB['password'], DB['database']);
-            mysqli_set_charset($conn, DB['charset']);
-            if (!$conn) {
-                die("Connection failed: " . mysqli_connect_error());
-            }
-            $result = mysqli_query($conn, "
-            UPDATE `users_students` SET `password` = '".$newpassc."' WHERE `users_students`.`students_id` = ".$_SESSION['id'].";
-            ");
-        }
-    }
-
-    function Logout() {
-        $_SESSION = array();
-
-        session_destroy();
-        header("Location: http://localhost/infprojectpage/index.php");
-    }
-?>
 <script src="./js/debuginfo.js"></script>
 <script src="./js/keyborad.js"></script>
 <script>

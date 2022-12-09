@@ -13,6 +13,17 @@
     ini_set('display_startup_errors', '1');
     error_reporting(E_ALL);
 ?>
+<?php
+    if (isset($_GET['action']) && $_GET['action'] == "logout")
+        Logout();
+
+    function Logout() {
+        $_SESSION = array();
+
+        session_destroy();
+        header("Location: http://localhost/infprojectpage/index.php");
+    }
+?>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -588,17 +599,6 @@
         </table>
     </div>
 </section>
-<?php
-    if (isset($_GET['action']) && $_GET['action'] == "logout")
-        Logout();
-
-    function Logout() {
-        $_SESSION = array();
-
-        session_destroy();
-        header("Location: http://localhost/infprojectpage/index.php");
-    }
-?>
 <script src="./js/grade.js"></script>
 <script src="./js/keyborad.js"></script>
 </body>

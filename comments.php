@@ -108,10 +108,6 @@
         ?>
     </table>
 </section>
-<?php
-
-?>
-
 <script src="./js/commentspraise.js"></script>
 <script src="./js/keyborad.js"></script>
 </body>
