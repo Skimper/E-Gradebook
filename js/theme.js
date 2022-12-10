@@ -141,12 +141,12 @@ function setColor(color) {
         case 1:
             root.style.setProperty('--color0', '#d4d4d4');
             root.style.setProperty('--color1', '#eeeeee');
-            root.style.setProperty('--color2', 'rgba(17, 17, 17, 0.7)');
-            root.style.setProperty('--color3', 'rgba(17, 17, 17, 0.3)');
+            root.style.setProperty('--color2', 'rgba(238, 238, 238, 0.7);');
+            root.style.setProperty('--color3', 'rgba(238, 238, 238, 0.3);');
             root.style.setProperty('--color9', '#b3b3b3');
             root.style.setProperty('--color10', '#686868');
             root.style.setProperty('--color11', '#181818');
-            root.style.setProperty('--color12', '#dbdbdb');
+            root.style.setProperty('--color12', '#111111');
             console.log("Loaded colors " + color);
         break;
     }  

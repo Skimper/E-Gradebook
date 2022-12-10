@@ -69,7 +69,7 @@
 
     <script>
         if(typeof window.history.pushState == 'function') {
-            window.history.pushState({}, "Hide", "settings.php");
+            window.history.pushState({}, "Hide", "profile.php");
         }
     </script>
     
