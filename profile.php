@@ -63,8 +63,30 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <script src="./js/profile.js"></script>
+
+    <script src="./js/accessibility.js"></script>
+    <script src="./js/theme.js"></script>
+
+    <script>
+        if(typeof window.history.pushState == 'function') {
+            window.history.pushState({}, "Hide", "settings.php");
+        }
+    </script>
+    
+    <noscript>
+        <div class="noscript"> 
+            <p>Aby dziennik mógł działać poprawnie, wymagana jest obsługa JavaScript.</p>
+            <a class="tutorial" target="_blank" href="https://www.geeksforgeeks.org/how-to-enable-javascript-in-my-browser/">W przypadku problemów skorzystaj z tego poradnika!</a>
+        </div>
+    </noscript>
 </head>
 <body>
+<script>
+    accessibilityContrast(<?php echo $_SESSION['contrast']; ?>);
+    setColor(<?php echo $_SESSION['color']; ?>);
+    setTheme(<?php echo $_SESSION['theme']; ?>);
+    accessibilityFont(<?php echo $_SESSION['font']; ?>);
+</script>
 <nav class="sidenav">
     <div class="profile">
         <img alt="Twoje zdjęcie profilowe" src="./img/avatar.jpeg" class="avatar"></img>
