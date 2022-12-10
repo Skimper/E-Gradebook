@@ -397,6 +397,7 @@
                 }
                 mysqli_free_result($result);
 
+                // Tutaj jest ostrzeżenie przy braku ocen.
                 $max = array_keys($avg, max($avg));
                 $min = array_keys($avg, min($avg));
 

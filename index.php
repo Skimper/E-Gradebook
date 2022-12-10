@@ -23,8 +23,24 @@
     <link rel="stylesheet" href="./styles/normalize.css" type="text/css">
     <link rel="stylesheet" href="./styles/webkit.css" type="text/css">
     <link rel="stylesheet" href="./styles/style.css" type="text/css">
+
+    <script src="./js/accessibility.js"></script>
+    <script src="./js/theme.js"></script>
+
+    <noscript>
+        <div class="noscript"> 
+            <p>Aby dziennik mógł działać poprawnie, wymagana jest obsługa JavaScript.</p>
+            <a class="tutorial" target="_blank" href="https://www.geeksforgeeks.org/how-to-enable-javascript-in-my-browser/">W przypadku problemów skorzystaj z tego poradnika!</a>
+        </div>
+    </noscript>
 </head>
 <body style="margin-left: -200px;">
+<script>
+    accessibilityContrast(<?php if(isset($_COOKIE['contrast'])) echo $_COOKIE['contrast']; ?>);
+    setColor(<?php if(isset($_COOKIE['color'])) echo $_COOKIE['color']; ?>);
+    setTheme(<?php if(isset($_COOKIE['theme'])) echo $_COOKIE['theme']; ?>);
+    accessibilityFont(<?php if(isset($_COOKIE['font'])) echo $_COOKIE['font']; ?>);
+</script>
     <header>
         <img class="logo_img" src="">
         <h1>ZALOGU SIĘ DO ...</h1>
@@ -84,6 +100,11 @@
                             UPDATE `users_students` SET `last_login` = '".date("Y-m-d")."', `ip` = '".$_SERVER['REMOTE_ADDR']."' WHERE `users_students`.`students_id` = ".$_SESSION['id']."; 
                             ");
                             mysqli_close($conn);
+
+                            setcookie('theme', $_SESSION['theme'], time() + (86400 * 30), "/");
+                            setcookie('contrast', $_SESSION['contrast'], time() + (86400 * 30), "/");
+                            setcookie('font', $_SESSION['font'], time() + (86400 * 30), "/");
+                            setcookie('color', $_SESSION['color'], time() + (86400 * 30), "/");
 
                             header("Location: panel.php");
                         } else {

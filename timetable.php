@@ -24,7 +24,6 @@
         header("Location: http://localhost/infprojectpage/index.php");
     }
 ?>
-<script src="./js/keyborad.js"></script>
 <!DOCTYPE html>
 <html lang="pl">
 <head>

@@ -240,6 +240,7 @@
                 <h3>Informacje</h3>
                 <p id="browser_version"></p>
                 <p id="app_version">Wersja aplikacji: 1.0.0</p>
+                <a href="./privacypolicy.php"><p>Polityka prywatności</p></a>
             </div>
         </div>
 </section>

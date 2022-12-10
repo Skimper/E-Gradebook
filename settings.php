@@ -36,6 +36,7 @@
         mysqli_query($conn, "UPDATE `users_students` SET `font` = '".$font."' WHERE `users_students`.`students_id` = ".$_SESSION['id'].";");
         mysqli_close($conn);
         $_SESSION['font'] = $font;
+        setcookie('font', $_SESSION['font'], time() + (86400 * 30), "/");
     }
 
     function SetContrast($contrast){
@@ -49,9 +50,11 @@
         mysqli_query($conn, "UPDATE `users_students` SET `contrast` = '".$contrast."' WHERE `users_students`.`students_id` = ".$_SESSION['id'].";");
         mysqli_close($conn);
         $_SESSION['contrast'] = $contrast;
-
+        setcookie('contrast', $_SESSION['contrast'], time() + (86400 * 30), "/");
         $_SESSION['theme'] = 1; // Motyw wraca do standardowego, bo po co komu te kolory jak używa wysokiego kontrastu
+        setcookie('theme', $_SESSION['theme'], time() + (86400 * 30), "/");
         $_SESSION['color'] = 0; // Rip dla tego kto będzie testował jak to działa ;)
+        setcookie('color', $_SESSION['color'], time() + (86400 * 30), "/");
     }
 
     function SetTheme($theme){
@@ -64,6 +67,7 @@
 
         mysqli_query($conn, "UPDATE `users_students` SET `theme` = '".$theme."' WHERE `users_students`.`students_id` = ".$_SESSION['id'].";");
         $_SESSION['theme'] = $theme;
+        setcookie('theme', $_SESSION['theme'], time() + (86400 * 30), "/");
     }
     function SetColor($color){
         $conn = mysqli_connect(DB['host'], DB['user'], DB['password'], DB['database']);
@@ -75,6 +79,7 @@
 
         mysqli_query($conn, "UPDATE `users_students` SET `color` = '".$color."' WHERE `users_students`.`students_id` = ".$_SESSION['id'].";");
         $_SESSION['color'] = $color;
+        setcookie('color', $_SESSION['color'], time() + (86400 * 30), "/");
     }
 
     function Logout() {
