@@ -633,6 +633,28 @@ h3 {
     }
     .avatar {
         width: 100px; height: 100px;
+
+        transition-duration: 0.2s;
+    }
+    .avatar_hover {
+        width: 100px; height: 100px;
+        margin-left: 115px;
+        position: absolute;
+        background-color: var(--color1);
+        border-radius: 50%;
+        opacity: 0%;
+        cursor: pointer;
+
+        transition-duration: 0.2s;
+
+        &:hover {
+            opacity: 80%;
+        }
+        .avatar_icon {
+            width: 50px; height: 50px;
+            margin-left: 23px;
+            margin-top: 23px;
+        }
     }
 }
 

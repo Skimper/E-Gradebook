@@ -41,12 +41,6 @@
     <script src="./js/accessibility.js"></script>
     <script src="./js/theme.js"></script>
 
-    <script>
-        if(typeof window.history.pushState == 'function') {
-            window.history.pushState({}, "Hide", "meetings.php");
-        }
-    </script>
-    
     <noscript>
         <div class="noscript"> 
             <p>Aby dziennik mógł działać poprawnie, wymagana jest obsługa JavaScript.</p>
@@ -63,7 +57,7 @@
 </script>
 <nav class="sidenav">
     <div class="profile">
-        <img alt="Twoje zdjęcie profilowe" src="./img/avatar.jpeg" class="avatar"></img>
+        <img alt="Twoje zdjęcie profilowe" src="./profile/<?php echo $_SESSION['id']; ?>.jpeg" class="avatar"></img>
         <p><?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name'] ?></p>
         <p><?php echo $_SESSION['class'] ?></p>
     </div>

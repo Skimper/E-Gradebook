@@ -21,11 +21,43 @@
 
     if (isset($_POST['password']) && $_POST['passwordc'])  
         ChangePassword($_POST['password'], $_POST['passwordc']);
+    if (isset($_FILES['avatar']))
+        UpdateAvatar();
 
-    function ChangeAvatar() {
+
+    function UpdateAvatar() {
+        $target_dir = "profile/";
+        $target_file = $target_dir . basename($_FILES["avatar"]["name"]);
+        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+        $uploadOk = true;
         
-    }
+        $check = getimagesize($_FILES["avatar"]["tmp_name"]);
+        if($check !== false) {
+            $uploadOk = true;
+        } else {
+            echo "File is not an image.";
+            $uploadOk = false;
+        }
+        if ($_FILES["avatar"]["size"] > 1000000) {
+            echo "Sorry, your file is too large.";
+            $uploadOk = false;
+        }
+        if($imageFileType != "jpg" && $imageFileType != "jpeg") {
+            echo "Sorry, only JPG, JPEG, & GIF files are allowed.";
+            $uploadOk = false;
+        } 
 
+        if ($uploadOk) {
+            if (move_uploaded_file($_FILES["avatar"]["tmp_name"], $target_dir . $_SESSION['id'] . ".jpeg")) {
+                return;
+            } else {
+                echo "Sorry, there was an error uploading your file.";
+            }
+        } else {
+            echo "Sorry, your file was not uploaded.";
+        }
+    }
     function ChangePassword($pass, $passc) {
         $newpass = hash('sha256', $pass);
         $newpassc = hash('sha256', $passc);
@@ -37,7 +69,7 @@
                 die("Connection failed: " . mysqli_connect_error());
             }
             $result = mysqli_query($conn, "
-            UPDATE `users_students` SET `password` = '".$newpassc."' WHERE `users_students`.`students_id` = ".$_SESSION['id'].";
+            UPDATE `users_students` SET `password` = '".$newpassc."', `last_pass` = '".date("Y-m-d")."' WHERE `users_students`.`students_id` = ".$_SESSION['id'].";
             ");
         }
     }
@@ -62,17 +94,12 @@
     <link rel="stylesheet" href="./styles/style.css" type="text/css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+
     <script src="./js/profile.js"></script>
 
     <script src="./js/accessibility.js"></script>
     <script src="./js/theme.js"></script>
 
-    <script>
-        if(typeof window.history.pushState == 'function') {
-            window.history.pushState({}, "Hide", "profile.php");
-        }
-    </script>
-    
     <noscript>
         <div class="noscript"> 
             <p>Aby dziennik mógł działać poprawnie, wymagana jest obsługa JavaScript.</p>
@@ -89,7 +116,7 @@
 </script>
 <nav class="sidenav">
     <div class="profile">
-        <img alt="Twoje zdjęcie profilowe" src="./img/avatar.jpeg" class="avatar"></img>
+        <img alt="Twoje zdjęcie profilowe" src="./profile/<?php echo $_SESSION['id']; ?>.jpeg" class="avatar"></img>
         <p><?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name']; ?></p>
         <p><?php echo $_SESSION['class']; ?></p>
     </div>
@@ -141,8 +168,16 @@
         <div class="p1">
             <div>
                 <h3>Profil ucznia</h3>
-                <img class="avatar" alt="Twoje zdjęcie profilowe" src="./img/avatar.jpeg" />
+                <div class="avatar_hover" onclick="document.getElementById('new_avatar').click()">
+                    <img class="avatar_icon" alt="Zmień swoje zdjęcie profilowe" src="./img/icons/<?php echo $_SESSION['color'];?>/edit_settings_regular_icon.png"></img>
+                </div>
                 
+                <img class="avatar" alt="Twoje zdjęcie profilowe" src="./profile/<?php echo $_SESSION['id']; ?>.jpeg" />
+                
+                <form method="POST" enctype="multipart/form-data" style="display: none; position:absolute;">
+                    <input id="new_avatar" name="avatar" type="file" accept="image/*" onchange="this.form.submit();">
+                </form>
+
                 <div id="profile">
                     <p><b>Imię i nazwisko:</b> <span><?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name']; ?></p>
                     <p><b>Email:</b> <?php echo $_SESSION['email']; ?></p>
@@ -232,7 +267,7 @@
             </div>
             <div class="right">
                 <p>Ostatnie logowanie: <?php echo $row['last_login'] . " (" . $row['ip'] . ")" ?></p>
-                <p>Ostatnia zmiana hasła: <?php echo $row['last_login'] ?></p>
+                <p>Ostatnia zmiana hasła: <?php echo $row['last_pass'] ?></p>
             </div>
         </div>
         <div class="p6">
@@ -241,6 +276,7 @@
                 <p id="browser_version"></p>
                 <p id="app_version">Wersja aplikacji: 1.0.0</p>
                 <a href="./privacypolicy.php"><p>Polityka prywatności</p></a>
+                <a href="./cookiespolicy.php"><p>Polityka plików cookie</p></a>
             </div>
         </div>
 </section>

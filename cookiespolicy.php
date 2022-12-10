@@ -55,7 +55,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel</title>
+    <title>Polityka plików cookie</title>
 
     <link rel="stylesheet" href="./styles/normalize.css" type="text/css">
     <link rel="stylesheet" href="./styles/webkit.css" type="text/css">
@@ -67,12 +67,6 @@
     <script src="./js/accessibility.js"></script>
     <script src="./js/theme.js"></script>
 
-    <script>
-        if(typeof window.history.pushState == 'function') {
-            window.history.pushState({}, "Hide", "cookiespolicy.php");
-        }
-    </script>
-    
     <noscript>
         <div class="noscript"> 
             <p>Aby dziennik mógł działać poprawnie, wymagana jest obsługa JavaScript.</p>
@@ -89,7 +83,7 @@
 </script>
 <nav class="sidenav">
     <div class="profile">
-        <img alt="Twoje zdjęcie profilowe" src="./img/avatar.jpeg" class="avatar"></img>
+        <img alt="Twoje zdjęcie profilowe" src="./profile/<?php echo $_SESSION['id']; ?>.jpeg" class="avatar"></img>
         <p><?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name']; ?></p>
         <p><?php echo $_SESSION['class']; ?></p>
     </div>
@@ -106,7 +100,7 @@
 </nav>
 <section>
     <header>
-        <h1 class="grades">Polityka prywatności</h1>
+        <h1 class="grades">Polityka plików cookie</h1>
     </header>
     <div class="cookies_policy">
     <div class="cookies_policy">

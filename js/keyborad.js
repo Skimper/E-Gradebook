@@ -6,19 +6,7 @@ document.addEventListener('keydown', (e) => {
 	}
 	switch(e.key) {
 		case "ArrowUp": 
-			switch (window.location.href) {
-				case "InfProject/panel.php":
-					break;
-				case "InfProject/grades.php":
-					break;
-				case "InfProject/attendance.php":
-					break;
-				case "InfProject/timetable.php":
-					break;
-				case "InfProject/exams.php":
-					break;
-			}
-			break;		
+			break;
 		case "ArrowRight": 
 			switch (window.location.href) {
 
@@ -33,33 +21,6 @@ document.addEventListener('keydown', (e) => {
 			switch (window.location.href) {
 				
 			}
-			break;
-		case "1":
-			window.location.href = 'panel.php';
-			break;
-		case "2":
-			window.location.href = 'grades.php';
-			break;
-		case "3":
-			window.location.href = 'attendance.php';
-			break;
-		case "4":
-			window.location.href = 'timetable.php';
-			break;
-		case "5":
-			window.location.href = 'exams.php';
-			break;
-		case "6":
-			window.location.href = 'meetings.php';
-			break;
-		case "7":
-			window.location.href = 'topics.php';
-			break;
-		case "8":
-			window.location.href = 'comments.php';
-			break;
-		case "0":
-			window.location.href = 'settings.php';
 			break;
 		default: 
 			return; 
