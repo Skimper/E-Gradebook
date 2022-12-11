@@ -86,7 +86,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,  user-scalable=no">
     <title>Panel</title>
 
     <link rel="stylesheet" href="./styles/normalize.css" type="text/css">
@@ -107,7 +107,7 @@
         </div>
     </noscript>
 </head>
-<body>
+<body ondragstart="return false" ondrag="return false"> 
 <script>
     accessibilityContrast(<?php echo $_SESSION['contrast']; ?>);
     setColor(<?php echo $_SESSION['color']; ?>);
@@ -172,7 +172,7 @@
                     <img class="avatar_icon" alt="Zmień swoje zdjęcie profilowe" src="./img/icons/<?php echo $_SESSION['color'];?>/edit_settings_regular_icon.png"></img>
                 </div>
                 
-                <img class="avatar" alt="Twoje zdjęcie profilowe" src="./profile/<?php echo $_SESSION['id']; ?>.jpeg" />
+                <img class="avatar" alt="Twoje zdjęcie profilowe" src="./profile/<?php echo isset($_SESSION['id']) ? $_SESSION['id'] : "default"; ?>.jpeg" />
                 
                 <form method="POST" enctype="multipart/form-data" style="display: none; position:absolute;">
                     <input id="new_avatar" name="avatar" type="file" accept="image/*" onchange="this.form.submit();">
@@ -188,19 +188,25 @@
         <div class="p2">
             <div>
                 <h3>Dane ucznia</h3>
-
-                <p><b>Imię i nazwisko:</b> <?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name']; ?></p>
-                <p><b>Płeć: </b> <?php echo $row['gender'] == 'male' ? "Mężczyzna" : "Kobieta"; ?></p>
-                <p><b>Email:</b> <?php echo $_SESSION['email']; ?></p>
-                <p><b>Adres:</b> <?php echo $row['address_street'] . " " . $row['address_number']; ?></p>
-                <p><b>Miasto:</b> <?php echo $row['address_city'];?></p>
-                <p><b>Miasto urodzenia:</b> <?php echo $row['birth_city'];?></p>
-                <p><b>Data urodzenia:</b> <?php echo $row['birth_date'];?></p>
-                <p><b>Pesel:</b> <?php echo $row['pesel'];?></p>
+                <div class="left">
+                    <p><b>Imię i nazwisko:</b> <?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name']; ?></p>
+                    <p><b>Płeć: </b> <?php echo $row['gender'] == 'male' ? "Mężczyzna" : "Kobieta"; ?></p>
+                    <p><b>Email:</b> <?php echo $_SESSION['email']; ?></p>
+                    <p><b>Adres zamieszkania:</b> <?php echo $row['address_street'] . " " . $row['address_number']; ?></p>
+                    <p><b>Adres zameldowania:</b> </p>
+                    <p><b>Miasto:</b> <?php echo $row['address_city'];?></p>
+                    <p><b>Miasto urodzenia:</b> <?php echo $row['birth_city'];?></p>
+                    <p><b>Data urodzenia:</b> <?php echo $row['birth_date'];?></p>
+                    <p><b>Pesel:</b> <?php echo $row['pesel'];?></p>
+                    <p><b>Obywatelstwo:</b> <?php echo $row['citizenship'];?></p>
+                </div>
+                <div class="right">
                 <p><b>Numer telefonu:</b> <?php echo $row['mobile'];?></p>
-                <p><b>Numer telefonu matki:</b> <?php echo $row['mobile_m'];?></p>
-                <p><b>Numer telefonu ojca:</b> <?php echo $row['mobile_d'];?></p>
-                <p><b>Obywatelstwo:</b> <?php echo $row['citizenship'];?></p>
+                    <p><b>Numer telefonu matki:</b> <?php echo $row['mobile_m'];?></p>
+                    <p><b>Numer telefonu ojca:</b> <?php echo $row['mobile_d'];?></p>
+                    <p><b>Imię matki:</b> <?php echo ''?></p>
+                    <p><b>Imię ojca:</b> <?php echo ''?></p>
+                </div>
             </div>
         </div>
         <div class="p3">
@@ -214,19 +220,6 @@
                 <p><b>NIP:</b> <?php echo $row2['nip'] ?></p>
                 <p><b>REGON:</b> <?php echo $row2['regon'] ?></p>
                 <p><b>Strona internetowa:</b> <?php echo $row2['page'] ?></p>
-            </div>
-        </div>
-        <div class="p4">
-            <div>
-                <h3>Ważne informacje</h3>
-
-                <p><b>Nazwa:</b> </p>
-                <p><b>Adres:</b> </p>
-                <p><b>Dyrekcja:</b> </p>
-                <p><b>Numer telefonu:</b> </p>
-                <p><b>NIP:</b> </p>
-                <p><b>REGON:</b> </p>
-                <p><b>Strona internetowa:</b> </p>
             </div>
         </div>
         <div class="p5">

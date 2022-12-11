@@ -18,7 +18,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,  user-scalable=no">
     <title>Uwagi i osiągnięcia</title>
 
     <link rel="stylesheet" href="./styles/normalize.css" type="text/css">
@@ -35,7 +35,7 @@
         </div>
     </noscript>
 </head>
-<body>
+<body ondragstart="return false" ondrag="return false">
 <script>
     accessibilityContrast(<?php echo $_SESSION['contrast']; ?>);
     setColor(<?php echo $_SESSION['color']; ?>);

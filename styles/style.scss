@@ -161,7 +161,8 @@ button.login_button {
 .panel {
     width: 80vw; height: 100%;
     margin-left: auto; margin-right: auto;
-    padding: 20px;
+    padding-top: 20px;
+    padding-left: 20px;
     
     .p1, .p2, .p3, .p4, .p5, .p6, .p7, .p8 {
         display: inline-block;
@@ -594,7 +595,8 @@ h3 {
 .profile_panel {
     width: 80vw; height: 100%;
     margin-left: auto; margin-right: auto;
-    padding: 20px;
+    padding-left: 20px;
+    padding-top: 20px;
     
     .p1, .p2, .p3, .p4, .p5, .p6 {
         padding: 10px;
@@ -607,6 +609,18 @@ h3 {
 
         .avatar {
             margin-left: 115px;
+        }
+    }
+    .p2 {
+        width: 705px;
+
+        .left, .right {
+            float: left;
+            
+            width: 45%;
+        }
+        .right {
+            margin-left: 10px;
         }
     }
     .p5 {
