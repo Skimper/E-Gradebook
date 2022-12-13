@@ -74,7 +74,7 @@
         </div>
     </noscript>
 </head>
-<body ondragstart="return false" ondrag="return false">
+<body>
 <script>
     accessibilityContrast(<?php echo $_SESSION['contrast']; ?>);
     setColor(<?php echo $_SESSION['color']; ?>);
