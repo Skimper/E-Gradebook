@@ -89,14 +89,16 @@
             <label class="login_label" for="password">Hasło</label><br />
             <input class="login_input" type="password" name="password" minlength="3" maxlength="64" required><br /><br />
             
-            <input class="radio" type="radio" name="type" value="student">
-            <input class="radio" type="radio" name="type" value="teacher">
-
+            <div class="buttons">
+                <input label="Uczeń" type="radio" name="type" value="student" checked>
+                <input label="Nauczyciel" type="radio" name="type" value="teacher">
+            </div>
+            
             <button class="login_button" type="submit">Zaloguj</button>
         </form>
         <p>
             <?php
-                if ( isset($_POST['username']) && isset($_POST['password']) ) {
+                if ( isset($_POST['username']) && isset($_POST['password']) && isset($_POST['type']) ) {
                     $username = htmlspecialchars($_POST['username'], ENT_QUOTES);
                     $password = hash('sha256', htmlspecialchars($_POST['password'], ENT_QUOTES));
                     Login($username, $password);
@@ -110,48 +112,99 @@
                         die("Connection failed: " . mysqli_connect_error());
                     }
                 
-                    $result = mysqli_query($conn, "
-                    SELECT `users_students`.*, `students`.`id`, `students`.`classes_id`, `students`.`first_name`, `students`.`last_name`
-                    FROM `users_students` 
-	                    LEFT JOIN `students` ON `users_students`.`students_id` = `students`.`id`
-                    WHERE `users_students`.`email` = '".$email."' AND `users_students`.`password` = '".$password."';
-                    ");
-                    mysqli_close($conn);
-                
-                    if (mysqli_num_rows($result) > 0) {
-                        $row = mysqli_fetch_assoc($result);
-                        if($row['password'] === $password) {
-                            session_regenerate_id();
-                            $_SESSION['loggedin'] = true;
-                            $_SESSION['email'] = $row['email'];
-
-                            $_SESSION['id'] = $row['id'];
-                            $_SESSION['class'] = $row['classes_id'];
-                            $_SESSION['first_name'] = $row['first_name'];
-                            $_SESSION['last_name'] = $row['last_name'];
-
-                            $_SESSION['theme'] = $row['theme'];
-                            $_SESSION['contrast'] = $row['contrast'];
-                            $_SESSION['font'] = $row['font'];
-                            $_SESSION['color'] = $row['color'];
-
-                            $conn = mysqli_connect(DB['host'], DB['user'], DB['password'], DB['database']);
-                            mysqli_query($conn, "
-                            UPDATE `users_students` SET `last_login` = '".date("Y-m-d")."', `ip` = '".$_SERVER['REMOTE_ADDR']."' WHERE `users_students`.`students_id` = ".$_SESSION['id']."; 
+                    switch ($_POST['type']){
+                        case "student":
+                            $result = mysqli_query($conn, "
+                            SELECT `users_students`.*, `students`.`id`, `students`.`classes_id`, `students`.`first_name`, `students`.`last_name`
+                            FROM `users_students` 
+                                LEFT JOIN `students` ON `users_students`.`students_id` = `students`.`id`
+                            WHERE `users_students`.`email` = '".$email."' AND `users_students`.`password` = '".$password."';
                             ");
                             mysqli_close($conn);
 
-                            setcookie('theme', $_SESSION['theme'], time() + (86400 * 30), "/");
-                            setcookie('contrast', $_SESSION['contrast'], time() + (86400 * 30), "/");
-                            setcookie('font', $_SESSION['font'], time() + (86400 * 30), "/");
-                            setcookie('color', $_SESSION['color'], time() + (86400 * 30), "/");
+                            if (mysqli_num_rows($result) > 0) {
+                                $row = mysqli_fetch_assoc($result);
+                                if($row['password'] === $password) {
+                                    session_regenerate_id();
+                                    $_SESSION['loggedin'] = true;
+                                    $_SESSION['who'] = "student";
+                                    $_SESSION['email'] = $row['email'];
+        
+                                    $_SESSION['id'] = $row['id'];
+                                    $_SESSION['class'] = $row['classes_id'];
+                                    $_SESSION['first_name'] = $row['first_name'];
+                                    $_SESSION['last_name'] = $row['last_name'];
+        
+                                    $_SESSION['theme'] = $row['theme'];
+                                    $_SESSION['contrast'] = $row['contrast'];
+                                    $_SESSION['font'] = $row['font'];
+                                    $_SESSION['color'] = $row['color'];
+        
+                                    $conn = mysqli_connect(DB['host'], DB['user'], DB['password'], DB['database']);
+                                    mysqli_query($conn, "
+                                    UPDATE `users_students` SET `last_login` = '".date("Y-m-d")."', `ip` = '".$_SERVER['REMOTE_ADDR']."' WHERE `users_students`.`students_id` = ".$_SESSION['id']."; 
+                                    ");
+                                    mysqli_close($conn);
+        
+                                    setcookie('theme', $_SESSION['theme'], time() + (86400 * 30), "/");
+                                    setcookie('contrast', $_SESSION['contrast'], time() + (86400 * 30), "/");
+                                    setcookie('font', $_SESSION['font'], time() + (86400 * 30), "/");
+                                    setcookie('color', $_SESSION['color'], time() + (86400 * 30), "/");
+        
+                                    header("Location: panel.php");
+                                } else {
+                                    die("Błędne hasło!");
+                                };
+                            } else {
+                                echo "Błędny login lub hasło!";
+                            }
+                        break;
+                        case "teacher":
+                            $result = mysqli_query($conn, "
+                            SELECT `users_teachers`.*, `teachers`.`classes_id`, `teachers`.`Name`
+                            FROM `users_teachers` 
+                            	LEFT JOIN `teachers` ON `users_teachers`.`teachers_id` = `teachers`.`id`
+                            WHERE `users_teachers`.`email` = '".$email."' AND `users_teachers`.`password` = '".$password."';
+                            ");
+                            mysqli_close($conn);
 
-                            header("Location: student/panel.php");
-                        } else {
-                            die("Błędne hasło!");
-                        };
-                    } else {
-                        echo "Błędny login lub hasło!";
+                            if (mysqli_num_rows($result) > 0) {
+                                $row = mysqli_fetch_assoc($result);
+                                if($row['password'] === $password) {
+                                    session_regenerate_id();
+                                    $_SESSION['loggedin'] = true;
+                                    $_SESSION['who'] = "teacher";
+                                    $_SESSION['email'] = $row['email'];
+        
+                                    $_SESSION['id'] = $row['teachers_id'];
+                                    $_SESSION['class'] = $row['classes_id'];
+                                    $_SESSION['Name'] = $row['Name'];
+        
+                                    $_SESSION['theme'] = $row['theme'];
+                                    $_SESSION['contrast'] = $row['contrast'];
+                                    $_SESSION['font'] = $row['font'];
+                                    $_SESSION['color'] = $row['color'];
+        
+                                    $conn = mysqli_connect(DB['host'], DB['user'], DB['password'], DB['database']);
+                                    mysqli_query($conn, "
+                                    UPDATE `users_teachers` SET `last_login` = '".date("Y-m-d")."', `ip` = '".$_SERVER['REMOTE_ADDR']."' WHERE `users_teachers`.`teachers_id` = ".$_SESSION['id']."; 
+                                    ");
+                                    mysqli_close($conn);
+        
+                                    setcookie('theme', $_SESSION['theme'], time() + (86400 * 30), "/");
+                                    setcookie('contrast', $_SESSION['contrast'], time() + (86400 * 30), "/");
+                                    setcookie('font', $_SESSION['font'], time() + (86400 * 30), "/");
+                                    setcookie('color', $_SESSION['color'], time() + (86400 * 30), "/");
+        
+                                    header("Location: teacher/panel.php");
+                                } else {
+                                    die("Błędne hasło!");
+                                };
+                            } else {
+                                echo "Błędny login lub hasło!";
+                            }
+                        break;
+                        default: break;
                     }
                 }
             ?>

@@ -51,28 +51,27 @@ function Logout()
         </div>
     </noscript>
 </head>
-
-<body ondragstart="return false" ondrag="return false">
-    <script>
-        accessibilityContrast(<?php echo $_SESSION['contrast']; ?>);
-        setColor(<?php echo $_SESSION['color']; ?>);
-        setTheme(<?php echo $_SESSION['theme']; ?>);
-        accessibilityFont(<?php echo $_SESSION['font']; ?>);
-    </script>
-    <nav class="sidenav">
-        <div class="profile">
-            <img alt="Twoje zdjęcie profilowe" src="./profile/<?php echo $_SESSION['id']; ?>.jpeg" class="avatar"></img>
-            <p><?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name'] ?></p>
-            <p><?php echo $_SESSION['class'] ?></p>
-        </div>
-        <a href="panel.php">Panel</a>
-        <a href="grades.php">Oceny</a>
-        <a href="attendance.php">Frekwencja</a>
-        <a class="active" href="timetable.php">Plan lekcji</a>
-        <a href="exams.php">Sprawdziany</a>
-        <a href="meetings.php">Wydarzenia</a>
-        <a href="topics.php">Tematy</a>
-        <a href="comments.php">Uwagi</a>
+<body>
+<script>
+    accessibilityContrast(<?php echo $_SESSION['contrast']; ?>);
+    setColor(<?php echo $_SESSION['color']; ?>);
+    setTheme(<?php echo $_SESSION['theme']; ?>);
+    accessibilityFont(<?php echo $_SESSION['font']; ?>);
+</script>
+<nav class="sidenav">
+    <div class="profile">
+        <img alt="Twoje zdjęcie profilowe" src="./profile/<?php echo $_SESSION['id']; ?>.jpeg" class="avatar"></img>
+        <p><?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name'] ?></p>
+        <p><?php echo $_SESSION['class'] ?></p>
+    </div>
+    <a href="panel.php">Panel</a>
+    <a href="grades.php">Oceny</a>
+    <a href="attendance.php">Frekwencja</a>
+    <a class="active" href="timetable.php">Plan lekcji</a>
+    <a href="exams.php">Sprawdziany</a>
+    <a href="meetings.php">Wydarzenia</a>
+    <a href="topics.php">Tematy</a>
+    <a href="comments.php">Uwagi</a>
 
         <a class="bottom" href="settings.php">Ustawienia</a>
     </nav>
