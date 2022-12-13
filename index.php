@@ -1,6 +1,9 @@
 <?php
     session_start();
 
+    if(isset($_SESSION['attendance_i'])) $_SESSION['attendance_i'] = 0;
+    if (isset($_SESSION['timetable_i'])) $_SESSION['timetable_i'] = 0;
+
     if (isset($_SESSION['loggedin'])) {
         header('Location: panel.php');
         exit;
