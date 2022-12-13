@@ -77,7 +77,7 @@
 </script>
     <header>
         <img class="logo_img" src="">
-        <h1>ZALOGU SIĘ DO ...</h1>
+        <h1>ZALOGU SIĘ DO DZIENIKA</h1>
     </header>
     <div class="login_panel">
         <form class="login_form" method="post" action="">
@@ -86,6 +86,9 @@
             <label class="login_label" for="password">Hasło</label><br />
             <input class="login_input" type="password" name="password" minlength="3" maxlength="64" required><br /><br />
             
+            <input class="radio" type="radio" name="type" value="student">
+            <input class="radio" type="radio" name="type" value="teacher">
+
             <button class="login_button" type="submit">Zaloguj</button>
         </form>
         <p>
@@ -140,7 +143,7 @@
                             setcookie('font', $_SESSION['font'], time() + (86400 * 30), "/");
                             setcookie('color', $_SESSION['color'], time() + (86400 * 30), "/");
 
-                            header("Location: panel.php");
+                            header("Location: student/panel.php");
                         } else {
                             die("Błędne hasło!");
                         };

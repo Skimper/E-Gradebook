@@ -175,7 +175,7 @@
                 <img class="avatar" alt="Twoje zdjęcie profilowe" src="./profile/<?php echo isset($_SESSION['id']) ? $_SESSION['id'] : "default"; ?>.jpeg" />
                 
                 <form method="POST" enctype="multipart/form-data" style="display: none; position:absolute;">
-                    <input id="new_avatar" name="avatar" type="file" accept="image/*" onchange="this.form.submit();">
+                    <input id="new_avatar" name="avatar" type="file" accept="image/jpeg" onchange="this.form.submit();">
                 </form>
 
                 <div id="profile">
