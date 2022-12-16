@@ -10,7 +10,7 @@ function accessibilityContrast(contrast) {
                 root.style.setProperty('--color12', 'yellow');
                 root.style.setProperty('--color13', 'yellow');
             break;
-        case false:
+        case 0:
             return;
     }
 }
@@ -22,14 +22,13 @@ function accessibilityFont(font) {
             document.body.style.setProperty("font-size", "110%", "important");
             let navlist = document.querySelectorAll('nav a');
                 navlist.forEach(el => el.style.fontSize = "110%");
-                console.log('???');
             break;
         case 2:
             document.body.style.setProperty("font-size", "120%", "important");
             let navlist2 = document.querySelectorAll('nav a');
                 navlist2.forEach(el => el.style.fontSize = "120%");
             break;
-        case false:
+        case 0:
             return;
     }
 }

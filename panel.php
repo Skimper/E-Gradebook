@@ -53,16 +53,19 @@
 </head>
 <body>
 <script>
-    accessibilityContrast(<?php echo $_SESSION['contrast']; ?>);
     setColor(<?php echo $_SESSION['color']; ?>);
     setTheme(<?php echo $_SESSION['theme']; ?>);
     accessibilityFont(<?php echo $_SESSION['font']; ?>);
+    accessibilityContrast(<?php echo $_SESSION['contrast']; ?>);
 </script>
 <nav class="sidenav">
     <div class="profile">
-        <img alt="Twoje zdjęcie profilowe" src="./profile/<?php echo $_SESSION['id']; ?>.jpeg" class="avatar"></img>
+        <img alt="Twoje zdjęcie profilowe" src="./profile/<?php if(is_readable('./profile/'.$_SESSION['id'] . '.jpeg')) {echo $_SESSION['id'];} else {echo "default";} ?>.jpeg" class="avatar"></img>
         <p><?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name']; ?></p>
         <p><?php echo $_SESSION['class']; ?></p>
+        <div class="logout_holder" onclick="window.location.href='panel.php?action=logout'">
+            <img class="logout" alt="Wyloguj się" src="./img/icons/<?php echo ($_SESSION['color'] == '2') ? '0' : $_SESSION['color'];?>/shutdown_switch_icon.png">
+        </div>
     </div>
     <a class="active" href="panel.php">Panel</a>
     <a href="grades.php">Oceny</a>

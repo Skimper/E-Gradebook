@@ -54,9 +54,9 @@
         mysqli_close($conn);
         $_SESSION['contrast'] = $contrast;
         setcookie('contrast', $_SESSION['contrast'], time() + (86400 * 30), "/");
-        $_SESSION['theme'] = 1; // Motyw wraca do standardowego, bo po co komu te kolory jak używa wysokiego kontrastu
+        $_SESSION['theme'] = 1; //! Motyw wraca do standardowego, bo po co komu te kolory jak używa wysokiego kontrastu
         setcookie('theme', $_SESSION['theme'], time() + (86400 * 30), "/");
-        $_SESSION['color'] = 0; // Rip dla tego kto będzie testował jak to działa ;)
+        $_SESSION['color'] = 0; //! Rip dla tego kto będzie testował jak to działa ;)
         setcookie('color', $_SESSION['color'], time() + (86400 * 30), "/");
     }
 
@@ -116,14 +116,14 @@
 </head>
 <body>
 <script>
-    accessibilityContrast(<?php echo $_SESSION['contrast']; ?>);
     setColor(<?php echo $_SESSION['color']; ?>);
     setTheme(<?php echo $_SESSION['theme']; ?>);
     accessibilityFont(<?php echo $_SESSION['font']; ?>);
+    accessibilityContrast(<?php echo $_SESSION['contrast']; ?>);
 </script>
 <nav class="sidenav">
     <div class="profile">
-        <img alt="Twoje zdjęcie profilowe" src="./profile/<?php echo $_SESSION['id']; ?>.jpeg" class="avatar"></img>
+        <img alt="Twoje zdjęcie profilowe" src="./profile/<?php if(is_readable('./profile/'.$_SESSION['id'] . '.jpeg')) {echo $_SESSION['id'];} else {echo "default";} ?>.jpeg" class="avatar"></img>
         <p><?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name'] ?></p>
         <p><?php echo $_SESSION['class'] ?></p>
     </div>
@@ -163,6 +163,7 @@
             </div>
             <div class="settings_setup">
                 <a href="?action=color&color=0"><div class="theme_box theme_white"></div></a>
+                <a href="?action=color&color=2"><div class="theme_box theme_medium"></div></a>
                 <a href="?action=color&color=1"><div class="theme_box theme_dark"></div></a>
             </div>
         </div>

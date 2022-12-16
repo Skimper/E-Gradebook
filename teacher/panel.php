@@ -5,6 +5,7 @@
         header('Location: index.php');
         exit;
     }
+    
 
     require('../api/sql.php');
 ?>
@@ -50,10 +51,10 @@
 </head>
 <body>
 <script>
-    accessibilityContrast(<?php echo $_SESSION['contrast']; ?>);
     setColor(<?php echo $_SESSION['color']; ?>);
     setTheme(<?php echo $_SESSION['theme']; ?>);
     accessibilityFont(<?php echo $_SESSION['font']; ?>);
+    accessibilityContrast(<?php echo $_SESSION['contrast']; ?>);
 </script>
 <nav class="sidenav">
     <div class="profile">

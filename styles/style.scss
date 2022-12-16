@@ -38,6 +38,32 @@ a {
     }
 }
 
+.logout_holder {
+    width: 25px;
+    height: 25px;
+    top: 65px;
+    left: 100px;
+    position: absolute;
+    background-color: var(--color9);
+    border-style: solid;
+    border-radius: 50%;
+    border-width: 4px;
+    border-color: var(--color0);
+    cursor: pointer;
+
+    transition-duration: 0.2s;
+
+    &:hover {
+        background-color: var(--color10);
+    }
+}
+.logout {
+    width: 15px;
+    height: 15px;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
 .sidenav {
   height: 100%;
   width: 200px;
@@ -83,7 +109,6 @@ a {
         background-color: var(--color1);
     }
 }
-
 
 .profile {
     padding-bottom: 20px;
@@ -283,9 +308,9 @@ h3 {
 
 // attendance.php
 
-.attendance {
+.attendance{
     width: 80vw; height: 80vh;
-    margin-top: 50px;
+    margin-top: 20px;
     border-style: none;
     border-collapse: collapse;
 
@@ -299,6 +324,28 @@ h3 {
         border-style: none;
         border-collapse: collapse;
         background-color: var(--color3);
+    }
+}
+.attendance_holder, .timetabel_holder {
+    text-align: center;
+}
+
+.attendance_button, .timetabel_button {
+    appearance: none;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    width: 140px;
+    height: 40px;
+    background-color: var(--color8);
+    color: var(--color11);
+    border-radius: 5px;
+    border-style: none;
+    text-align: center;
+    cursor: pointer;
+    transition-duration: 0.3s;
+
+    &:hover {
+        background-color: var(--color7);
     }
 }
 
@@ -346,6 +393,7 @@ h3 {
 }
 
 .profiltype_button, .exam_button, .comments_button {
+    appearance: none;
     display: inline-block;
     margin-top: 2px;
     margin-bottom: 2px;
@@ -626,6 +674,11 @@ h3 {
     background: #111;
     background: -webkit-linear-gradient(to left, #111, #1b1b1b);
     background: linear-gradient(to left, #111, #1b1b1b);
+}
+.theme_medium {
+    background: #5a5a5a;
+    background: -webkit-linear-gradient(to left, #5a5a5a, #353535);
+    background: linear-gradient(to left, #5a5a5a, #353535);
 }
 
 // profile.php

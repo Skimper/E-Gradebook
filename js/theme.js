@@ -131,7 +131,14 @@ function setColor(color) {
     
     const colors = {
         1: {
-
+            1: '#d4d4d4',
+            2: '#eeeeee',
+            3: 'rgba(238, 238, 238, 0.7)',
+            4: 'rgba(238, 238, 238, 0.3)',
+            9: '#b3b3b3',
+            10: '#686868',
+            11: '#181818',
+            12: '#111111'
         },
         2: {
 
@@ -149,5 +156,15 @@ function setColor(color) {
             root.style.setProperty('--color12', '#111111');
             console.log("Loaded colors " + color);
         break;
+        case 2:
+            root.style.setProperty('--color0', '#353535');
+            root.style.setProperty('--color1', '#3c3c3c');
+            root.style.setProperty('--color2', 'rgba(60, 60, 60, 0.7)');
+            root.style.setProperty('--color3', 'rgba(60, 60, 60, 0.3)');
+            root.style.setProperty('--color9', '#434343');
+            root.style.setProperty('--color10', '#8B8B8B');
+            root.style.setProperty('--color11', '#f5f5f5');
+            root.style.setProperty('--color12', '#f5f5f5');
+            console.log("Loaded colors " + color);
     }  
 }

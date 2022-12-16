@@ -61,6 +61,7 @@
             echo "Sorry, your file was not uploaded.";
         }
     }
+
     function ChangePassword($pass, $passc) {
         $newpass = hash('sha256', $pass);
         $newpassc = hash('sha256', $passc);
@@ -74,6 +75,8 @@
             $result = mysqli_query($conn, "
             UPDATE `users_students` SET `password` = '".$newpassc."', `last_pass` = '".date("Y-m-d")."' WHERE `users_students`.`students_id` = ".$_SESSION['id'].";
             ");
+        } else {
+            trigger_error("Hasła nie są takie same!", E_USER_NOTICE);
         }
     }
 
@@ -112,14 +115,14 @@
 </head>
 <body> 
 <script>
-    accessibilityContrast(<?php echo $_SESSION['contrast']; ?>);
     setColor(<?php echo $_SESSION['color']; ?>);
     setTheme(<?php echo $_SESSION['theme']; ?>);
     accessibilityFont(<?php echo $_SESSION['font']; ?>);
+    accessibilityContrast(<?php echo $_SESSION['contrast']; ?>);
 </script>
 <nav class="sidenav">
     <div class="profile">
-        <img alt="Twoje zdjęcie profilowe" src="./profile/<?php echo $_SESSION['id']; ?>.jpeg" class="avatar"></img>
+        <img alt="Twoje zdjęcie profilowe" src="./profile/<?php if(is_readable('./profile/'.$_SESSION['id'] . '.jpeg')) {echo $_SESSION['id'];} else {echo "default";} ?>.jpeg" class="avatar"></img>
         <p><?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name']; ?></p>
         <p><?php echo $_SESSION['class']; ?></p>
     </div>
@@ -172,10 +175,9 @@
             <div>
                 <h3>Profil ucznia</h3>
                 <div class="avatar_hover" onclick="document.getElementById('new_avatar').click()">
-                    <img class="avatar_icon" alt="Zmień swoje zdjęcie profilowe" src="./img/icons/<?php echo $_SESSION['color'];?>/edit_settings_regular_icon.png"></img>
+                    <img class="avatar_icon" alt="Zmień swoje zdjęcie profilowe" src="./img/icons/<?php echo ($_SESSION['color'] == '2') ? '0' : $_SESSION['color'];?>/edit_settings_regular_icon.png"></img>
                 </div>
-                
-                <img class="avatar" alt="Twoje zdjęcie profilowe" src="./profile/<?php echo isset($_SESSION['id']) ? $_SESSION['id'] : "default"; ?>.jpeg" />
+                <img class="avatar" alt="Twoje zdjęcie profilowe" src="./profile/<?php if(is_readable('./profile/'.$_SESSION['id'] . '.jpeg')) {echo $_SESSION['id'];} else {echo "default";} ?>.jpeg" />
                 
                 <form method="POST" enctype="multipart/form-data" style="display: none; position:absolute;">
                     <input id="new_avatar" name="avatar" type="file" accept="image/jpeg" onchange="this.form.submit();">

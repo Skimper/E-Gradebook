@@ -126,8 +126,7 @@
                                 $row = mysqli_fetch_assoc($result);
                                 if($row['password'] === $password) {
                                     session_regenerate_id();
-                                    $_SESSION['loggedin'] = true;
-                                    $_SESSION['who'] = "student";
+                                    $_SESSION['loggedin'] = "student";
                                     $_SESSION['email'] = $row['email'];
         
                                     $_SESSION['id'] = $row['id'];
@@ -172,8 +171,7 @@
                                 $row = mysqli_fetch_assoc($result);
                                 if($row['password'] === $password) {
                                     session_regenerate_id();
-                                    $_SESSION['loggedin'] = true;
-                                    $_SESSION['who'] = "teacher";
+                                    $_SESSION['loggedin'] = "teacher";
                                     $_SESSION['email'] = $row['email'];
         
                                     $_SESSION['id'] = $row['teachers_id'];

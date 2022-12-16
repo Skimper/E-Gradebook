@@ -61,7 +61,7 @@ function Logout()
     </script>
     <nav class="sidenav">
         <div class="profile">
-            <img alt="Twoje zdjęcie profilowe" src="./profile/<?php echo $_SESSION['id']; ?>.jpeg" class="avatar"></img>
+            <img alt="Twoje zdjęcie profilowe" src="./profile/<?php if(is_readable('./profile/'.$_SESSION['id'] . '.jpeg')) {echo $_SESSION['id'];} else {echo "default";} ?>.jpeg" class="avatar"></img>
             <p><?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name'] ?></p>
             <p><?php echo $_SESSION['class'] ?></p>
         </div>
@@ -81,9 +81,9 @@ function Logout()
             <h1 class="grades">Frekwencja</h1>
         </header>
         <div>
-            <form method="POST">
-                <input type="submit" value="<--tydzień" name="back" />
-                <input type="submit" value="tydzień-->" name="forward" />
+            <form class="attendance_holder" method="POST">
+                <input class="attendance_button" type="submit" value="<-- Tydzień" name="back" />
+                <input class="attendance_button" type="submit" value="Tydzień -->" name="forward" />
             </form>
         </div>
         <table class="attendance" border="5" cellspacing="0" align="center">
@@ -102,7 +102,6 @@ function Logout()
             if (!$conn) {
                 die("Connection failed: " . mysqli_connect_error());
             }
-
 
             $day = date('w') - 3;
             $day1 = date('Y-m-d', strtotime('+' . ($_SESSION['attendance_i'] + $day) . ' days'));

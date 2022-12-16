@@ -79,14 +79,14 @@
 </head>
 <body>
 <script>
-    accessibilityContrast(<?php echo $_SESSION['contrast']; ?>);
     setColor(<?php echo $_SESSION['color']; ?>);
     setTheme(<?php echo $_SESSION['theme']; ?>);
     accessibilityFont(<?php echo $_SESSION['font']; ?>);
+    accessibilityContrast(<?php echo $_SESSION['contrast']; ?>);
 </script>
 <nav class="sidenav">
     <div class="profile">
-        <img alt="Twoje zdjęcie profilowe" src="./profile/<?php echo $_SESSION['id']; ?>.jpeg" class="avatar"></img>
+        <img alt="Twoje zdjęcie profilowe" src="./profile/<?php if(is_readable('./profile/'.$_SESSION['id'] . '.jpeg')) {echo $_SESSION['id'];} else {echo "default";} ?>.jpeg" class="avatar"></img>
         <p><?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name']; ?></p>
         <p><?php echo $_SESSION['class']; ?></p>
     </div>
@@ -160,7 +160,7 @@
 
         <p>Mamy nadzieję, że to wyjaśniło Ci sprawy i, jak wspomniano wcześniej, jeśli jest coś, czego nie jesteś pewien, czy potrzebujesz, czy nie, zwykle bezpieczniej jest pozostawić włączone pliki cookie na wypadek, gdyby wchodziły w interakcję z jedną z funkcji, z których korzystasz na naszej stronie.</p>
 
-        <p>Aby uzyskać więcej ogólnych informacji na temat plików cookie, <a href="https://www.cookiepolicygenerator.com/sample-cookies-policy/" _istranslated="1">przeczytaj artykuł Polityka plików cookie</a>.</p>
+        <p>Aby uzyskać więcej ogólnych informacji na temat plików cookie, <a href="https://www.cookiepolicygenerator.com/sample-cookies-policy/">przeczytaj artykuł Polityka plików cookie</a>.</p>
 
         <p>Jeśli jednak nadal szukasz więcej informacji, możesz skontaktować się z nami za pomocą jednej z naszych preferowanych metod kontaktu:</p>
 
