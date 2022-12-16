@@ -19,15 +19,9 @@
 <?php
     if (isset($_GET['action']) && $_GET['action'] == "logout")
         Logout();
-    if (isset($_GET['action']) && $_GET['action'] == "avatar")  
-        ChangeAvatar();
-
     if (isset($_POST['password']) && $_POST['passwordc'])  
         ChangePassword($_POST['password'], $_POST['passwordc']);
 
-    function ChangeAvatar() {
-        
-    }
 
     function ChangePassword($pass, $passc) {
         $newpass = hash('sha256', $pass);

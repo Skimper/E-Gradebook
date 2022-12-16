@@ -1,32 +1,42 @@
 <?php
-session_start();
+    session_start();
 
-if (isset($_SESSION['attendance_i'])) $_SESSION['attendance_i'] = 0;
-if (!isset($_SESSION['timetable_i'])) $_SESSION['timetable_i'] = 0;
+    if (!isset($_SESSION['loggedin'])) {
+        header('Location: index.php');
+        exit;
+    } else {
+        switch ($_SESSION['loggedin']) {
+            case "student":
+                break;
+            case "teacher":
+                header('Location: teacher/panel.php');
+                break;
+            default:
+                break;
+        }
+    }
 
-if (!isset($_SESSION['loggedin'])) {
-    header('Location: index.php');
-    exit;
-}
+    if(!isset($_SESSION['attendance_i'])) $_SESSION['attendance_i'] = 0;
+    if (isset($_SESSION['timetable_i'])) $_SESSION['timetable_i'] = 0;
 
-require('./api/sql.php');
+    require('./api/sql.php');
 ?>
 <?php
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
+    ini_set('display_errors', '1');
+    ini_set('display_startup_errors', '1');
+    error_reporting(E_ALL);
 ?>
 <?php
-if (isset($_GET['action']) && $_GET['action'] == "logout")
-    Logout();
-
-function Logout()
-{
-    $_SESSION = array();
-
-    session_destroy();
-    header("Location: http://localhost/infprojectpage/index.php");
-}
+    if (isset($_GET['action']) && $_GET['action'] == "logout")
+        Logout();
+    
+    function Logout()
+    {
+        $_SESSION = array();
+    
+        session_destroy();
+        header("Location: http://localhost/infprojectpage/index.php");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="pl">
