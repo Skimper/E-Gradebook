@@ -54,6 +54,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,  user-scalable=no">
     <title>Polityka prywatności</title>
 
+    
+    <link rel="canonical" href="https://iiproject.ddns.net" />
+
+    <meta name="language" content="pl" />
+    <meta name="title" content="Dziennik elektroniczny" />
+    <meta name="description" content="Dziennik elektroniczny dla szkół ponadpodstawowych." />
+
+    <meta name="author" content="Kacper Kostera, skimpertm@o2.pl, Skimper" />
+    <meta name="copyright" content="Copyright &copy; 2022 by Kacper Kostera" />
+    <meta name="keywords" content="dziennik, elektroniczny, szkoła" />
+    <meta name="subject" content="Dziennik elektroniczny" />
+    <meta name="revisit-after" content="1 days" />
+
+    <link rel="icon" href="./img/browser/icon180.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="img/browser/icon180.ico" type="image/x-icon" />
+
+    <meta property="og:url" content="https://iiproject.ddns.net" />
+    <meta property="og:title" content="E-Dziennik" />
+    <meta name="og:site_name" content="Dziennik elektroniczny" />
+    <meta name="og:type" content="website" />
+    <meta name="og:description" content="Zaloguj się do panelu" />
+    <meta name="og:image" content="img/browser/icon180.ico" />
+    <meta property="og:image:height" content="250" />
+    <meta property="og:image:width" content="250" />
+    <meta property="og:image:alt" content="E-Dziennik" />
+    <meta name="og:email" content="skimpertm@o2.pl" />
+    <meta name="theme-color" content="#464646" />
+
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="googlebot" content="noindex,nofollow" />
+    <meta name="fragment" content="!">
+    <meta name="google" content="nositelinkssearchbox" />
+
+    <meta name="pinterest" content="nopin" />
+
     <link rel="stylesheet" href="./styles/normalize.css" type="text/css">
     <link rel="stylesheet" href="./styles/webkit.css" type="text/css">
     <link rel="stylesheet" href="./styles/style.css" type="text/css">

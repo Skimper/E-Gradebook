@@ -67,13 +67,9 @@
         </div>
     </div>
     <a class="active" href="panel.php">Panel</a>
-    <a href="grades.php">Oceny</a>
-    <a href="attendance.php">Frekwencja</a>
+    <a href="">Aktualna lekcja</a>
     <a href="timetable.php">Plan lekcji</a>
-    <a href="exams.php">Sprawdziany</a>
-    <a href="meetings.php">Wydarzenia</a>
-    <a href="topics.php">Tematy</a>
-    <a href="comments.php">Uwagi</a>
+
 
     <a class="bottom" href="settings.php">Ustawienia</a>
 </nav>
@@ -161,7 +157,7 @@
                 ORDER BY `timetable`.`lesson`;
                 ");
                 while ($row = mysqli_fetch_array($result)) {
-                    echo "<p><b>" . $row['lesson'] . "</b>. " . $row['name'] . "</p>";
+                    echo "<p><b>" . $row['lesson'] . ".</b> " . $row['classes_id'] . " - " . $row['classroom'] . " (" . $row['name'] . ")</p>";
                 }
                 mysqli_free_result($result);
             ?>
