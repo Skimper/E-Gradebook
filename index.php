@@ -86,8 +86,8 @@
     accessibilityFont(<?php if(isset($_COOKIE['font'])) echo $_COOKIE['font']; ?>);
 </script>
     <header>
-        <img class="logo_img" src="">
-        <h1>ZALOGU SIĘ DO DZIENIKA</h1>
+        <img class="logo_img" src="./img/logo/icon512.webp">
+        <h1>ZALOGU SIĘ</h1>
     </header>
     <div class="login_panel">
         <form class="login_form" method="post" action="">
@@ -167,7 +167,7 @@
                         break;
                         case "teacher":
                             $result = mysqli_query($conn, "
-                            SELECT `users_teachers`.*, `teachers`.`classes_id`, `teachers`.`Name`
+                            SELECT `users_teachers`.*, `teachers`.`classes_id`, `teachers`.`first_name`, `teachers`.`last_name`
                             FROM `users_teachers` 
                             	LEFT JOIN `teachers` ON `users_teachers`.`teachers_id` = `teachers`.`id`
                             WHERE `users_teachers`.`email` = '".$email."' AND `users_teachers`.`password` = '".$password."';
@@ -183,7 +183,8 @@
         
                                     $_SESSION['id'] = $row['teachers_id'];
                                     $_SESSION['class'] = $row['classes_id'];
-                                    $_SESSION['Name'] = $row['Name'];
+                                    $_SESSION['first_name'] = $row['first_name'];
+                                    $_SESSION['last_name'] = $row['last_name'];
         
                                     $_SESSION['theme'] = $row['theme'];
                                     $_SESSION['contrast'] = $row['contrast'];

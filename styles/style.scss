@@ -155,15 +155,18 @@ form.login_form {
     appearance: none;
     cursor: pointer;
     border-radius: 2px;
-    padding: 9px 16px;
+    padding: 7px 16px;
     background: var(--color8);
     color: var(--color1);
     border-radius: 5px;
+    border-style: solid;
+    border-color: transparent;
 
     transition: all 0.1s;
 }
 .buttons input:checked {
     background: var(--color7);
+    border-color: var(--color10);
 }
 .buttons input::before {
     content: attr(label);

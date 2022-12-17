@@ -16,8 +16,8 @@
         }
     }
 
-    if(!isset($_SESSION['attendance_i'])) $_SESSION['attendance_i'] = 0;
-    if (isset($_SESSION['timetable_i'])) $_SESSION['timetable_i'] = 0;
+    if(isset($_SESSION['attendance_i'])) $_SESSION['attendance_i'] = 0;
+    if(!isset($_SESSION['timetable_i'])) $_SESSION['timetable_i'] = 0;
 
     require('./api/sql.php');
 ?>
@@ -29,11 +29,10 @@
 <?php
     if (isset($_GET['action']) && $_GET['action'] == "logout")
         Logout();
-    
-    function Logout()
-    {
+
+    function Logout() {
         $_SESSION = array();
-    
+
         session_destroy();
         header("Location: http://localhost/infprojectpage/index.php");
     }

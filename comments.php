@@ -97,14 +97,14 @@
         );
 
         $result = mysqli_query($conn, "
-        SELECT `comments`.*, `comments`.type, `teachers`.`Name`
+        SELECT `comments`.*, `comments`.type, `teachers`.`first_name`
         FROM `comments` 
         	LEFT JOIN `teachers` ON `comments`.`teachers_id` = `teachers`.`id`
         WHERE `comments`.`students_id` = '".$_SESSION['id']."';
         ");
 
         while ($row = mysqli_fetch_array($result)) {
-            array_push($comments[$row['type']], array($row['topic'], $row['description'], $row['Name'], $row['date']));
+            array_push($comments[$row['type']], array($row['topic'], $row['description'], $row['first_name'], $row['date']));
         }
     ?>
     <table class="comments" id="comments" border="5" cellspacing="0" align="center" style="display: table;">
