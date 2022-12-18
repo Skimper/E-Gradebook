@@ -269,6 +269,9 @@ h3 {
         background-color: var(--color7);
     }
 }
+.teacher {
+    top: 140px;
+}
 
 // GRADES.PHP
 
@@ -291,6 +294,10 @@ h3 {
         text-align: left;
         background-color: var(--color3);
     }
+}
+
+.grade {
+    cursor: help;
 }
 
 .table_top th, .table_top td {
@@ -831,4 +838,27 @@ h3 {
     padding-left: 20px;
     padding-right: 20px;
     padding-bottom: 20px;
+}
+
+// TACHER 
+
+.class_holder {
+    padding: 15px;
+}
+.class {
+    display: inline-block;
+    text-align: center;
+    padding-top: 12px;
+    width: 70px;
+    height: 30px;
+    margin: 5px;
+    background-color: var(--color8);
+    border-radius: 5px;
+    cursor: pointer;
+
+    transition-duration: 0.2s;
+
+    &:hover {
+        background-color: var(--color7);
+    }
 }

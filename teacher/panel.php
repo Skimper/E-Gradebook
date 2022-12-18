@@ -35,6 +35,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,  user-scalable=no">
     <title>Panel</title>
 
+    <link rel="canonical" href="https://iiproject.ddns.net" />
+
+    <meta name="language" content="pl" />
+    <meta name="title" content="Dziennik elektroniczny" />
+    <meta name="description" content="Dziennik elektroniczny dla szkół ponadpodstawowych." />
+
+    <meta name="author" content="Kacper Kostera, skimpertm@o2.pl, Skimper" />
+    <meta name="copyright" content="Copyright &copy; 2022 by Kacper Kostera" />
+    <meta name="keywords" content="dziennik, elektroniczny, szkoła" />
+    <meta name="subject" content="Dziennik elektroniczny" />
+    <meta name="revisit-after" content="1 days" />
+
+    <link rel="icon" href="./img/browser/icon180.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="img/browser/icon180.ico" type="image/x-icon" />
+
+    <meta property="og:url" content="https://iiproject.ddns.net" />
+    <meta property="og:title" content="E-Dziennik" />
+    <meta name="og:site_name" content="Dziennik elektroniczny" />
+    <meta name="og:type" content="website" />
+    <meta name="og:description" content="Zaloguj się do panelu" />
+    <meta name="og:image" content="img/browser/icon180.ico" />
+    <meta property="og:image:height" content="250" />
+    <meta property="og:image:width" content="250" />
+    <meta property="og:image:alt" content="E-Dziennik" />
+    <meta name="og:email" content="skimpertm@o2.pl" />
+    <meta name="theme-color" content="#464646" />
+
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="googlebot" content="noindex,nofollow" />
+    <meta name="fragment" content="!">
+    <meta name="google" content="nositelinkssearchbox" />
+
+    <meta name="pinterest" content="nopin" />
+
     <link rel="stylesheet" href="../styles/normalize.css" type="text/css">
     <link rel="stylesheet" href="../styles/webkit.css" type="text/css">
     <link rel="stylesheet" href="../styles/style.css" type="text/css">
@@ -70,7 +104,6 @@
     <a href="">Aktualna lekcja</a>
     <a href="timetable.php">Plan lekcji</a>
 
-
     <a class="bottom" href="settings.php">Ustawienia</a>
 </nav>
 <section>
@@ -82,8 +115,9 @@
             <h3>Dane nauczyciela</h3>
             <p><b>Imię i nazwisko:</b> <?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name']; ?></p>
             <p><b>Email:</b> <?php echo $_SESSION['email']; ?></p>
+            <p><b>Przedmiot:</b> <?php echo $_SESSION['subject']; ?></p>
             <p><b>Wychowawca:</b> <?php echo $_SESSION['class']; ?></p>
-            <a href="profile.php"><p class="profile_button">Profil ucznia</p></a>
+            <a href="profile.php"><p class="profile_button teacher">Profil nauczyciela</p></a>
         </div>
         <div class="p2">
             <?php // Podgląd najbliższego planu lekcji (Penie i tak trzeba będzie to zmienić)
@@ -95,56 +129,56 @@
                 }
                 switch (getdate()['wday']){
                     case 0:
-                        $day = "mon";
+                        $day = date("Y-m-d");
                         echo "<h3>Najbliższe lekcje</h3>";
                         break;
                     case 1:
                         if (getdate()['hours'] < 16){
-                            $day = 'mon';
+                            $day = date("Y-m-d");
                             echo "<h3>Dzisiejsze lekcje</h3>";
                         } else {
                             echo "<h3>Jutrzejsze lekcje</h3>";
-                            $day = 'tue';
+                            $day = date("Y-m-d");
                         }
                         break; 
                     case 2:
                         if (getdate()['hours'] < 16){
-                            $day = 'wue';
+                            $day = date("Y-m-d");
                             echo "<h3>Dzisiejsze lekcje</h3>";
                         } else {
                             echo "<h3>Jutrzejsze lekcje</h3>";
-                            $day = 'wed';
+                            $day = date("Y-m-d");
                         }
                         break; 
                     case 3:
                         if (getdate()['hours'] < 16){
-                            $day = 'wed';
+                            $day = date("Y-m-d");
                             echo "<h3>Dzisiejsze lekcje</h3>";
                         } else {
                             echo "<h3>Jutrzejsze lekcje</h3>";
-                            $day = 'thu';
+                            $day = date("Y-m-d");
                         }
                         break;
                     case 4:
                         if (getdate()['hours'] < 16){
-                            $day = 'thu';
+                            $day = date("Y-m-d");
                             echo "<h3>Dzisiejsze lekcje</h3>";
                         } else {
                             echo "<h3>Jutrzejsze lekcje</h3>";
-                            $day = 'fri';
+                            $day = date("Y-m-d");
                         }
                         break;
                     case 5:
                         if (getdate()['hours'] < 16){
-                            $day = 'fri';
+                            $day = date("Y-m-d");
                             echo "<h3>Dzisiejsze lekcje</h3>";
                         } else {
                             echo "<h3>Najbliższe lekcje</h3>";
-                            $day = 'mon';
+                            $day = date("Y-m-d");
                         }
                         break;
                     case 6:
-                        $day = 'mon';
+                        $day = date("Y-m-d");
                         echo "<h3>Najbliższe lekcje</h3>";
                         break;
                 }
@@ -161,6 +195,51 @@
                 }
                 mysqli_free_result($result);
             ?>
+        </div>
+        <div class="p3">
+            <h3>Najbliższe sprawdziany</h3>
+            <?php
+                $result = mysqli_query($conn, "
+                SELECT `exams`.*
+                FROM `exams`
+                    WHERE `exams`.`teacher_id` = '".$_SESSION['id']."' AND `exams`.`date` >= '".date('Y-m-d')."'
+                LIMIT 7;
+                ");
+                while ($row = mysqli_fetch_array($result)) {
+                    echo "<p><b>" . $row['classes_id'] . ".</b> " . $row['topic'] . " - " . $row['date'];
+                }
+                mysqli_free_result($result);
+            ?>
+        </div>
+        <div class="p3">
+            <h3>Najbliższe prace domowe</h3>
+            <?php
+                $result = mysqli_query($conn, "
+                SELECT `homework`.*
+                FROM `homework`
+                    WHERE `homework`.`teacher_id` = '".$_SESSION['id']."' AND `homework`.`date` >= '".date('Y-m-d')."' 
+                LIMIT 7;
+                ");
+                while ($row = mysqli_fetch_array($result)) {
+                    echo "<p><b>" . $row['classes_id'] . ".</b> " . $row['topic'] . " - " . $row['date'];
+                }
+                mysqli_free_result($result);
+            ?>
+        </div>
+        <div class="p4">
+            <h3>Klasy</h3>
+            <div class="class_holder">
+            <?php
+                $result = mysqli_query($conn, "
+                SELECT `classes`.*
+                FROM `classes`;
+                ");
+                while ($row = mysqli_fetch_array($result)) {
+                    echo "<div class='class'>".$row['id']."</div>";
+                }
+                mysqli_free_result($result);
+            ?>
+            </div>
         </div>
     </div>
 </section>

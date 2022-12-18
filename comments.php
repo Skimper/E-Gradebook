@@ -131,14 +131,14 @@
         );
 
         $result = mysqli_query($conn, "
-        SELECT `comments`.*, `comments`.type, `teachers`.`first_name`
+        SELECT `comments`.*, `comments`.type, `teachers`.`first_name`, `teachers`.`last_name`
         FROM `comments` 
         	LEFT JOIN `teachers` ON `comments`.`teachers_id` = `teachers`.`id`
         WHERE `comments`.`students_id` = '".$_SESSION['id']."';
         ");
 
         while ($row = mysqli_fetch_array($result)) {
-            array_push($comments[$row['type']], array($row['topic'], $row['description'], $row['first_name'], $row['date']));
+            array_push($comments[$row['type']], array($row['topic'], $row['description'], $row['first_name'], $row['last_name'], $row['date']));
         }
     ?>
     <table class="comments" id="comments" border="5" cellspacing="0" align="center" style="display: table;">
@@ -150,8 +150,8 @@
         <?php
             for ($i=0; $i < count($comments['comment']); $i++) { 
                 echo "<tr>";
-                    echo "<td align='center' height='50'>".$comments['comment'][$i][2]."</td>";
-                    echo "<td align='center' height='50'>".$comments['comment'][$i][3]."</td>";
+                    echo "<td align='center' height='50'>".$comments['comment'][$i][2] . " " . $comments['comment'][$i][3]."</td>";
+                    echo "<td align='center' height='50'>".$comments['comment'][$i][4]."</td>";
                     echo "<td align='center' height='50'>".$comments['comment'][$i][0]."<br />". $comments['comment'][$i][1] ."</td>";
                 echo "</tr>";
             }
@@ -166,8 +166,8 @@
         <?php
             for ($i=0; $i < count($comments['praise']); $i++) { 
                 echo "<tr>";
-                    echo "<td align='center' height='50'>".$comments['praise'][$i][2]."</td>";
-                    echo "<td align='center' height='50'>".$comments['praise'][$i][3]."</td>";
+                    echo "<td align='center' height='50'>".$comments['praise'][$i][2] . " " . $comments['praise'][$i][3]."</td>";
+                    echo "<td align='center' height='50'>".$comments['praise'][$i][4]."</td>";
                     echo "<td align='center' height='50'>".$comments['praise'][$i][0]."<br />". $comments['praise'][$i][1] ."</td>";
                 echo "</tr>";
             }

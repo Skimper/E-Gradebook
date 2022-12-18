@@ -237,34 +237,34 @@
         
         while ($row = mysqli_fetch_array($result)) {
             $wday = date('w', strtotime($row['date']));
-            if ($row['date'] >= $day1 || $row['date'] <= $day7){
+            if ($row['date'] >= $day1 && $row['date'] <= $day7){
                 //$timetable[$day1][date('w', strtotime($row['date']))] = array($row['name'], $row['topic'], $row['description'], $row['date'], $row['from']);
                 array_push($timetable[$day1][$wday], array($row['name'], $row['topic'], $row['description'], $row['date'], $row['from']));
                 //array_push($timetable[$day1][0], array('cock', 'xx'));
                 //array_push($timetable[$day1][date('w', strtotime($row['date']))], array($row['name'], $row['topic'], $row['description'], $row['date'], $row['from']));
             } 
-            else if ($row['date'] >= $day8 || $row['date'] <= $day14)
+            else if ($row['date'] >= $day8 && $row['date'] <= $day14)
                 $timetable[$day8][date('w', strtotime($row['date']))] = array($row['name'], $row['topic'], $row['description'], $row['date'], $row['from']);
-            else if ($row['date'] >= $day8|| $row['date'] <= $day21)
-                $timetable[$day8][date('w', strtotime($row['date']))] = array($row['name'], $row['topic'], $row['description'], $row['date'], $row['from']);
-            else if ($row['date'] >= $day22 || $row['date'] <= $day27)
+            else if ($row['date'] >= $day14 && $row['date'] <= $day21)
+                $timetable[$day14][date('w', strtotime($row['date']))] = array($row['name'], $row['topic'], $row['description'], $row['date'], $row['from']);
+            else if ($row['date'] >= $day22 && $row['date'] <= $day27)
                 $timetable[$day22][date('w', strtotime($row['date']))] = array($row['name'], $row['topic'], $row['description'], $row['date'], $row['from']);
         }
         mysqli_free_result($result);
         
         while ($row = mysqli_fetch_array($result2)) {
             $wday = date('w', strtotime($row['date']));
-            if ($row['date'] >= $day1 || $row['date'] <= $day7){
+            if ($row['date'] >= $day1 && $row['date'] <= $day7){
                 //$homework[$day1][date('w', strtotime($row['date']))] = array($row['name'], $row['topic'], $row['description'], $row['date'], $row['from']);
                 array_push($homework[$day1][$wday], array($row['name'], $row['topic'], $row['description'], $row['date'], $row['from']));
                 //array_push($homework[$day1][0], array('cock', 'xx'));
                 //array_push($homework[$day1][date('w', strtotime($row['date']))], array($row['name'], $row['topic'], $row['description'], $row['date'], $row['from']));
             } 
-            else if ($row['date'] >= $day8 || $row['date'] <= $day14)
+            else if ($row['date'] >= $day8 && $row['date'] <= $day14)
                 $homework[$day8][date('w', strtotime($row['date']))] = array($row['name'], $row['topic'], $row['description'], $row['date'], $row['from']);
-            else if ($row['date'] >= $day8|| $row['date'] <= $day21)
-                $homework[$day8][date('w', strtotime($row['date']))] = array($row['name'], $row['topic'], $row['description'], $row['date'], $row['from']);
-            else if ($row['date'] >= $day22 || $row['date'] <= $day27)
+            else if ($row['date'] >= $day8 && $row['date'] <= $day21)
+                $homework[$day14][date('w', strtotime($row['date']))] = array($row['name'], $row['topic'], $row['description'], $row['date'], $row['from']);
+            else if ($row['date'] >= $day22 && $row['date'] <= $day27)
                 $homework[$day22][date('w', strtotime($row['date']))] = array($row['name'], $row['topic'], $row['description'], $row['date'], $row['from']);
         }
         mysqli_free_result($result2);

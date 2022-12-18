@@ -7,9 +7,9 @@
     } else {
         switch ($_SESSION['loggedin']) {
             case "student":
+                header('Location: ../panel.php');
                 break;
             case "teacher":
-                header('Location: teacher/panel.php');
                 break;
             default:
                 break;
@@ -19,7 +19,7 @@
     if(isset($_SESSION['attendance_i'])) $_SESSION['attendance_i'] = 0;
     if(!isset($_SESSION['timetable_i'])) $_SESSION['timetable_i'] = 0;
 
-    require('./api/sql.php');
+    require('../api/sql.php');
 ?>
 <?php
     ini_set('display_errors', '1');
@@ -45,6 +45,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,  user-scalable=no">
     <title>Plan lekcji</title>
+
     
     <link rel="canonical" href="https://iiproject.ddns.net" />
 
@@ -80,12 +81,12 @@
 
     <meta name="pinterest" content="nopin" />
 
-    <link rel="stylesheet" href="./styles/normalize.css" type="text/css">
-    <link rel="stylesheet" href="./styles/webkit.css" type="text/css">
-    <link rel="stylesheet" href="./styles/style.css" type="text/css">
+    <link rel="stylesheet" href="../styles/normalize.css" type="text/css">
+    <link rel="stylesheet" href="../styles/webkit.css" type="text/css">
+    <link rel="stylesheet" href="../styles/style.css" type="text/css">
 
-    <script src="./js/accessibility.js"></script>
-    <script src="./js/theme.js"></script>
+    <script src="../js/accessibility.js"></script>
+    <script src="../js/theme.js"></script>
 
     <noscript>
         <div class="noscript">
@@ -103,21 +104,15 @@
 </script>
 <nav class="sidenav">
     <div class="profile">
-        <img alt="Twoje zdjęcie profilowe" src="./profile/<?php if(is_readable('./profile/'.$_SESSION['id'] . '.jpeg')) {echo $_SESSION['id'];} else {echo "default";} ?>.jpeg" class="avatar"></img>
+        <img alt="Twoje zdjęcie profilowe" src="../profile/<?php if(is_readable('../profile/'.$_SESSION['id'] . '.jpeg')) {echo $_SESSION['id'];} else {echo "default";} ?>.jpeg" class="avatar"></img>
         <p><?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name']; ?></p>
-        <p><?php echo $_SESSION['class']; ?></p>
         <div class="logout_holder" onclick="window.location.href='panel.php?action=logout'">
-            <img class="logout" alt="Wyloguj się" src="./img/icons/<?php echo ($_SESSION['color'] == '2') ? '0' : $_SESSION['color'];?>/shutdown_switch_icon.png">
+            <img class="logout" alt="Wyloguj się" src="../img/icons/<?php echo ($_SESSION['color'] == '2') ? '0' : $_SESSION['color'];?>/shutdown_switch_icon.png">
         </div>
     </div>
     <a href="panel.php">Panel</a>
-    <a href="grades.php">Oceny</a>
-    <a href="attendance.php">Frekwencja</a>
+    <a href="">Aktualna lekcja</a>
     <a class="active" href="timetable.php">Plan lekcji</a>
-    <a href="exams.php">Sprawdziany</a>
-    <a href="meetings.php">Wydarzenia</a>
-    <a href="topics.php">Tematy</a>
-    <a href="comments.php">Uwagi</a>
 
     <a class="bottom" href="settings.php">Ustawienia</a>
     </nav>
@@ -133,6 +128,7 @@
         </div>
         <table class="attendance" border="5" cellspacing="0" align="center">
         <?php
+
             if (array_key_exists('back', $_POST)) {
                 $_SESSION['timetable_i'] -= 7;
             }
@@ -141,7 +137,7 @@
                 $_SESSION['timetable_i'] += 7;
             }
 
-            $day = date('w') +1;
+            $day = date('w') - 3;
             $day1 = date('Y-m-d', strtotime('+' . ($_SESSION['timetable_i'] + $day) . ' days'));
             $day2 = date('Y-m-d', strtotime('+' . (($_SESSION['timetable_i'] + 1) + $day) . ' days'));
             $day3 = date('Y-m-d', strtotime('+' . (($_SESSION['timetable_i'] + 2) + $day) . ' days'));
@@ -161,32 +157,26 @@
             SELECT `timetable`.`classes_id`, `timetable`.`lesson`, `timetable`.`day`, `subject`.`name`
                 FROM `timetable` 
                     LEFT JOIN `subject` ON `timetable`.`subject_id` = `subject`.`id`
-                WHERE `timetable`.`classes_id` = '" . $_SESSION['class'] . "' 
-                AND `timetable`.`day` >= '" . $day1 . "'
-                AND `timetable`.`day` <= '" . $day7 . "';
+                WHERE `timetable`.`teacher_id` = '" . $_SESSION['id'] . "' 
+                AND `timetable`.`day` >= " . $day1 . "
+                AND `timetable`.`day` <= " . $day7 . ";
             ");
 
             $timetable = array(
-                $day1 => array(
+                "mon" => array(
                     "0" => "Poniedziałek",
                 ),
-                $day2 => array(
+                "tue" => array(
                     "0" => "Wtorek",
                 ),
-                $day3 => array(
+                "wed" => array(
                     "0" => "Środa",
                 ),
-                $day4 => array(
+                "thu" => array(
                     "0" => "Czwartek",
                 ),
-                $day5 => array(
+                "fri" => array(
                     "0" => "Piątek",
-                ),
-                $day6 => array(
-                    "0" => "Sobota",
-                ),
-                $day7 => array(
-                    "0" => "Niedziela",
                 ),
             );
 
@@ -194,42 +184,37 @@
                 array_push($timetable[$row['day']], $row['name']);
             }
             mysqli_free_result($result);
-            
-            //print "<pre>";
-            //print_r($timetable);
-            //print "</pre>";
-            
             ?>
             <tr>
                 <td class="day" align="center" height="50" width="100">
                     <b>Dzień /<br>Lekcja</b></br>
                 </td>
                 <td class="day" align="center" height="50" width="100">
-                    <b><?php echo $day1; ?></b><br>
-                    <b><?php echo $timetable[$day1][0]; ?></b>
+                    <b><?php echo $day1;  ?></b><br>
+                    <b><?php echo $timetable['mon'][0]; ?></b>
                 </td>
                 <td class="day" align="center" height="50" width="100">
-                <b><?php echo $day2; ?></b><br>
-                    <b><?php echo $timetable[$day2][0]; ?></b>
+                <b><?php echo $day2;  ?></b><br>
+                    <b><?php echo $timetable['tue'][0]; ?></b>
                 </td>
                 <td class="day" align="center" height="50" width="100">
-                    <b><?php echo $day3; ?></b><br>
-                    <b><?php echo $timetable[$day3][0]; ?></b>
+                    <b><?php echo $day3;  ?></b><br>
+                    <b><?php echo $timetable['wed'][0]; ?></b>
                 </td>
                 <td class="day" align="center" height="50" width="100">
-                    <b><?php echo $day4; ?></b><br>
-                    <b><?php echo $timetable[$day4][0]; ?></b>
+                    <b><?php echo $day4;  ?></b><br>
+                    <b><?php echo $timetable['thu'][0]; ?></b>
                 </td>
                 <td class="day" align="center" height="50" width="100">
-                    <b><?php echo $day5; ?></b><br>
-                    <b><?php echo $timetable[$day5][0]; ?></b>
+                    <b><?php echo $day5;  ?></b><br>
+                    <b><?php echo $timetable['fri'][0]; ?></b>
                 </td>
                 <td class="day" align="center" height="50" width="100">
-                    <b><?php echo $day6; ?></b><br>
+                    <b><?php echo $day6;  ?></b><br>
                     <b>Sobota</b>
                 </td>
                 <td class="day" align="center" height="50" width="100">
-                    <b><?php echo $day7; ?></b><br>
+                    <b><?php echo $day7;  ?></b><br>
                     <b>Niedziela</b>
                 </td>
             </tr>
@@ -237,11 +222,11 @@
                 <td align="center" height="50">
                     <b>1<br>7:45-8:30</b>
                 </td>
-                <td align="center" height="50"><?php if (isset($timetable[$day1][1])) echo $timetable[$day1][1]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day2][1])) echo $timetable[$day2][1]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day3][1])) echo $timetable[$day3][1]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day4][1])) echo $timetable[$day4][1]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day5][1])) echo $timetable[$day5][1]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['mon'][1])) echo $timetable['mon'][1]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['tue'][1])) echo $timetable['tue'][1]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['wed'][1])) echo $timetable['wed'][1]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['thu'][1])) echo $timetable['thu'][1]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['fri'][1])) echo $timetable['fri'][1]; ?></td>
                 <td align="center" height="50"></td>
                 <td align="center" height="50"></td>
             </tr>
@@ -249,11 +234,11 @@
                 <td align="center" height="50">
                     <b>2<br>8:35-9:20</b>
                 </td>
-                <td align="center" height="50"><?php if (isset($timetable[$day1][2])) echo $timetable[$day1][2]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day2][2])) echo $timetable[$day2][2]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day3][2])) echo $timetable[$day3][2]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day4][2])) echo $timetable[$day4][2]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day5][2])) echo $timetable[$day5][2]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['mon'][2])) echo $timetable['mon'][2]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['tue'][2])) echo $timetable['tue'][2]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['wed'][2])) echo $timetable['wed'][2]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['thu'][2])) echo $timetable['thu'][2]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['fri'][2])) echo $timetable['fri'][2]; ?></td>
                 <td align="center" height="50"></td>
                 <td align="center" height="50"></td>
             </tr>
@@ -261,11 +246,11 @@
                 <td align="center" height="50">
                     <b>3<br>9:25-10:10</b>
                 </td>
-                <td align="center" height="50"><?php if (isset($timetable[$day1][3])) echo $timetable[$day1][3]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day2][3])) echo $timetable[$day2][3]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day3][3])) echo $timetable[$day3][3]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day4][3])) echo $timetable[$day4][3]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day5][3])) echo $timetable[$day5][3]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['mon'][3])) echo $timetable['mon'][3]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['tue'][3])) echo $timetable['tue'][3]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['wed'][3])) echo $timetable['wed'][3]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['thu'][3])) echo $timetable['thu'][3]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['fri'][3])) echo $timetable['fri'][3]; ?></td>
                 <td align="center" height="50"></td>
                 <td align="center" height="50"></td>
             </tr>
@@ -273,11 +258,11 @@
                 <td align="center" height="50">
                     <b>4<br>10:15-11:00</b>
                 </td>
-                <td align="center" height="50"><?php if (isset($timetable[$day1][4])) echo $timetable[$day1][4]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day2][4])) echo $timetable[$day2][4]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day3][4])) echo $timetable[$day3][4]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day4][4])) echo $timetable[$day4][4]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day5][4])) echo $timetable[$day5][4]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['mon'][4])) echo $timetable['mon'][4]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['tue'][4])) echo $timetable['tue'][4]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['wed'][4])) echo $timetable['wed'][4]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['thu'][4])) echo $timetable['thu'][4]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['fri'][4])) echo $timetable['fri'][4]; ?></td>
                 <td align="center" height="50"></td>
                 <td align="center" height="50"></td>
             </tr>
@@ -285,11 +270,11 @@
                 <td align="center" height="50">
                     <b>5<br>11:15-12:00</b>
                 </td>
-                <td align="center" height="50"><?php if (isset($timetable[$day1][5])) echo $timetable[$day1][5]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day2][5])) echo $timetable[$day2][5]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day3][5])) echo $timetable[$day3][5]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day4][5])) echo $timetable[$day4][5]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day5][5])) echo $timetable[$day5][5]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['mon'][5])) echo $timetable['mon'][5]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['tue'][5])) echo $timetable['tue'][5]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['wed'][5])) echo $timetable['wed'][5]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['thu'][5])) echo $timetable['thu'][5]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['fri'][5])) echo $timetable['fri'][5]; ?></td>
                 <td align="center" height="50"></td>
                 <td align="center" height="50"></td>
             </tr>
@@ -297,11 +282,11 @@
                 <td align="center" height="50">
                     <b>6<br>12:15-13:00</b>
                 </td>
-                <td align="center" height="50"><?php if (isset($timetable[$day1][6])) echo $timetable[$day1][6]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day2][6])) echo $timetable[$day2][6]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day3][6])) echo $timetable[$day3][6]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day4][6])) echo $timetable[$day4][6]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day5][6])) echo $timetable[$day5][6]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['mon'][6])) echo $timetable['mon'][6]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['tue'][6])) echo $timetable['tue'][6]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['wed'][6])) echo $timetable['wed'][6]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['thu'][6])) echo $timetable['thu'][6]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['fri'][6])) echo $timetable['fri'][6]; ?></td>
                 <td align="center" height="50"></td>
                 <td align="center" height="50"></td>
             </tr>
@@ -309,11 +294,11 @@
                 <td align="center" height="50">
                     <b>7<br>13:05-13:50</b>
                 </td>
-                <td align="center" height="50"><?php if (isset($timetable[$day1][7])) echo $timetable[$day1][7]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day2][7])) echo $timetable[$day2][7]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day3][7])) echo $timetable[$day3][7]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day4][7])) echo $timetable[$day4][7]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day5][7])) echo $timetable[$day5][7]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['mon'][7])) echo $timetable['mon'][7]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['tue'][7])) echo $timetable['tue'][7]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['wed'][7])) echo $timetable['wed'][7]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['thu'][7])) echo $timetable['thu'][7]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['fri'][7])) echo $timetable['fri'][7]; ?></td>
                 <td align="center" height="50"></td>
                 <td align="center" height="50"></td>
             </tr>
@@ -321,11 +306,11 @@
                 <td align="center" height="50">
                     <b>8<br>14:05-14:50</b>
                 </td>
-                <td align="center" height="50"><?php if (isset($timetable[$day1][8])) echo $timetable[$day1][8]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day2][8])) echo $timetable[$day2][8]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day3][8])) echo $timetable[$day3][8]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day4][8])) echo $timetable[$day4][8]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day5][8])) echo $timetable[$day5][8]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['mon'][8])) echo $timetable['mon'][8]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['tue'][8])) echo $timetable['tue'][8]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['wed'][8])) echo $timetable['wed'][8]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['thu'][8])) echo $timetable['thu'][8]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['fri'][8])) echo $timetable['fri'][8]; ?></td>
                 <td align="center" height="50"></td>
                 <td align="center" height="50"></td>
             </tr>
@@ -333,11 +318,11 @@
                 <td align="center" height="50">
                     <b>9<br>14:55-15:40</b>
                 </td>
-                <td align="center" height="50"><?php if (isset($timetable[$day1][9])) echo $timetable[$day1][9]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day2][9])) echo $timetable[$day2][9]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day3][9])) echo $timetable[$day3][9]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day4][9])) echo $timetable[$day4][9]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day5][9])) echo $timetable[$day5][9]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['mon'][9])) echo $timetable['mon'][9]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['tue'][9])) echo $timetable['tue'][9]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['wed'][9])) echo $timetable['wed'][9]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['thu'][9])) echo $timetable['thu'][9]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['fri'][9])) echo $timetable['fri'][9]; ?></td>
                 <td align="center" height="50"></td>
                 <td align="center" height="50"></td>
             </tr>
@@ -345,11 +330,11 @@
                 <td align="center" height="50">
                     <b>10<br>15:45-16:30</b>
                 </td>
-                <td align="center" height="50"><?php if (isset($timetable[$day1][10])) echo $timetable[$day1][10]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day2][10])) echo $timetable[$day2][10]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day3][10])) echo $timetable[$day3][10]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day4][10])) echo $timetable[$day4][10]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day5][10])) echo $timetable[$day5][10]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['mon'][10])) echo $timetable['mon'][10]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['tue'][10])) echo $timetable['tue'][10]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['wed'][10])) echo $timetable['wed'][10]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['thu'][10])) echo $timetable['thu'][10]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['fri'][10])) echo $timetable['fri'][10]; ?></td>
                 <td align="center" height="50"></td>
                 <td align="center" height="50"></td>
             </tr>
@@ -357,11 +342,11 @@
                 <td align="center" height="50">
                     <b>11<br>16:35-17:20</b>
                 </td>
-                <td align="center" height="50"><?php if (isset($timetable[$day1][11])) echo $timetable[$day1][11]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day2][11])) echo $timetable[$day2][11]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day3][11])) echo $timetable[$day3][11]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day4][11])) echo $timetable[$day4][11]; ?></td>
-                <td align="center" height="50"><?php if (isset($timetable[$day5][11])) echo $timetable[$day5][11]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['mon'][11])) echo $timetable['mon'][11]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['tue'][11])) echo $timetable['tue'][11]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['wed'][11])) echo $timetable['wed'][11]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['thu'][11])) echo $timetable['thu'][11]; ?></td>
+                <td align="center" height="50"><?php if (isset($timetable['fri'][11])) echo $timetable['fri'][11]; ?></td>
                 <td align="center" height="50"></td>
                 <td align="center" height="50"></td>
             </tr>

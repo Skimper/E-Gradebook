@@ -167,9 +167,10 @@
                         break;
                         case "teacher":
                             $result = mysqli_query($conn, "
-                            SELECT `users_teachers`.*, `teachers`.`classes_id`, `teachers`.`first_name`, `teachers`.`last_name`
+                            SELECT `users_teachers`.*, `teachers`.`classes_id`, `teachers`.`first_name`, `teachers`.`last_name`, `subject`.`name`
                             FROM `users_teachers` 
                             	LEFT JOIN `teachers` ON `users_teachers`.`teachers_id` = `teachers`.`id`
+                                LEFT JOIN `subject` ON `users_teachers`.`teachers_id` = `subject`.`teachers_id`
                             WHERE `users_teachers`.`email` = '".$email."' AND `users_teachers`.`password` = '".$password."';
                             ");
                             mysqli_close($conn);
@@ -185,6 +186,7 @@
                                     $_SESSION['class'] = $row['classes_id'];
                                     $_SESSION['first_name'] = $row['first_name'];
                                     $_SESSION['last_name'] = $row['last_name'];
+                                    $_SESSION['subject'] = $row['name'];
         
                                     $_SESSION['theme'] = $row['theme'];
                                     $_SESSION['contrast'] = $row['contrast'];

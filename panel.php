@@ -44,7 +44,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,  user-scalable=no">
     <title>Panel</title>
-
     
     <link rel="canonical" href="https://iiproject.ddns.net" />
 
@@ -246,56 +245,56 @@
                 }
                 switch (getdate()['wday']){
                     case 0:
-                        $day = "mon";
+                        $day = date("Y-m-d");
                         echo "<h3>Najbliższe lekcje</h3>";
                         break;
                     case 1:
                         if (getdate()['hours'] < 16){
-                            $day = 'mon';
+                            $day = date("Y-m-d");
                             echo "<h3>Dzisiejsze lekcje</h3>";
                         } else {
                             echo "<h3>Jutrzejsze lekcje</h3>";
-                            $day = 'tue';
+                            $day = date("Y-m-d");
                         }
                         break; 
                     case 2:
                         if (getdate()['hours'] < 16){
-                            $day = 'wue';
+                            $day = date("Y-m-d");
                             echo "<h3>Dzisiejsze lekcje</h3>";
                         } else {
                             echo "<h3>Jutrzejsze lekcje</h3>";
-                            $day = 'wed';
+                            $day = date("Y-m-d");
                         }
                         break; 
                     case 3:
                         if (getdate()['hours'] < 16){
-                            $day = 'wed';
+                            $day = date("Y-m-d");
                             echo "<h3>Dzisiejsze lekcje</h3>";
                         } else {
                             echo "<h3>Jutrzejsze lekcje</h3>";
-                            $day = 'thu';
+                            $day = date("Y-m-d");
                         }
                         break;
                     case 4:
                         if (getdate()['hours'] < 16){
-                            $day = 'thu';
+                            $day = date("Y-m-d");
                             echo "<h3>Dzisiejsze lekcje</h3>";
                         } else {
                             echo "<h3>Jutrzejsze lekcje</h3>";
-                            $day = 'fri';
+                            $day = date("Y-m-d");
                         }
                         break;
                     case 5:
                         if (getdate()['hours'] < 16){
-                            $day = 'fri';
+                            $day = date("Y-m-d");
                             echo "<h3>Dzisiejsze lekcje</h3>";
                         } else {
                             echo "<h3>Najbliższe lekcje</h3>";
-                            $day = 'mon';
+                            $day = date("Y-m-d");
                         }
                         break;
                     case 6:
-                        $day = 'mon';
+                        $day = date("Y-m-d");
                         echo "<h3>Najbliższe lekcje</h3>";
                         break;
                 }
@@ -327,7 +326,7 @@
                 SELECT `exams`.`topic`, `subject`.`name`, `exams`.`date`
                 FROM `exams` 
                 	LEFT JOIN `subject` ON `exams`.`subject_id` = `subject`.`id`
-                WHERE `exams`.`classes_id` = '4c';
+                WHERE `exams`.`classes_id` = '4c' AND `exams`.`date` > '".date("Y-m-d")."';
                 ");
                 while ($row = mysqli_fetch_array($result)) {
                     echo "<p><b>" . $row['name'] . "</b>: " . $row['topic'] . " (" . $row['date'] . ")" .  "</p>";
