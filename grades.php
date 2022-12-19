@@ -250,7 +250,7 @@
                     <?php 
                         if(isset($grades[5])) {
                             for ($i=0; $i < count($grades[5]); $i++) { 
-                                if (isset($grades[5][$j][2])){
+                                if (isset($grades[5][$i][2])){
                                     echo "<span class='grade' style='color: ".$grades[5][$i][0].";' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[5][$i][0] . ", ";
                                 } else { 
                                     echo "<span class='grade' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[5][$i][0] . ", ";
@@ -288,7 +288,7 @@
                     <?php 
                         if(isset($grades[6])) {
                             for ($i=0; $i < count($grades[6]); $i++) { 
-                                if (isset($grades[6][$j][2])){
+                                if (isset($grades[6][$i][2])){
                                     echo "<span class='grade' style='color: ".$grades[6][$i][0].";' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[6][$i][0] . ", ";
                                 } else { 
                                     echo "<span class='grade' onmouseover='GradeInfo(this);' onmouseout='HideGrade(this);'>". $grades[6][$i][0] . ", ";

@@ -147,7 +147,7 @@
                 die("Connection failed: " . mysqli_connect_error());
             }
 
-            $day = date('w') + 1;
+            $day = date('w') - 1;
             $day1 = date('Y-m-d', strtotime('+' . ($_SESSION['attendance_i'] + $day) . ' days'));
             $day2 = date('Y-m-d', strtotime('+' . (($_SESSION['attendance_i'] + 1) + $day) . ' days'));
             $day3 = date('Y-m-d', strtotime('+' . (($_SESSION['attendance_i'] + 2) + $day) . ' days'));

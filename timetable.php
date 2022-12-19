@@ -141,7 +141,7 @@
                 $_SESSION['timetable_i'] += 7;
             }
 
-            $day = date('w') +1;
+            $day = date('w') - 1;
             $day1 = date('Y-m-d', strtotime('+' . ($_SESSION['timetable_i'] + $day) . ' days'));
             $day2 = date('Y-m-d', strtotime('+' . (($_SESSION['timetable_i'] + 1) + $day) . ' days'));
             $day3 = date('Y-m-d', strtotime('+' . (($_SESSION['timetable_i'] + 2) + $day) . ' days'));
